@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acceso Interno | El Volcán</title>
+    <link rel="stylesheet" href="../cliente/css/styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container">
+        <a href="../cliente/index.html" class="brand">
+          <img class="brand-logo" src="../assets/logo/logosinfondo.png" alt="Logo de Distribuidora El Volcán" />
+          <span>
+            El Volcán
+            <small>Gas Licuado</small>
+          </span>
+        </a>
+        <nav>
+          <a href="../cliente/index.html">Volver a la tienda</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="container">
+          <div class="panel panel-centrado">
+            <h2 class="titulo-seccion">Acceso del personal</h2>
+            <p class="descripcion-seccion">
+              Este ingreso es exclusivo para el personal interno de la distribuidora.
+            </p>
+
+            <form id="formLoginAdmin" novalidate>
+              <div class="campo campo-field">
+                <label for="admin-email">Correo interno <span class="requerido">*</span></label>
+                <input
+                  type="email"
+                  id="admin-email"
+                  name="email"
+                  placeholder="operador@elvolcan.cl"
+                  autocomplete="email"
+                />
+                <span class="mensaje-ayuda"></span>
+              </div>
+
+              <div class="campo campo-field">
+                <label for="admin-password">Contraseña <span class="requerido">*</span></label>
+                <input
+                  type="password"
+                  id="admin-password"
+                  name="password"
+                  placeholder="Ingresa tu contraseña"
+                  autocomplete="current-password"
+                />
+                <span class="mensaje-ayuda"></span>
+              </div>
+
+              <button type="submit" class="boton boton-ancho">Entrar al panel</button>
+
+              <div class="mensaje-exito"></div>
+            </form>
+
+            <div class="panel-demo">
+              <p>
+                <strong>Cuenta de operadora:</strong> <code>operador@elvolcan.cl</code> / <code>volcan123</code>.
+                Úsala para acceder al panel de la operadora.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p class="footer-copy">@ 2026 Distribuidora El Volcán. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <script>
+      const CLAVE_OPERADOR = "elvolcan_operador";
+
+      const CUENTA_OPERADORA = {
+        nombre: "Juan Perez",
+        email: "operador@elvolcan.cl",
+        password: "volcan123",
+      };
+
+      function iniciarSesionOperador(email, password) {
+        if (email !== CUENTA_OPERADORA.email || password !== CUENTA_OPERADORA.password) return false;
+        localStorage.setItem(CLAVE_OPERADOR, JSON.stringify({ nombre: CUENTA_OPERADORA.nombre, email: CUENTA_OPERADORA.email }));
+        return true;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const formulario = document.getElementById("formLoginAdmin");
+        formulario.addEventListener("submit", (evento) => {
+          evento.preventDefault();
+          const email = formulario.querySelector('[name="email"]').value.trim();
+          const password = formulario.querySelector('[name="password"]').value;
+          const aviso = formulario.querySelector(".mensaje-exito");
+
+          if (iniciarSesionOperador(email, password)) {
+            aviso.className = "mensaje-exito visible";
+            aviso.textContent = "Acceso correcto. Cargando el panel...";
+            setTimeout(() => {
+              window.location.href = "../operador/operador.html";
+            }, 800);
+          } else {
+            aviso.className = "mensaje-exito visible error";
+            aviso.textContent = "Correo o contraseña incorrectos. Usa la cuenta de operadora señalada.";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

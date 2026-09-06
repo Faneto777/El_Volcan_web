@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel Operadora - El Volcán</title>
+    <link rel="stylesheet" href="css/operador.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  </head>
+  <body>
+    <header class="header-operador">
+      <div class="marca-operador">
+        <img src="../assets/logo/logosinfondo.png" alt="Logo" width="32" />
+        <h2>El Volcán</h2>
+      </div>
+      <div class="info-operador">
+        <span>Operadora: <span id="nombreOperador">Juan Perez</span></span>
+        <span class="separador">|</span>
+        <a href="../cliente/login.html">Cerrar Sesión</a>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <section class="col-izquierda">
+        <div class="tarjetas-grid">
+          <div class="tarjeta t-hoy"><p>Pedidos Hoy</p><h2 id="tHoy">0</h2></div>
+          <div class="tarjeta t-pendientes"><p>Pendientes</p><h2 id="tPendientes">0</h2></div>
+          <div class="tarjeta t-camino"><p>En Camino</p><h2 id="tCamino">0</h2></div>
+          <div class="tarjeta t-entregados"><p>Entregados</p><h2 id="tEntregados">0</h2></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Pedidos del Día</h3>
+              <p class="panel-subtitulo">Gestiona, crea y asigna los pedidos activos.</p>
+            </div>
+            <button type="button" class="btn-nuevo" id="btnNuevoPedido">+ Nuevo Pedido</button>
+          </div>
+
+          <div class="tabla-contenedor">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Cliente</th>
+                  <th>Dirección</th>
+                  <th>Cilindro</th>
+                  <th>Estado</th>
+                  <th>Repartidor</th>
+                </tr>
+              </thead>
+              <tbody id="tablaPedidos"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="col-derecha">
+        <div class="panel panel-mapa">
+          <h3>Mapa de Entregas</h3>
+          <p class="panel-subtitulo">Ubicación en tiempo real de repartidores y destinos.</p>
+          <div id="mapa-operador"></div>
+        </div>
+      </section>
+    </main>
+
+    <div class="overlay-modal" id="overlayModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Nuevo Pedido</h3>
+          <button type="button" class="boton-cerrar-modal" id="btnCerrarModal" aria-label="Cerrar">&#10005;</button>
+        </div>
+        <form id="formNuevoPedido" novalidate>
+          <div class="campo-modal">
+            <label for="nuevo-cliente">Cliente <span class="requerido">*</span></label>
+            <input type="text" id="nuevo-cliente" name="cliente" placeholder="Nombre del cliente" autocomplete="off" />
+          </div>
+          <div class="campo-modal">
+            <label for="nuevo-direccion">Dirección <span class="requerido">*</span></label>
+            <input type="text" id="nuevo-direccion" name="direccion" placeholder="Dirección de despacho" autocomplete="off" />
+          </div>
+          <div class="campo-modal">
+            <label for="nuevo-cilindro">Cilindro <span class="requerido">*</span></label>
+            <select id="nuevo-cilindro" name="cilindro">
+              <option value="5 kg">5 kg</option>
+              <option value="11 kg">11 kg</option>
+              <option value="15 kg">15 kg</option>
+              <option value="45 kg">45 kg</option>
+            </select>
+          </div>
+          <div class="modal-acciones">
+            <button type="button" class="boton-cancelar" id="btnCancelar">Cancelar</button>
+            <button type="submit" class="btn-crear">Crear pedido</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/operador.js"></script>
+  </body>
+</html>
