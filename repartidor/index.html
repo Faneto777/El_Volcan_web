@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>El Volcán · Panel Repartidor</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="app-movil">
+      <header class="barra-superior">
+        <button type="button" id="btnAbrirMenu" class="boton-menu" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="titulo-barra">
+          <span class="titulo-marca">El Volcán</span>
+          <span class="subtitulo-marca" id="nombreRepartidor">Repartidor</span>
+        </div>
+        <span class="estado-en-linea" title="Conexión GPS">●</span>
+      </header>
+
+      <nav class="menu-lateral" id="menuLateral" aria-label="Menú del repartidor">
+        <div class="perfil-menu">
+          <img src="../assets/logo/logosinfondo.png" alt="Logo El Volcán" class="avatar-logo" />
+          <div>
+            <strong id="nombreMenu">Repartidor</strong>
+            <small id="emailMenu">—</small>
+          </div>
+        </div>
+        <ul class="lista-menu">
+          <li><button type="button" class="item-menu activo" data-accion="verPedidos">📦 Mis pedidos</button></li>
+          <li><button type="button" class="item-menu" data-accion="verMapa">🗺️ Mapa en vivo</button></li>
+          <li><button type="button" class="item-menu" data-accion="miUbicacion">📍 Mi ubicación (GPS)</button></li>
+        </ul>
+        <button type="button" class="boton-cerrar-sesion" id="btnCerrarSesionRep">Cerrar sesión</button>
+      </nav>
+      <div class="overlay-menu" id="overlayMenu"></div>
+
+      <main class="contenido">
+        <section class="seccion" id="seccionPedidos" aria-labelledby="tituloPedidos">
+          <div class="encabezado-seccion">
+            <h2 id="tituloPedidos">Mis entregas</h2>
+            <span class="contador-pedidos" id="contadorPedidos">0</span>
+          </div>
+          <p class="ayuda" id="avisoVacio" hidden>
+            No tienes pedidos asignados por ahora. Vuelve a revisar en un momento.
+          </p>
+          <div class="lista-pedidos" id="listaPedidos"></div>
+        </section>
+
+        <section class="seccion oculta" id="seccionMapa" aria-labelledby="tituloMapa">
+          <div class="encabezado-seccion">
+            <h2 id="tituloMapa">Mapa de entregas</h2>
+            <button type="button" class="boton-gps" id="btnGps">📍 Mi ubicación</button>
+          </div>
+          <div class="mapa-contenedor" id="mapa"></div>
+          <p class="ayuda" id="avisoMapa">
+            Toca cualquier marcador para ver el pedido. Usa «📍 Mi ubicación» para centrar el mapa en tu GPS y
+            luego «Cómo llegar» en una tarjeta para trazar la ruta.
+          </p>
+        </section>
+      </main>
+
+      <nav class="barra-inferior" aria-label="Navegación rápida">
+        <button type="button" class="item-inferior activo" data-accion="verPedidos">📦<span>Pedidos</span></button>
+        <button type="button" class="item-inferior" data-accion="verMapa">🗺️<span>Mapa</span></button>
+        <button type="button" class="item-inferior" data-accion="miUbicacion">📍<span>GPS</span></button>
+      </nav>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/datos.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
