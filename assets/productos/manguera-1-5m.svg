@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" role="img" aria-label="Manguera de gas 1.5 metros enrollada">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e8edf3"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="640" rx="24" fill="url(#fondo)"/>
+  <circle cx="400" cy="310" r="190" fill="none" stroke="#1c1c1c" stroke-width="52" stroke-linecap="round"/>
+  <circle cx="400" cy="310" r="128" fill="none" stroke="#1c1c1c" stroke-width="52" stroke-linecap="round"/>
+  <circle cx="400" cy="310" r="66" fill="none" stroke="#1c1c1c" stroke-width="52" stroke-linecap="round"/>
+  <rect x="338" y="500" width="70" height="52" rx="12" fill="#9aa3af" stroke="#7e8794" stroke-width="4"/>
+  <rect x="408" y="516" width="58" height="26" rx="8" fill="#ff6b2b"/>
+</svg>

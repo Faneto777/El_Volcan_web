@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" role="img" aria-label="Manguera de gas 3 metros">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e8edf3"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="640" rx="24" fill="url(#fondo)"/>
+  <ellipse cx="400" cy="585" rx="240" ry="20" fill="#d8dfe7"/>
+  <path d="M320 170 C120 170 120 330 290 330 S460 490 460 620" fill="none" stroke="#1c1c1c" stroke-width="46" stroke-linecap="round"/>
+  <path d="M320 170 C120 170 120 330 290 330 S460 490 460 620" fill="none" stroke="#343a40" stroke-width="6" stroke-dasharray="16 18" opacity="0.6"/>
+  <rect x="278" y="120" width="70" height="62" rx="12" fill="#9aa3af" stroke="#7e8794" stroke-width="4"/>
+  <rect x="430" y="600" width="70" height="62" rx="12" fill="#9aa3af" stroke="#7e8794" stroke-width="4"/>
+  <rect x="444" y="618" width="58" height="24" rx="8" fill="#ff6b2b"/>
+</svg>

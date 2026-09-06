@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" role="img" aria-label="Detector de gas a batería">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e8edf3"/>
+    </linearGradient>
+    <linearGradient id="caja" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#eef1f5"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="640" rx="24" fill="url(#fondo)"/>
+  <ellipse cx="400" cy="585" rx="220" ry="20" fill="#d8dfe7"/>
+  <path d="M260 500 C150 420 150 260 280 170 C360 115 440 115 520 170 C650 260 650 420 540 500 Z" fill="none" stroke="#ff6b2b" stroke-width="10" stroke-linecap="round" opacity="0.4"/>
+  <path d="M280 460 C190 400 190 280 300 210" fill="none" stroke="#ff6b2b" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+  <rect x="260" y="240" width="280" height="280" rx="34" fill="url(#caja)" stroke="#c2c9d2" stroke-width="6"/>
+  <rect x="290" y="300" width="140" height="92" rx="16" fill="#0d2b45"/>
+  <rect x="308" y="318" width="104" height="56" rx="8" fill="#ff6b2b"/>
+  <circle cx="430" cy="406" r="22" fill="#2a9d4a"/>
+  <circle cx="506" cy="338" r="20" fill="#d62828"/>
+  <rect x="300" y="452" width="200" height="24" rx="10" fill="#c2c9d2"/>
+  <circle cx="400" cy="466" r="7" fill="#7e8794"/>
+</svg>

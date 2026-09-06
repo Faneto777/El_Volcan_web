@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" role="img" aria-label="Regulador doméstico estándar">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e8edf3"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6e9ee"/>
+      <stop offset="1" stop-color="#c2c9d2"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="640" rx="24" fill="url(#fondo)"/>
+  <ellipse cx="400" cy="585" rx="230" ry="22" fill="#d8dfe7"/>
+  <rect x="235" y="320" width="330" height="90" rx="28" fill="url(#metal)" stroke="#9aa3af" stroke-width="4"/>
+  <rect x="250" y="335" width="140" height="60" rx="18" fill="#0d2b45"/>
+  <rect x="380" y="220" width="44" height="110" rx="16" fill="#ff6b2b"/>
+  <rect x="368" y="118" width="68" height="68" rx="18" fill="#ff6b2b" stroke="#e8540f" stroke-width="6"/>
+  <circle cx="402" cy="152" r="12" fill="#ffffff" opacity="0.7"/>
+  <rect x="565" y="335" width="64" height="60" rx="14" fill="#0d2b45"/>
+  <rect x="355" y="410" width="90" height="34" rx="10" fill="#9aa3af"/>
+  <rect x="365" y="444" width="70" height="16" rx="6" fill="#7e8794"/>
+</svg>
