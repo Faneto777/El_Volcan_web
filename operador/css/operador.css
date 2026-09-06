@@ -25,10 +25,11 @@ body {
   gap: 10px;
 }
 
-.marca-operador img {
-  border-radius: 50%;
-  background: #ffffff;
-  padding: 2px;
+.marca-operador .logo-operador {
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+  object-fit: contain;
 }
 
 .marca-operador h2 {
