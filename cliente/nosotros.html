@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nosotros | El Volcán</title>
+    <meta
+      name="description"
+      content="Conoce a Distribuidora El Volcán: nuestra historia, misión, visión y los servicios de gas licuado que ofrecemos."
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container">
+        <a href="index.html" class="brand">
+          <img class="brand-logo" src="../assets/logo/logosinfondo.png" alt="Logo de Distribuidora El Volcán" />
+          <span>
+            El Volcán
+            <small>Gas Licuado</small>
+          </span>
+        </a>
+
+        <input type="checkbox" id="menuToggle" class="menu-toggle" hidden />
+        <label for="menuToggle" class="icono-toggle" aria-hidden="true">&#9776;</label>
+
+        <nav>
+          <a href="index.html">Inicio</a>
+<a href="productos.html">Productos</a>
+          <a href="nosotros.html" class="activo">Nosotros</a>
+          <a href="contacto.html">Contacto</a>
+          <div class="area-cuenta" id="areaCuenta">
+            <a href="login.html">Ingresar</a>
+            <a href="registro.html">Registro</a>
+          </div>
+        </nav>
+
+        <button type="button" class="boton-carrito" id="btnAbrirCarrito" aria-label="Abrir carrito de compras">
+          <span aria-hidden="true">&#128722;</span>
+          <span class="badge-carrito oculto" id="badgeCarrito">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="container">
+          <h2 class="titulo-seccion">Quiénes somos</h2>
+          <p class="descripcion-seccion">
+            Distribuidora El Volcán nació con el objetivo de llevar gas licuado de calidad a cada hogar,
+            con un trato cercano y despacho oportuno.
+          </p>
+
+          <div class="grid-servicios">
+            <div class="tarjeta-servicio">
+              <div class="servicio-icono" aria-hidden="true">&#128161;</div>
+              <h3>Misión</h3>
+              <p>
+                Proveer gas licuado y servicios asociados con los más altos estándares de seguridad,
+                calidad y atención, garantizando tranquilidad a nuestros clientes.
+              </p>
+            </div>
+            <div class="tarjeta-servicio">
+              <div class="servicio-icono" aria-hidden="true">&#128065;</div>
+              <h3>Visión</h3>
+              <p>
+                Ser la distribuidora de gas más confiable de la región, reconocida por su servicio
+                cercano, puntualidad y compromiso con las personas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="beneficios">
+        <div class="container">
+          <h2 class="titulo-seccion">Nuestros valores</h2>
+          <div class="grid-valores">
+            <div class="tarjeta-valor">
+              <div class="valor-numero" aria-hidden="true">&#128274;</div>
+              <h3>Seguridad</h3>
+              <p>Cilindros certificados y manipulación responsable en cada entrega.</p>
+            </div>
+            <div class="tarjeta-valor">
+              <div class="valor-numero" aria-hidden="true">&#128200;</div>
+              <h3>Confianza</h3>
+              <p>Transparencia en precios y compromiso con lo prometido.</p>
+            </div>
+            <div class="tarjeta-valor">
+              <div class="valor-numero" aria-hidden="true">&#128176;</div>
+              <h3>Cercanía</h3>
+              <p>Atención humana y despacho que llega hasta tu puerta.</p>
+            </div>
+            <div class="tarjeta-valor">
+              <div class="valor-numero" aria-hidden="true">&#9203;</div>
+              <h3>Puntualidad</h3>
+              <p>Respuesta rápida y entregas dentro de los plazos acordados.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h2 class="titulo-seccion">Servicios</h2>
+          <div class="grid-servicios">
+            <div class="tarjeta-servicio">
+              <div class="servicio-icono" aria-hidden="true">&#128666;</div>
+              <h3>Despacho a domicilio</h3>
+              <p>Recambio de cilindros en tu hogar, comercio o empresa en la misma jornada.</p>
+            </div>
+            <div class="tarjeta-servicio">
+              <div class="servicio-icono" aria-hidden="true">&#128295;</div>
+              <h3>Instalación segura</h3>
+              <p>Técnicos certificados instalan y conectan tu equipo de gas correctamente.</p>
+            </div>
+            <div class="tarjeta-servicio">
+              <div class="servicio-icono" aria-hidden="true">&#128269;</div>
+              <h3>Mantención de equipos</h3>
+              <p>Revisión y recambio de reguladores, mangueras y accesorios.</p>
+            </div>
+            <div class="tarjeta-servicio">
+              <div class="servicio-icono" aria-hidden="true">&#128293;</div>
+              <h3>Servicio de urgencia</h3>
+              <p>Atención de emergencias de gas disponibles durante todo el día.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="overlay-carrito" id="overlayCarrito">
+      <aside class="carrito-panel" aria-label="Carrito de compras">
+        <div class="carrito-header">
+          <h2>Tu carrito de compras</h2>
+          <button type="button" class="boton-cerrar" id="btnCerrarCarrito" aria-label="Cerrar carrito">&#10005;</button>
+        </div>
+        <div class="carrito-cuerpo">
+          <div class="carrito-vacio" id="carritoVacio">
+            <div class="carrito-vacio-icono" aria-hidden="true">&#128722;</div>
+            <p>Tu carrito está vacío.</p>
+            <p>Agrega productos desde la tienda para comenzar.</p>
+          </div>
+          <div id="listaCarrito"></div>
+        </div>
+        <div class="carrito-footer">
+          <div class="carrito-totales">
+            <div><span>Unidades</span><span id="totalUnidades">0</span></div>
+            <div><span>Subtotal</span><span id="totalSubtotal">$0</span></div>
+            <div><span>Total</span><strong id="totalFinal">$0</strong></div>
+          </div>
+          <div class="carrito-acciones">
+            <button type="button" class="boton boton-primario-oscuro boton-ancho" id="btnFinalizarCompra" disabled>
+              Finalizar pedido
+            </button>
+            <button type="button" class="boton boton-secundario boton-ancho" id="btnVaciarCarrito" disabled>
+              Vaciar carrito
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="grid-footer">
+          <div>
+            <div class="footer-logo">El Volcán</div>
+            <p>
+              Distribuidora de gas licuado comprometida con un servicio seguro, rápido y cercano para tu hogar y negocio.
+            </p>
+          </div>
+          <div>
+            <h4>Enlaces</h4>
+            <ul>
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="productos.html">Productos</a></li>
+              <li><a href="nosotros.html">Nosotros</a></li>
+              <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Cuenta</h4>
+            <ul>
+              <li><a href="login.html">Ingresar</a></li>
+              <li><a href="registro.html">Registrarme</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Atención</h4>
+            <ul>
+              <li>Lun a Sáb: 8:00 - 20:00</li>
+              <li>Teléfono: +56 9 5555 1234</li>
+              <li>Urgencias 24/7</li>
+            </ul>
+          </div>
+        </div>
+        <p class="footer-copy">@ 2026 Distribuidora El Volcán. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <script src="../js/sesion.js"></script>
+    <script src="../js/carrito.js"></script>
+    <script src="../js/validaciones.js"></script>
+  </body>
+</html>

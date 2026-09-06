@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacto | El Volcán</title>
+    <meta
+      name="description"
+      content="Contacta a Distribuidora El Volcán para pedidos, cotizaciones, despacho a domicilio o atención al cliente."
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container">
+        <a href="index.html" class="brand">
+          <img class="brand-logo" src="../assets/logo/logosinfondo.png" alt="Logo de Distribuidora El Volcán" />
+          <span>
+            El Volcán
+            <small>Gas Licuado</small>
+          </span>
+        </a>
+
+        <input type="checkbox" id="menuToggle" class="menu-toggle" hidden />
+        <label for="menuToggle" class="icono-toggle" aria-hidden="true">&#9776;</label>
+
+        <nav>
+          <a href="index.html">Inicio</a>
+<a href="productos.html">Productos</a>
+          <a href="nosotros.html">Nosotros</a>
+          <a href="contacto.html" class="activo">Contacto</a>
+          <div class="area-cuenta" id="areaCuenta">
+            <a href="login.html">Ingresar</a>
+            <a href="registro.html">Registro</a>
+          </div>
+        </nav>
+
+        <button type="button" class="boton-carrito" id="btnAbrirCarrito" aria-label="Abrir carrito de compras">
+          <span aria-hidden="true">&#128722;</span>
+          <span class="badge-carrito oculto" id="badgeCarrito">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="container">
+          <h2 class="titulo-seccion">Contáctanos</h2>
+          <p class="descripcion-seccion">
+            Escríbenos para cotizar tu gas, coordinar un despacho o resolver cualquier duda.
+            Te responderemos a la brevedad.
+          </p>
+
+          <div class="grid-contacto">
+            <div>
+              <div class="panel">
+                <h3>Tus datos de contacto</h3>
+                <ul class="lista-contacto">
+                  <li>
+                    <span class="contacto-icono" aria-hidden="true">&#128101;</span>
+                    <span>Atención al cliente</span>
+                    <small>Lunes a Sábado de 8:00 a 20:00</small>
+                  </li>
+                  <li>
+                    <span class="contacto-icono" aria-hidden="true">&#9742;</span>
+                    <span>Teléfono</span>
+                    <small>+56 9 5555 1234</small>
+                  </li>
+                  <li>
+                    <span class="contacto-icono" aria-hidden="true">&#9993;</span>
+                    <span>Correo</span>
+                    <small>contacto@elvolcan.cl</small>
+                  </li>
+                  <li>
+                    <span class="contacto-icono" aria-hidden="true">&#128204;</span>
+                    <span>Dirección</span>
+                    <small>Av. Los Hornos 1450, Comuna de la Energía</small>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Envíanos un mensaje</h3>
+              <form id="formContacto" novalidate>
+                <div class="grid-formulario">
+                  <div class="campo campo-field">
+                    <label for="contacto-nombre">Nombre completo <span class="requerido">*</span></label>
+                    <input
+                      type="text"
+                      id="contacto-nombre"
+                      name="nombre"
+                      placeholder="Ej.: María Pérez"
+                      autocomplete="name"
+                    />
+                    <span class="mensaje-ayuda"></span>
+                  </div>
+
+                  <div class="campo campo-field">
+                    <label for="contacto-email">Correo electrónico <span class="requerido">*</span></label>
+                    <input
+                      type="email"
+                      id="contacto-email"
+                      name="email"
+                      placeholder="Ej.: maria@correo.com"
+                      autocomplete="email"
+                    />
+                    <span class="mensaje-ayuda"></span>
+                  </div>
+
+                  <div class="campo campo-field">
+                    <label for="contacto-telefono">Teléfono <span class="requerido">*</span></label>
+                    <input
+                      type="tel"
+                      id="contacto-telefono"
+                      name="telefono"
+                      placeholder="Ej.: 912345678"
+                      autocomplete="tel"
+                    />
+                    <span class="mensaje-ayuda"></span>
+                  </div>
+
+                  <div class="campo campo-field">
+                    <label for="contacto-asunto">Asunto <span class="requerido">*</span></label>
+                    <select id="contacto-asunto" name="asunto"></select>
+                    <span class="mensaje-ayuda"></span>
+                  </div>
+
+                  <div class="campo campo-field campo-ancho">
+                    <label for="contacto-mensaje">Mensaje <span class="requerido">*</span></label>
+                    <textarea
+                      id="contacto-mensaje"
+                      name="mensaje"
+                      placeholder="Cuéntanos qué necesitas..."
+                    ></textarea>
+                    <span class="mensaje-ayuda"></span>
+                  </div>
+                </div>
+
+                <p class="nota-formulario">Los campos marcados con <span class="requerido">*</span> son obligatorios.</p>
+
+                <div style="margin-top: 16px">
+                  <button type="submit" class="boton boton-ancho">Enviar mensaje</button>
+                </div>
+
+                <div class="mensaje-exito"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="overlay-carrito" id="overlayCarrito">
+      <aside class="carrito-panel" aria-label="Carrito de compras">
+        <div class="carrito-header">
+          <h2>Tu carrito de compras</h2>
+          <button type="button" class="boton-cerrar" id="btnCerrarCarrito" aria-label="Cerrar carrito">&#10005;</button>
+        </div>
+        <div class="carrito-cuerpo">
+          <div class="carrito-vacio" id="carritoVacio">
+            <div class="carrito-vacio-icono" aria-hidden="true">&#128722;</div>
+            <p>Tu carrito está vacío.</p>
+            <p>Agrega productos desde la tienda para comenzar.</p>
+          </div>
+          <div id="listaCarrito"></div>
+        </div>
+        <div class="carrito-footer">
+          <div class="carrito-totales">
+            <div><span>Unidades</span><span id="totalUnidades">0</span></div>
+            <div><span>Subtotal</span><span id="totalSubtotal">$0</span></div>
+            <div><span>Total</span><strong id="totalFinal">$0</strong></div>
+          </div>
+          <div class="carrito-acciones">
+            <button type="button" class="boton boton-primario-oscuro boton-ancho" id="btnFinalizarCompra" disabled>
+              Finalizar pedido
+            </button>
+            <button type="button" class="boton boton-secundario boton-ancho" id="btnVaciarCarrito" disabled>
+              Vaciar carrito
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="grid-footer">
+          <div>
+            <div class="footer-logo">El Volcán</div>
+            <p>
+              Distribuidora de gas licuado comprometida con un servicio seguro, rápido y cercano para tu hogar y negocio.
+            </p>
+          </div>
+          <div>
+            <h4>Enlaces</h4>
+            <ul>
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="productos.html">Productos</a></li>
+              <li><a href="nosotros.html">Nosotros</a></li>
+              <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Cuenta</h4>
+            <ul>
+              <li><a href="login.html">Ingresar</a></li>
+              <li><a href="registro.html">Registrarme</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Atención</h4>
+            <ul>
+              <li>Lun a Sáb: 8:00 - 20:00</li>
+              <li>Teléfono: +56 9 5555 1234</li>
+              <li>Urgencias 24/7</li>
+            </ul>
+          </div>
+        </div>
+        <p class="footer-copy">@ 2026 Distribuidora El Volcán. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <script src="../js/sesion.js"></script>
+    <script src="../js/carrito.js"></script>
+    <script src="../js/validaciones.js"></script>
+  </body>
+</html>

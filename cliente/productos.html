@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Productos | El Volcán</title>
+    <meta
+      name="description"
+      content="Catálogo de productos y tarifas de Distribuidora El Volcán: cilindros de gas, reguladores, mangueras y accesorios."
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container">
+        <a href="index.html" class="brand">
+          <img class="brand-logo" src="../assets/logo/logosinfondo.png" alt="Logo de Distribuidora El Volcán" />
+          <span>
+            El Volcán
+            <small>Gas Licuado</small>
+          </span>
+        </a>
+
+        <input type="checkbox" id="menuToggle" class="menu-toggle" hidden />
+        <label for="menuToggle" class="icono-toggle" aria-hidden="true">&#9776;</label>
+
+        <nav>
+          <a href="index.html">Inicio</a>
+          <a href="productos.html" class="activo">Productos</a>
+          <a href="nosotros.html">Nosotros</a>
+          <a href="contacto.html">Contacto</a>
+          <div class="area-cuenta" id="areaCuenta">
+            <a href="login.html">Ingresar</a>
+            <a href="registro.html">Registro</a>
+          </div>
+        </nav>
+
+        <button type="button" class="boton-carrito" id="btnAbrirCarrito" aria-label="Abrir carrito de compras">
+          <span aria-hidden="true">&#128722;</span>
+          <span class="badge-carrito oculto" id="badgeCarrito">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="container">
+          <h2 class="titulo-seccion">Catálogo de productos y tarifas</h2>
+          <p class="descripcion-seccion">
+            Precios de productos según presentación. Agrega lo que necesites a tu carrito
+            para coordinar el despacho o retiro en bodega.
+          </p>
+
+          <div class="categoria">
+            <h3 class="titulo-categoria">Cilindros de Gas</h3>
+            <div class="grid-productos">
+              <article class="producto">
+                <div class="producto-imagen">
+                  <img src="../assets/productos/cilindro%205kg.jpg" alt="Cilindro GLP 5 kg" loading="lazy" />
+                </div>
+                <div class="producto-cuerpo">
+                  <h3>Cilindro GLP 5 kg</h3>
+                  <p class="producto-descripcion">
+                    Cilindro de gas licuado de petróleo 5 kg. Para uso residencial (cocina, calefacción pequeña).
+                  </p>
+                  <p class="detalle-info">Unidad: Unidad <span class="chip-stock">Stock: 80</span></p>
+                  <div class="detalle-precio"><span>Precio</span><strong>$6.500</strong></div>
+                  <div class="pie-catalogo">
+                    <button
+                      type="button"
+                      class="btn-agregar-carrito"
+                      data-id="CL001"
+                      data-nombre="Cilindro GLP 5 kg"
+                      data-precio="6500"
+                      data-imagen="../assets/productos/cilindro%205kg.jpg"
+                      data-emoji="balon"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="producto">
+                <div class="producto-imagen">
+                  <img src="../assets/productos/cilindro%2011kg.jpg" alt="Cilindro GLP 11 kg" loading="lazy" />
+                </div>
+                <div class="producto-cuerpo">
+                  <h3>Cilindro GLP 11 kg</h3>
+                  <p class="producto-descripcion">
+                    Cilindro estándar doméstico. El más utilizado en hogares chilenos. Compatible con reguladores estándar.
+                  </p>
+                  <p class="detalle-info">Unidad: Unidad <span class="chip-stock">Stock: 200</span></p>
+                  <div class="detalle-precio"><span>Precio</span><strong>$12.000</strong></div>
+                  <div class="pie-catalogo">
+                    <button
+                      type="button"
+                      class="btn-agregar-carrito"
+                      data-id="CL002"
+                      data-nombre="Cilindro GLP 11 kg"
+                      data-precio="12000"
+                      data-imagen="../assets/productos/cilindro%2011kg.jpg"
+                      data-emoji="balon"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="producto">
+                <div class="producto-imagen">
+                  <img src="../assets/productos/cilindro%2015kg.jpg" alt="Cilindro GLP 15 kg" loading="lazy" />
+                </div>
+                <div class="producto-cuerpo">
+                  <h3>Cilindro GLP 15 kg</h3>
+                  <p class="producto-descripcion">
+                    Cilindro de mayor capacidad para hogares de alto consumo o locales pequeños.
+                  </p>
+                  <p class="detalle-info">Unidad: Unidad <span class="chip-stock">Stock: 90</span></p>
+                  <div class="detalle-precio"><span>Precio</span><strong>$16.000</strong></div>
+                  <div class="pie-catalogo">
+                    <button
+                      type="button"
+                      class="btn-agregar-carrito"
+                      data-id="CL003"
+                      data-nombre="Cilindro GLP 15 kg"
+                      data-precio="16000"
+                      data-imagen="../assets/productos/cilindro%2015kg.jpg"
+                      data-emoji="balon"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="producto">
+                <div class="producto-imagen imagen-alta">
+                  <img src="../assets/productos/cilindro%2045.jpg" alt="Cilindro GLP 45 kg" loading="lazy" class="imagen-45" />
+                </div>
+                <div class="producto-cuerpo">
+                  <h3>Cilindro GLP 45 kg</h3>
+                  <p class="producto-descripcion">
+                    Cilindro industrial. Uso comercial: restaurantes, talleres, calefacción de locales.
+                  </p>
+                  <p class="detalle-info">Unidad: Unidad <span class="chip-stock">Stock: 30</span></p>
+                  <div class="detalle-precio"><span>Precio</span><strong>$45.000</strong></div>
+                  <div class="pie-catalogo">
+                    <button
+                      type="button"
+                      class="btn-agregar-carrito"
+                      data-id="CL004"
+                      data-nombre="Cilindro GLP 45 kg"
+                      data-precio="45000"
+                      data-imagen="../assets/productos/cilindro%2045.jpg"
+                      data-emoji="balon"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="categoria">
+            <h3 class="titulo-categoria">Reguladores</h3>
+            <div class="grid-productos">
+              <article class="producto">
+                <div class="producto-imagen">
+                  <span class="producto-icono" aria-hidden="true">&#128295;</span>
+                </div>
+                <div class="producto-cuerpo">
+                  <h3>Regulador doméstico estándar</h3>
+                  <p class="producto-descripcion">
+                    Regulador de 1 etapa para cilindros 5, 11 y 15 kg. Presión de salida 28 mbar.
+                  </p>
+                  <p class="detalle-info">Unidad: Unidad <span class="chip-stock">Stock: 45</span></p>
+                  <div class="detalle-precio"><span>Precio</span><strong>$8.990</strong></div>
+                  <div class="pie-catalogo">
+                    <button
+                      type="button"
+                      class="btn-agregar-carrito"
+                      data-id="RG001"
+                      data-nombre="Regulador doméstico estándar"
+                      data-precio="8990"
+                      data-imagen=""
+                      data-emoji="regulador"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="producto">
+                <div class="producto-imagen">
+                  <span class="producto-icono" aria-hidden="true">&#128295;</span>
+                </div>
+                <div class="producto-cuerpo">
+                  <h3>Regulador de alta presión</h3>
+                  <p class="producto-descripcion">
+                    Regulador para cocinas industriales o equipos de mayor consumo. Presión regulable.
+                  </p>
+                  <p class="detalle-info">Unidad: Unidad <span class="chip-stock">Stock: 12</span></p>
+                  <div class="detalle-precio"><span>Precio</span><strong>$18.990</strong></div>
+                  <div class="pie-catalogo">
+                    <button
+                      type="button"
+                      class="btn-agregar-carrito"
+                      data-id="RG002"
+                      data-nombre="Regulador de alta presión"
+                      data-precio="18990"
+                      data-imagen=""
+                      data-emoji="regulador"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="producto">
+                <div class="producto-imagen">
+                  <span class="producto-icono" aria-hidden="true">&#128295;</span>
+                </div>
+                <div class="producto-cuerpo">
+                  <h3>Regulador dual (2 salidas)</h3>
+                  <p class="producto-descripcion">
+                    Permite conectar dos artefactos simultáneamente al mismo cilindro.
+                  </p>
+                  <p class="detalle-info">Unidad: Unidad <span class="chip-stock">Stock: 18</span></p>
+                  <div class="detalle-precio"><span>Precio</span><strong>$14.990</strong></div>
+                  <div class="pie-catalogo">
+                    <button
+                      type="button"
+                      class="btn-agregar-carrito"
+                      data-id="RG003"
+                      data-nombre="Regulador dual (2 salidas)"
+                      data-precio="14990"
+                      data-imagen=""
+                      data-emoji="regulador"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="categoria">
+            <h3 class="titulo-categoria">Mangueras y Conexiones</h3>
+            <div class="grid-productos">
+              <article class="producto">
+                <div class="producto-imagen">
+                  <span class="producto-icono" aria-hidden="true">&#127756;</span>
+                </div>
+                <div class="producto-cuerpo">
+                  <h3>Manguera gas 1.5 m</h3>
+                  <p class="producto-descripcion">
+                    Manguera flexible homologada. Diámetro interior 9mm. Compatible con reguladores estándar.
+                  </p>
+                  <p class="detalle-info">Unidad: Unidad <span class="chip-stock">Stock: 80</span></p>
+                  <div class="detalle-precio"><span>Precio</span><strong>$3.990</strong></div>
+                  <div class="pie-catalogo">
+                    <button
+                      type="button"
+                      class="btn-agregar-carrito"
+                      data-id="MG001"
+                      data-nombre="Manguera gas 1.5 m"
+                      data-precio="3990"
+                      data-imagen=""
+                      data-emoji="manguera"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="producto">
+                <div class="producto-imagen">
+                  <span class="producto-icono" aria-hidden="true">&#127756;</span>
+                </div>
+                <div class="producto-cuerpo">
+                  <h3>Manguera gas 3 m</h3>
+                  <p class="producto-descripcion">
+                    Manguera larga para instalaciones donde el artefacto está alejado del cilindro.
+                  </p>
+                  <p class="detalle-info">Unidad: Unidad <span class="chip-stock">Stock: 50</span></p>
+                  <div class="detalle-precio"><span>Precio</span><strong>$6.990</strong></div>
+                  <div class="pie-catalogo">
+                    <button
+                      type="button"
+                      class="btn-agregar-carrito"
+                      data-id="MG002"
+                      data-nombre="Manguera gas 3 m"
+                      data-precio="6990"
+                      data-imagen=""
+                      data-emoji="manguera"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="producto">
+                <div class="producto-imagen">
+                  <span class="producto-icono" aria-hidden="true">&#128521;</span>
+                </div>
+                <div class="producto-cuerpo">
+                  <h3>Abrazadera metálica</h3>
+                  <p class="producto-descripcion">
+                    Abrazadera de acero para asegurar la conexión manguera-regulador y manguera-artefacto.
+                  </p>
+                  <p class="detalle-info">Unidad: Unidad <span class="chip-stock">Stock: 200</span></p>
+                  <div class="detalle-precio"><span>Precio</span><strong>$990</strong></div>
+                  <div class="pie-catalogo">
+                    <button
+                      type="button"
+                      class="btn-agregar-carrito"
+                      data-id="MG003"
+                      data-nombre="Abrazadera metálica"
+                      data-precio="990"
+                      data-imagen=""
+                      data-emoji="abrazadera"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="producto">
+                <div class="producto-imagen">
+                  <span class="producto-icono" aria-hidden="true">&#129526;</span>
+                </div>
+                <div class="producto-cuerpo">
+                  <h3>Kit conexión completo</h3>
+                  <p class="producto-descripcion">
+                    Regulador + manguera 1.5 m + abrazaderas. Todo lo necesario para instalar un cilindro nuevo.
+                  </p>
+                  <p class="detalle-info">Unidad: Kit <span class="chip-stock">Stock: 25</span></p>
+                  <div class="detalle-precio"><span>Precio</span><strong>$12.990</strong></div>
+                  <div class="pie-catalogo">
+                    <button
+                      type="button"
+                      class="btn-agregar-carrito"
+                      data-id="MG004"
+                      data-nombre="Kit conexión completo"
+                      data-precio="12990"
+                      data-imagen=""
+                      data-emoji="kit"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="categoria">
+            <h3 class="titulo-categoria">Accesorios</h3>
+            <div class="grid-productos">
+              <article class="producto">
+                <div class="producto-imagen">
+                  <span class="producto-icono" aria-hidden="true">&#128766;</span>
+                </div>
+                <div class="producto-cuerpo">
+                  <h3>Carro porta cilindro 11/15 kg</h3>
+                  <p class="producto-descripcion">
+                    Carro metálico con ruedas para transportar cilindros dentro del hogar con seguridad.
+                  </p>
+                  <p class="detalle-info">Unidad: Unidad <span class="chip-stock">Stock: 20</span></p>
+                  <div class="detalle-precio"><span>Precio</span><strong>$12.990</strong></div>
+                  <div class="pie-catalogo">
+                    <button
+                      type="button"
+                      class="btn-agregar-carrito"
+                      data-id="AC001"
+                      data-nombre="Carro porta cilindro 11/15 kg"
+                      data-precio="12990"
+                      data-imagen=""
+                      data-emoji="carro"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="producto">
+                <div class="producto-imagen">
+                  <span class="producto-icono" aria-hidden="true">&#128737;</span>
+                </div>
+                <div class="producto-cuerpo">
+                  <h3>Tapa protectora para válvula</h3>
+                  <p class="producto-descripcion">
+                    Tapa de plástico ABS para proteger la válvula del cilindro durante el transporte.
+                  </p>
+                  <p class="detalle-info">Unidad: Unidad <span class="chip-stock">Stock: 60</span></p>
+                  <div class="detalle-precio"><span>Precio</span><strong>$1.490</strong></div>
+                  <div class="pie-catalogo">
+                    <button
+                      type="button"
+                      class="btn-agregar-carrito"
+                      data-id="AC002"
+                      data-nombre="Tapa protectora para válvula"
+                      data-precio="1490"
+                      data-imagen=""
+                      data-emoji="tapa"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="producto">
+                <div class="producto-imagen">
+                  <span class="producto-icono" aria-hidden="true">&#128225;</span>
+                </div>
+                <div class="producto-cuerpo">
+                  <h3>Detector de gas a batería</h3>
+                  <p class="producto-descripcion">
+                    Sensor electroquímico. Alarma sonora y visual ante fuga de gas GLP o metano.
+                  </p>
+                  <p class="detalle-info">Unidad: Unidad <span class="chip-stock">Stock: 8</span></p>
+                  <div class="detalle-precio"><span>Precio</span><strong>$19.990</strong></div>
+                  <div class="pie-catalogo">
+                    <button
+                      type="button"
+                      class="btn-agregar-carrito"
+                      data-id="AC003"
+                      data-nombre="Detector de gas a batería"
+                      data-precio="19990"
+                      data-imagen=""
+                      data-emoji="detector"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="overlay-carrito" id="overlayCarrito">
+      <aside class="carrito-panel" aria-label="Carrito de compras">
+        <div class="carrito-header">
+          <h2>Tu carrito de compras</h2>
+          <button type="button" class="boton-cerrar" id="btnCerrarCarrito" aria-label="Cerrar carrito">&#10005;</button>
+        </div>
+        <div class="carrito-cuerpo">
+          <div class="carrito-vacio" id="carritoVacio">
+            <div class="carrito-vacio-icono" aria-hidden="true">&#128722;</div>
+            <p>Tu carrito está vacío.</p>
+            <p>Agrega productos desde la tienda para comenzar.</p>
+          </div>
+          <div id="listaCarrito"></div>
+        </div>
+        <div class="carrito-footer">
+          <div class="carrito-totales">
+            <div><span>Unidades</span><span id="totalUnidades">0</span></div>
+            <div><span>Subtotal</span><span id="totalSubtotal">$0</span></div>
+            <div><span>Total</span><strong id="totalFinal">$0</strong></div>
+          </div>
+          <div class="carrito-acciones">
+            <button type="button" class="boton boton-primario-oscuro boton-ancho" id="btnFinalizarCompra" disabled>
+              Finalizar pedido
+            </button>
+            <button type="button" class="boton boton-secundario boton-ancho" id="btnVaciarCarrito" disabled>
+              Vaciar carrito
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="grid-footer">
+          <div>
+            <div class="footer-logo">El Volcán</div>
+            <p>
+              Distribuidora de gas licuado comprometida con un servicio seguro, rápido y cercano para tu hogar y negocio.
+            </p>
+          </div>
+          <div>
+            <h4>Enlaces</h4>
+            <ul>
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="productos.html">Productos</a></li>
+              <li><a href="nosotros.html">Nosotros</a></li>
+              <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Cuenta</h4>
+            <ul>
+              <li><a href="login.html">Ingresar</a></li>
+              <li><a href="registro.html">Registrarme</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Atención</h4>
+            <ul>
+              <li>Lun a Sáb: 8:00 - 20:00</li>
+              <li>Teléfono: +56 9 5555 1234</li>
+              <li>Urgencias 24/7</li>
+            </ul>
+          </div>
+        </div>
+        <p class="footer-copy">@ 2026 Distribuidora El Volcán. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <script src="../js/sesion.js"></script>
+    <script src="../js/carrito.js"></script>
+    <script src="../js/validaciones.js"></script>
+  </body>
+</html>
