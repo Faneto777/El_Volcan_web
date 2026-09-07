@@ -38,6 +38,7 @@ function crearUsuario(datos) {
     telefono: datos.telefono || "",
     direccion: datos.direccion || "",
     password: datos.password,
+    activo: true,
   });
   guardarUsuarios(usuarios);
   return true;
@@ -46,6 +47,7 @@ function crearUsuario(datos) {
 function iniciarSesion(email, password) {
   const usuario = buscarUsuario(email);
   if (!usuario || usuario.password !== password) return false;
+  if (usuario.activo === false) return false;
   localStorage.setItem(CLAVE_SESION, JSON.stringify({ nombre: usuario.nombre, email: usuario.email }));
   return true;
 }

@@ -63,6 +63,10 @@
 
             <div class="panel-demo">
               <p>
+                <strong>Cuenta de administradora:</strong> <code>administradora@gmail.com</code> / <code>admin123</code>.
+                Úsala para acceder al panel de administración.
+              </p>
+              <p>
                 <strong>Cuenta de operadora:</strong> <code>operador@gmail.com</code> / <code>volcan123</code>.
                 Úsala para acceder al panel de la operadora.
               </p>
@@ -79,17 +83,42 @@
     </footer>
 
     <script>
+      const CLAVE_SESION_ADMIN = "elvolcan_sesion_admin";
       const CLAVE_OPERADOR = "elvolcan_operador";
+
+      const CUENTA_ADMINISTRADORA = {
+        nombre: "Administradora",
+        email: "administradora@gmail.com",
+        password: "admin123",
+        rol: "administrador",
+      };
 
       const CUENTA_OPERADORA = {
         nombre: "Juan Perez",
         email: "operador@gmail.com",
         password: "volcan123",
+        rol: "operador",
       };
+
+      function iniciarSesionAdmin(email, password) {
+        if (email !== CUENTA_ADMINISTRADORA.email || password !== CUENTA_ADMINISTRADORA.password) return false;
+        localStorage.setItem(
+          CLAVE_SESION_ADMIN,
+          JSON.stringify({
+            nombre: CUENTA_ADMINISTRADORA.nombre,
+            email: CUENTA_ADMINISTRADORA.email,
+            rol: CUENTA_ADMINISTRADORA.rol,
+          })
+        );
+        return true;
+      }
 
       function iniciarSesionOperador(email, password) {
         if (email !== CUENTA_OPERADORA.email || password !== CUENTA_OPERADORA.password) return false;
-        localStorage.setItem(CLAVE_OPERADOR, JSON.stringify({ nombre: CUENTA_OPERADORA.nombre, email: CUENTA_OPERADORA.email }));
+        localStorage.setItem(
+          CLAVE_OPERADOR,
+          JSON.stringify({ nombre: CUENTA_OPERADORA.nombre, email: CUENTA_OPERADORA.email })
+        );
         return true;
       }
 
@@ -101,15 +130,21 @@
           const password = formulario.querySelector('[name="password"]').value;
           const aviso = formulario.querySelector(".mensaje-exito");
 
-          if (iniciarSesionOperador(email, password)) {
+          if (iniciarSesionAdmin(email, password)) {
             aviso.className = "mensaje-exito visible";
-            aviso.textContent = "Acceso correcto. Cargando el panel...";
+            aviso.textContent = "Acceso correcto. Cargando el panel de administración...";
+            setTimeout(() => {
+              window.location.href = "admin.html";
+            }, 800);
+          } else if (iniciarSesionOperador(email, password)) {
+            aviso.className = "mensaje-exito visible";
+            aviso.textContent = "Acceso correcto. Cargando el panel de la operadora...";
             setTimeout(() => {
               window.location.href = "../operador/operador.html";
             }, 800);
           } else {
             aviso.className = "mensaje-exito visible error";
-            aviso.textContent = "Correo o contraseña incorrectos. Usa la cuenta de operadora señalada.";
+            aviso.textContent = "Correo o contraseña incorrectos. Usa una de las cuentas señaladas.";
           }
         });
       });

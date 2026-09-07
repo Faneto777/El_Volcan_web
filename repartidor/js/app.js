@@ -47,7 +47,7 @@ function configurarLoginRepartidor() {
             const usuario = usuarios.find(
                 (u) => String(u.email).toLowerCase() === String(email).toLowerCase()
             );
-            if (usuario && usuario.password === password) {
+            if (usuario && usuario.password === password && usuario.activo !== false) {
                 localStorage.setItem(
                     REPARTIDOR_SESION_KEY,
                     JSON.stringify({ id: usuario.id, nombre: usuario.nombre, email: usuario.email, rol: "repartidor" })
