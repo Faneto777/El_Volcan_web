@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel Administración | El Volcán</title>
+    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  </head>
+  <body>
+    <header class="header-admin">
+      <div class="marca-admin">
+        <img src="../assets/logo/logosinfondo.png" alt="El Volcán" class="logo-admin" />
+        <div>
+          <h1>El Volcán</h1>
+          <span class="subtitulo-panel">Panel de administración</span>
+        </div>
+      </div>
+      <div class="info-admin">
+        <span>Administradora: <span id="nombreAdmin">—</span></span>
+        <span class="separador-admin">|</span>
+        <a href="#" id="btnCerrarSesionAdmin">Cerrar Sesión</a>
+      </div>
+    </header>
+
+    <main class="dashboard-admin">
+      <section class="kpis-grid" aria-label="Indicadores del sistema">
+        <div class="kpi kpi-total"><p>Pedidos registrados</p><h2 id="kpiTotal">0</h2></div>
+        <div class="kpi kpi-pendientes"><p>Pendientes</p><h2 id="kpiPendientes">0</h2></div>
+        <div class="kpi kpi-camino"><p>En camino</p><h2 id="kpiCamino">0</h2></div>
+        <div class="kpi kpi-entregados"><p>Entregados</p><h2 id="kpiEntregados">0</h2></div>
+        <div class="kpi kpi-ingresos"><p>Ingresos estimados</p><h2 id="kpiIngresos">$0</h2></div>
+        <div class="kpi kpi-repartidores"><p>Repartidores activos</p><h2 id="kpiRepartidores">0</h2></div>
+        <div class="kpi kpi-clientes"><p>Clientes registrados</p><h2 id="kpiClientes">0</h2></div>
+      </section>
+
+      <nav class="tabs-admin" aria-label="Secciones del panel">
+        <button type="button" class="tab-admin activo" data-pestana="pedidos">📦 Pedidos</button>
+        <button type="button" class="tab-admin" data-pestana="usuarios">👥 Usuarios y roles</button>
+        <button type="button" class="tab-admin" data-pestana="reportes">📊 Reportes</button>
+      </nav>
+
+      <section class="pestana" id="pestana-pedidos">
+        <div class="panel-admin">
+          <div class="panel-header-admin">
+            <div>
+              <h3>Pedidos del sistema</h3>
+              <p class="panel-subtitulo-admin">Acceso total: cambia estados y asigna repartidores.</p>
+            </div>
+          </div>
+          <div class="tabla-contenedor-admin">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Cliente</th>
+                  <th>Dirección</th>
+                  <th>Cilindro</th>
+                  <th>Estado</th>
+                  <th>Repartidor</th>
+                </tr>
+              </thead>
+              <tbody id="tablaPedidos"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="pestana oculta" id="pestana-usuarios">
+        <div class="panel-admin">
+          <div class="panel-header-admin">
+            <div>
+              <h3>Usuarios del sistema</h3>
+              <p class="panel-subtitulo-admin">Crea, edita, desactiva o reasigna roles de usuario.</p>
+            </div>
+            <button type="button" class="btn-nuevo-admin" id="btnNuevoUsuario">+ Nuevo usuario</button>
+          </div>
+          <div class="tabla-contenedor-admin">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Correo</th>
+                  <th>Rol</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaUsuarios"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="pestana oculta" id="pestana-reportes">
+        <div class="grid-reportes">
+          <div class="panel-admin">
+            <div class="panel-header-admin">
+              <h3>Carga por repartidor</h3>
+              <p class="panel-subtitulo-admin">Pedidos asignados y entregados por cada repartidor.</p>
+            </div>
+            <div id="barrasRepartidores"></div>
+          </div>
+
+          <div class="panel-admin">
+            <div class="panel-header-admin">
+              <h3>Ingresos por estado</h3>
+              <p class="panel-subtitulo-admin">Estimación de ventas acumuladas según estado del pedido.</p>
+            </div>
+            <div id="barrasIngresos"></div>
+          </div>
+
+          <div class="panel-admin panel-mapa-admin">
+            <div class="panel-header-admin">
+              <h3>Mapa de entregas</h3>
+              <p class="panel-subtitulo-admin">Todos los destinos del sistema (Chillán y alrededores).</p>
+            </div>
+            <div id="mapa-admin"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="overlay-modal" id="overlayModalUsuario">
+      <div class="modal usuario-modal">
+        <div class="modal-header">
+          <h3 id="tituloModalUsuario">Nuevo usuario</h3>
+          <button type="button" class="boton-cerrar-modal" id="btnCerrarModalUsuario" aria-label="Cerrar">&#10005;</button>
+        </div>
+        <form id="formUsuario" novalidate>
+          <input type="hidden" id="usuario-id" />
+          <input type="hidden" id="usuario-origen" />
+          <div class="campo-modal">
+            <label for="usuario-nombre">Nombre <span class="requerido">*</span></label>
+            <input type="text" id="usuario-nombre" name="nombre" placeholder="Nombre completo" autocomplete="off" />
+          </div>
+          <div class="campo-modal">
+            <label for="usuario-email">Correo <span class="requerido">*</span></label>
+            <input type="email" id="usuario-email" name="email" placeholder="nombre@gmail.com" autocomplete="off" />
+          </div>
+          <div class="campo-modal">
+            <label for="usuario-contrasena">Contraseña <span class="requerido">*</span></label>
+            <input type="text" id="usuario-contrasena" name="password" placeholder="demo123" autocomplete="off" />
+          </div>
+          <div class="campo-modal">
+            <label for="usuario-rol">Rol <span class="requerido">*</span></label>
+            <select id="usuario-rol" name="rol">
+              <option value="repartidor">Repartidor</option>
+              <option value="cliente">Cliente</option>
+            </select>
+          </div>
+          <label class="campo-check">
+            <input type="checkbox" id="usuario-activo" checked />
+            <span>Cuenta activa (puede iniciar sesión)</span>
+          </label>
+          <div class="modal-acciones">
+            <button type="button" class="boton-cancelar" id="btnCancelarUsuario">Cancelar</button>
+            <button type="submit" class="btn-crear usuario-guardar">Guardar usuario</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>
