@@ -1,4 +1,4 @@
-const CLAVE_PRODUCTOS = 'elvolcan_react_productos'
+const CLAVE_PRODUCTOS = 'elvolcan_react_productos_v2'
 
 export const CATEGORIAS = [
   { id: 'cilindros', nombre: 'Cilindros de Gas' },

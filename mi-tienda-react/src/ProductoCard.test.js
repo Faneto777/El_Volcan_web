@@ -1,47 +1,57 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom'; 
 import ProductoCard from './components/ProductoCard';
 
-const productoBase = {
-  id: 'CL003',
-  nombre: 'Cilindro 15kg',
-  descripcion: 'Gas licuado de prueba',
-  precio: 16000,
-  imagen: 'ruta-falsa.jpg',
-  stock: 10,
-  oferta: false,
-  precioOferta: null,
-};
-
-function renderCard(producto = productoBase) {
-  return render(
-    <MemoryRouter>
-      <ProductoCard producto={producto} onAgregar={() => {}} />
-    </MemoryRouter>
-  );
-}
-
 describe("Pruebas del Componente ProductoCard", () => {
+  
+  const productoMock = {
+    id: 1,
+    nombre: "Cilindro 15kg",
+    descripcion: "Gas de prueba para test",
+    precio: 15000,
+    imagen: "ruta-falsa.jpg",
+    stock: 5,
+    oferta: false
+  };
 
-  it("Prueba 1: Debería renderizar el nombre del producto en el DOM", () => {
-    renderCard();
+  it("Prueba 1: Debería renderizar la información del producto correctamente", () => {
+    render(
+      <BrowserRouter>
+        <ProductoCard producto={productoMock} onAgregar={() => {}} />
+      </BrowserRouter>
+    );
 
-    const tituloDelProducto = screen.getByText("Cilindro 15kg");
-
-    expect(tituloDelProducto).not.toBeNull();
+    expect(screen.getByText("Cilindro 15kg")).not.toBeNull();
+    expect(screen.getByText("Gas de prueba para test")).not.toBeNull();
   });
 
-  it("Prueba 2: Debería renderizar la descripción del producto", () => {
-    renderCard({
-      ...productoBase,
-      id: 'CL004',
-      nombre: 'Cilindro 45kg',
-      descripcion: 'Formato industrial de alto consumo',
-    });
+  it("Prueba 2: Debería deshabilitar el botón y mostrar 'Sin stock' si el stock es 0", () => {
+    const productoSinStock = { ...productoMock, stock: 0 };
+    
+    render(
+      <BrowserRouter>
+        <ProductoCard producto={productoSinStock} onAgregar={() => {}} />
+      </BrowserRouter>
+    );
 
-    const descripcion = screen.getByText("Formato industrial de alto consumo");
-    expect(descripcion).not.toBeNull();
+    const boton = screen.getByRole('button', { name: /sin stock/i });
+    expect(boton.disabled).toBeTrue();
+  });
+
+  it("Prueba 3: Debería ejecutar la función onAgregar al hacer clic", () => {
+    const espiaAgregar = jasmine.createSpy('onAgregar');
+    
+    render(
+      <BrowserRouter>
+        <ProductoCard producto={productoMock} onAgregar={espiaAgregar} />
+      </BrowserRouter>
+    );
+
+    const boton = screen.getByRole('button', { name: /agregar/i });
+    fireEvent.click(boton);
+    
+    expect(espiaAgregar).toHaveBeenCalledWith(productoMock);
   });
 
 });
