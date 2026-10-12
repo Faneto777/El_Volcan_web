@@ -1,5 +1,6 @@
 import { Link, NavLink } from 'react-router-dom'
 import { useCarrito } from '../context/useCarrito'
+import { BASE_URL } from '../services/productoService'
 import { formatearPrecio } from '../utils/formato'
 
 function Navbar() {
@@ -9,7 +10,7 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div className="container">
         <Link className="navbar-brand d-flex align-items-center gap-2" to="/">
-          <img src="/assets/logo/logosinfondo.png" alt="Logo El Volcán" height="36" />
+          <img src={`${BASE_URL}assets/logo/logosinfondo.png`} alt="Logo El Volcán" height="36" />
           El Volcán
         </Link>
 

@@ -8,7 +8,7 @@ import {
   restablecerProductos,
 } from './services/productoService'
 
-const CLAVE = 'elvolcan_react_productos_v2'
+const CLAVE = 'elvolcan_react_productos_v3'
 
 const productoNuevo = {
   id: 'XX001',

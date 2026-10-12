@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "karma start karma.conf.cjs"
+    "test": "karma start karma.conf.cjs",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
@@ -27,6 +29,7 @@
     "eslint": "^10.10.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.6",
+    "gh-pages": "^6.3.0",
     "globals": "^17.12.0",
     "jasmine-core": "^7.0.2",
     "karma": "^6.4.4",
