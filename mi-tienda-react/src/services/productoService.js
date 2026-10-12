@@ -91,8 +91,6 @@ const productosIniciales = [
   },
 ]
 
-// Recupera los productos desde localStorage
-// Si no hay datos guardados, carga la lista inicial
 function leerProductos() {
   const datos = localStorage.getItem(CLAVE_PRODUCTOS)
 
@@ -100,7 +98,7 @@ function leerProductos() {
     try {
       const lista = JSON.parse(datos)
       if (Array.isArray(lista)) return lista
-    } catch (error) {
+    } catch {
       console.warn('No se pudo leer el listado de productos')
     }
   }
@@ -113,7 +111,6 @@ function guardarProductos(lista) {
   localStorage.setItem(CLAVE_PRODUCTOS, JSON.stringify(lista))
 }
 
-// CREATE
 export function crearProducto(datos) {
   const lista = leerProductos()
 
@@ -132,7 +129,6 @@ export function crearProducto(datos) {
   return nuevo
 }
 
-// READ
 export function obtenerProductos() {
   return leerProductos()
 }
@@ -146,7 +142,6 @@ export function obtenerProductosPorCategoria(categoria) {
   return leerProductos().filter((p) => p.categoria === categoria)
 }
 
-// UPDATE
 export function actualizarProducto(id, cambios) {
   const lista = leerProductos()
   const indice = lista.findIndex((p) => p.id === id)
@@ -160,7 +155,6 @@ export function actualizarProducto(id, cambios) {
   return actualizado
 }
 
-// DELETE
 export function eliminarProducto(id) {
   const lista = leerProductos()
   const nuevaLista = lista.filter((p) => p.id !== id)
@@ -171,7 +165,6 @@ export function eliminarProducto(id) {
   return true
 }
 
-// Restaura el listado inicial
 export function restablecerProductos() {
   guardarProductos([...productosIniciales])
 }

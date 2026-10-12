@@ -17,11 +17,9 @@ describe('Pruebas del carrito', () => {
   }
 
   beforeEach(() => {
-    // Limpiar localStorage antes de cada prueba
     localStorage.removeItem('elvolcan_react_carrito')
   })
 
-  // Componente auxiliar que expone la función agregar del contexto
   function BotonDePrueba({ prod }) {
     const { agregar } = useCarrito()
     return <button onClick={() => agregar(prod)}>Agregar</button>
@@ -44,7 +42,6 @@ describe('Pruebas del carrito', () => {
 
     fireEvent.click(screen.getByRole('button', { name: /agregar/i }))
 
-    // Se usa regex porque el navbar concatena el precio con el texto del botón
     expect(screen.getByText(/\(1\)/)).not.toBeNull()
     expect(screen.getByText(/\$6\.500/)).not.toBeNull()
   })
@@ -56,7 +53,6 @@ describe('Pruebas del carrito', () => {
     fireEvent.click(btnAgregar)
     fireEvent.click(btnAgregar)
 
-    // Dos clics sobre el mismo id deben acumular cantidad, no duplicar el producto
     expect(screen.getByText(/\(2\)/)).not.toBeNull()
     expect(screen.getByText(/\$13\.000/)).not.toBeNull()
   })
