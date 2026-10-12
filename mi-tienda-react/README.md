@@ -51,7 +51,7 @@ npm test
 
 Eso levanta Karma en Chrome headless y al final tira algo como:
 ```
-TOTAL: 10 SUCCESS
+TOTAL: 41 SUCCESS
 ```
 
 Para ver los tests corriendo en el Chrome normal, en `karma.conf.cjs` cambia:
@@ -74,6 +74,41 @@ singleRun: false,
 | 8 | Estado | El carrito sube contador y total al agregar un producto | `src/CarritoProvider.test.js` |
 | 9 | Estado | Suma la cantidad si se agrega el mismo producto de nuevo | `src/CarritoProvider.test.js` |
 | 10 | Evento | El clic en Agregar llama a `onAgregar` con el producto | `src/ProductoCard.test.js` |
+| 11-22 | Servicio | Lógica de `productoService`  | `src/ProductoService.test.js` |
+| 23 | Formulario | Login: correo inválido muestra error y no guarda sesión | `src/Auth.test.js` |
+| 24 | Formulario | Login: contraseña de menos de 6 caracteres bloquea el ingreso | `src/Auth.test.js` |
+| 25 | Formulario | Login: datos válidos guardan la sesión y navegan al inicio | `src/Auth.test.js` |
+| 26 | Formulario | Registro: nombre de menos de 3 caracteres muestra error | `src/Auth.test.js` |
+| 27 | Formulario | Registro: contraseña sin número muestra error | `src/Auth.test.js` |
+| 28 | Formulario | Registro: confirmar contraseña distinta muestra error | `src/Auth.test.js` |
+| 29 | Formulario | Registro: datos válidos registran y navegan al inicio | `src/Auth.test.js` |
+| 30 | Formulario | Contacto: mensaje de menos de 10 caracteres muestra error | `src/Contacto.test.js` |
+| 31 | Formulario | Contacto: envío válido muestra éxito y limpia el formulario | `src/Contacto.test.js` |
+| 32 | Vista | Checkout: carrito vacío muestra mensaje | `src/Checkout.test.js` |
+| 33 | Formulario | Checkout: formulario incompleto muestra error y no navega | `src/Checkout.test.js` |
+| 34 | Formulario | Checkout: la calle es obligatoria aunque el resto esté completo | `src/Checkout.test.js` |
+| 35 | Flujo | Checkout: datos completos navegan a pago correcto y vacían el carrito | `src/Checkout.test.js` |
+| 36 | Vista | Categorías: lista las 4 categorías | `src/CategoriasOfertas.test.js` |
+| 37 | Filtro | Categoría: muestra solo los productos de esa categoría | `src/CategoriasOfertas.test.js` |
+| 38 | Vista | Categoría inexistente muestra mensaje | `src/CategoriasOfertas.test.js` |
+| 39 | Filtro | Ofertas: muestra solo los productos en oferta | `src/CategoriasOfertas.test.js` |
+| 40 | Vista | Ofertas: muestra precio de oferta y precio original tachado | `src/CategoriasOfertas.test.js` |
+| 41 | Vista | Ofertas: sin ofertas muestra mensaje | `src/CategoriasOfertas.test.js` |
+
+Total: **41 tests**.
+
+## Cobertura de código
+
+Se mide con `karma-coverage` (Istanbul). `npm test` ahora genera el reporte al final:
+
+```powershell
+npm test
+```
+
+- Resumen y tabla por archivo: aparecen en la consola.
+- Reporte navegable: abrir `coverage/index.html` en el navegador.
+
+> Solo se miden los archivos de `src/` que algún test carga. `App.jsx` y `Admin.jsx` aún no tienen tests, por lo que no aparecen en el reporte.
 
 ## Otros comandos
 
