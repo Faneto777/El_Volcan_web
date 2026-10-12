@@ -51,7 +51,7 @@ npm test
 
 Eso levanta Karma en Chrome headless y al final tira algo como:
 ```
-TOTAL: 41 SUCCESS
+TOTAL: 58 SUCCESS
 ```
 
 Para ver los tests corriendo en el Chrome normal, en `karma.conf.cjs` cambia:
@@ -94,8 +94,25 @@ singleRun: false,
 | 39 | Filtro | Ofertas: muestra solo los productos en oferta | `src/CategoriasOfertas.test.js` |
 | 40 | Vista | Ofertas: muestra precio de oferta y precio original tachado | `src/CategoriasOfertas.test.js` |
 | 41 | Vista | Ofertas: sin ofertas muestra mensaje | `src/CategoriasOfertas.test.js` |
+| 42 | Ruta | Inicio: muestra el catálogo con 6 productos y el enlace al catálogo completo | `src/App.test.js` |
+| 43 | Ruta | Catálogo: muestra los 14 productos | `src/App.test.js` |
+| 44 | Ruta | Detalle: muestra el producto y lo agrega al carrito | `src/App.test.js` |
+| 45 | Ruta | Detalle: producto inexistente muestra mensaje | `src/App.test.js` |
+| 46 | Ruta | Carrito: vacío muestra mensaje | `src/App.test.js` |
+| 47 | Estado | Carrito: el botón + sube la cantidad | `src/App.test.js` |
+| 48 | Estado | Carrito: el botón - elimina el producto al llegar a 0 | `src/App.test.js` |
+| 49 | Estado | Carrito: Vaciar carrito deja el carrito vacío | `src/App.test.js` |
+| 50 | Estado | Carrito: Eliminar quita el producto | `src/App.test.js` |
+| 51 | Vista | Admin: el dashboard muestra los KPIs  | `src/Admin.test.js` |
+| 52 | Vista | Admin: el dashboard muestra los enlaces de gestión y tienda | `src/Admin.test.js` |
+| 53 | CRUD | Admin: lista los 14 productos en la tabla | `src/Admin.test.js` |
+| 54 | CRUD | Admin: sin código ni nombre muestra error | `src/Admin.test.js` |
+| 55 | CRUD | Admin: crea un producto nuevo | `src/Admin.test.js` |
+| 56 | CRUD | Admin: actualiza un producto si el código ya existe | `src/Admin.test.js` |
+| 57 | CRUD | Admin: elimina un producto | `src/Admin.test.js` |
+| 58 | CRUD | Admin: restablece los productos originales | `src/Admin.test.js` |
 
-Total: **41 tests**.
+Total: **58 tests**.
 
 ## Cobertura de código
 
@@ -108,14 +125,14 @@ npm test
 - Resumen y tabla por archivo: aparecen en la consola.
 - Reporte navegable: abrir `coverage/index.html` en el navegador.
 
-> Solo se miden los archivos de `src/` que algún test carga. `App.jsx` y `Admin.jsx` aún no tienen tests, por lo que no aparecen en el reporte.
+> Cobertura actual: ~91 % de statements y ~92 % de funciones. Los archivos con menor cobertura son `Info.jsx` (Blog y Nosotros sin tests) y `Checkout.jsx` (páginas de pago correcto/error).
 
 ## Otros comandos
 
 ```powershell
-npm run dev      # levanta la tienda en el navegador
-npm run build    # genera la versión de producción
-npm run lint     # revisa el código
+npm run dev      
+npm run build    
+npm run lint     
 ```
 
 ## Si algo falla
