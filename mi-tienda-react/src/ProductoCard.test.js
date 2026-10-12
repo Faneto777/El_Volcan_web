@@ -1,57 +1,67 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom'; 
-import ProductoCard from './components/ProductoCard';
+import { render, screen, fireEvent } from '@testing-library/react'
+import { BrowserRouter } from 'react-router-dom'
+import ProductoCard from './components/ProductoCard'
 
-describe("Pruebas del Componente ProductoCard", () => {
-  
-  const productoMock = {
-    id: 1,
-    nombre: "Cilindro 15kg",
-    descripcion: "Gas de prueba para test",
-    precio: 15000,
-    imagen: "ruta-falsa.jpg",
-    stock: 5,
-    oferta: false
-  };
+describe('Pruebas de ProductoCard', () => {
+  // producto de ejemplo para todos los tests
+  const producto = {
+    id: 'CL001',
+    nombre: 'Cilindro GLP 5 kg',
+    descripcion: 'Cilindro de gas licuado de petroleo 5 kg',
+    precio: 6500,
+    imagen: '/assets/productos/cilindro.jpg',
+    stock: 10,
+    oferta: false,
+    precioOferta: null,
+  }
 
-  it("Prueba 1: Debería renderizar la información del producto correctamente", () => {
+  const mostrar = (prod) =>
     render(
       <BrowserRouter>
-        <ProductoCard producto={productoMock} onAgregar={() => {}} />
+        <ProductoCard producto={prod} onAgregar={() => {}} />
       </BrowserRouter>
-    );
+    )
 
-    expect(screen.getByText("Cilindro 15kg")).not.toBeNull();
-    expect(screen.getByText("Gas de prueba para test")).not.toBeNull();
-  });
+  it('deberia mostrar el nombre y la descripcion del producto', () => {
+    mostrar(producto)
 
-  it("Prueba 2: Debería deshabilitar el botón y mostrar 'Sin stock' si el stock es 0", () => {
-    const productoSinStock = { ...productoMock, stock: 0 };
-    
+    expect(screen.getByText('Cilindro GLP 5 kg')).not.toBeNull()
+    expect(screen.getByText(/Cilindro de gas licuado/)).not.toBeNull()
+  })
+
+  it('deberia mostrar el precio con formato de moneda', () => {
+    mostrar(producto)
+
+    // el precio se ve asi $6.500
+    expect(screen.getByText('$6.500')).not.toBeNull()
+  })
+
+  it('deberia dejar el boton deshabilitado cuando el stock es 0', () => {
+    mostrar({ ...producto, stock: 0 })
+
+    const btnAgregar = screen.getByRole('button', { name: /sin stock/i })
+    expect(btnAgregar.disabled).toBeTrue()
+  })
+
+  it('deberia mostrar el precio viejo tachado si el producto esta en oferta', () => {
+    mostrar({ ...producto, oferta: true, precioOferta: 5000 })
+
+    expect(screen.getByText('$6.500')).not.toBeNull()
+    expect(screen.getByText('$5.000')).not.toBeNull()
+  })
+
+  it('deberia llamar a onAgregar con el producto cuando aprieto agregar', () => {
+    const espia = jasmine.createSpy('onAgregar')
+
     render(
       <BrowserRouter>
-        <ProductoCard producto={productoSinStock} onAgregar={() => {}} />
+        <ProductoCard producto={producto} onAgregar={espia} />
       </BrowserRouter>
-    );
+    )
 
-    const boton = screen.getByRole('button', { name: /sin stock/i });
-    expect(boton.disabled).toBeTrue();
-  });
+    // aqui simulamos que el usuario aprieta el boton
+    fireEvent.click(screen.getByRole('button', { name: /agregar/i }))
 
-  it("Prueba 3: Debería ejecutar la función onAgregar al hacer clic", () => {
-    const espiaAgregar = jasmine.createSpy('onAgregar');
-    
-    render(
-      <BrowserRouter>
-        <ProductoCard producto={productoMock} onAgregar={espiaAgregar} />
-      </BrowserRouter>
-    );
-
-    const boton = screen.getByRole('button', { name: /agregar/i });
-    fireEvent.click(boton);
-    
-    expect(espiaAgregar).toHaveBeenCalledWith(productoMock);
-  });
-
-});
+    expect(espia).toHaveBeenCalledWith(producto)
+  })
+})
