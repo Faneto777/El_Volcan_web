@@ -55,6 +55,15 @@ describe('Formulario de Login', () => {
     expect(screen.getByText('PAGINA INICIO')).not.toBeNull()
     expect(JSON.parse(localStorage.getItem(CLAVE_SESION)).correo).toBe('jose@correo.cl')
   })
+
+  it('deberia entrar con la cuenta demo sin escribir nada', () => {
+    montar('/login', <Login />)
+
+    fireEvent.click(screen.getByRole('button', { name: /usar cuenta demo/i }))
+
+    expect(screen.getByText('PAGINA INICIO')).not.toBeNull()
+    expect(JSON.parse(localStorage.getItem(CLAVE_SESION)).correo).toBe('clientedemo@gmail.com')
+  })
 })
 
 describe('Formulario de Registro', () => {

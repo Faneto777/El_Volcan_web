@@ -63,7 +63,6 @@ describe('Checkout', () => {
     escribir('Nombre*', 'Jose')
     escribir('Apellidos*', 'Perez')
     escribir('Correo*', 'jose@correo.cl')
-    // Calle queda vacia a proposito
     fireEvent.click(screen.getByRole('button', { name: /pagar ahora/i }))
 
     expect(

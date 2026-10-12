@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>24/24</span>
+                <span class='fraction'>27/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>7/8</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>24/24</span>
+                <span class='fraction'>27/27</span>
             </div>
         
             
@@ -318,7 +318,20 @@
 <a name='L253'></a><a href='#L253'>253</a>
 <a name='L254'></a><a href='#L254'>254</a>
 <a name='L255'></a><a href='#L255'>255</a>
-<a name='L256'></a><a href='#L256'>256</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L256'></a><a href='#L256'>256</a>
+<a name='L257'></a><a href='#L257'>257</a>
+<a name='L258'></a><a href='#L258'>258</a>
+<a name='L259'></a><a href='#L259'>259</a>
+<a name='L260'></a><a href='#L260'>260</a>
+<a name='L261'></a><a href='#L261'>261</a>
+<a name='L262'></a><a href='#L262'>262</a>
+<a name='L263'></a><a href='#L263'>263</a>
+<a name='L264'></a><a href='#L264'>264</a>
+<a name='L265'></a><a href='#L265'>265</a>
+<a name='L266'></a><a href='#L266'>266</a>
+<a name='L267'></a><a href='#L267'>267</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -544,6 +557,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -573,7 +591,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Link, Route, Routes, useParams } from 'react-router-dom';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Link, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -585,8 +607,10 @@ import { CategoriaDetalle, Categorias } from './pages/Categorias';
 import Ofertas from './pages/Ofertas';
 import { Checkout, PagoCorrecto, PagoError } from './pages/Checkout';
 import { Login, Registro } from './pages/Auth';
+import { Operador, Personal, Repartidor } from './pages/Personal';
 import { Blog, BlogDetalle, Contacto, Nosotros } from './pages/Info';
 import { AdminDashboard, AdminProductos } from './pages/Admin';
+import AdminSistema from './pages/AdminSistema';
 &nbsp;
 function Inicio() {
   const { agregar } = useCarrito();
@@ -799,10 +823,15 @@ function Carrito() {
   );
 }
 &nbsp;
+const RUTAS_SIN_MARCO = ['/operador', '/repartidor', '/admin/sistema']
+&nbsp;
 function App() {
+  const { pathname } = useLocation()
+  const sinMarco = RUTAS_SIN_MARCO.includes(pathname)
+&nbsp;
   return (
     &lt;&gt;
-      &lt;Navbar /&gt;
+      {!sinMarco &amp;&amp; &lt;Navbar /&gt;}
       &lt;Routes&gt;
         &lt;Route path="/" element={&lt;Inicio /&gt;} /&gt;
         &lt;Route path="/productos" element={&lt;Catalogo /&gt;} /&gt;
@@ -816,14 +845,18 @@ function App() {
         &lt;Route path="/pago-error" element={&lt;PagoError /&gt;} /&gt;
         &lt;Route path="/login" element={&lt;Login /&gt;} /&gt;
         &lt;Route path="/registro" element={&lt;Registro /&gt;} /&gt;
+        &lt;Route path="/personal" element={&lt;Personal /&gt;} /&gt;
+        &lt;Route path="/operador" element={&lt;Operador /&gt;} /&gt;
+        &lt;Route path="/repartidor" element={&lt;Repartidor /&gt;} /&gt;
         &lt;Route path="/nosotros" element={&lt;Nosotros /&gt;} /&gt;
         &lt;Route path="/blog" element={&lt;Blog /&gt;} /&gt;
         &lt;Route path="/blog/:id" element={&lt;BlogDetalle /&gt;} /&gt;
         &lt;Route path="/contacto" element={&lt;Contacto /&gt;} /&gt;
         &lt;Route path="/admin" element={&lt;AdminDashboard /&gt;} /&gt;
         &lt;Route path="/admin/productos" element={&lt;AdminProductos /&gt;} /&gt;
+        &lt;Route path="/admin/sistema" element={&lt;AdminSistema /&gt;} /&gt;
       &lt;/Routes&gt;
-      &lt;Footer /&gt;
+      {!sinMarco &amp;&amp; &lt;Footer /&gt;}
     &lt;/&gt;
   );
 }
@@ -835,7 +868,7 @@ export default App</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-12T06:48:13.592Z
+                at 2026-10-12T18:09:10.735Z
             </div>
         <script src="../prettify.js"></script>
         <script>

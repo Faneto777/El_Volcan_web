@@ -35,6 +35,7 @@ export function AdminDashboard() {
           </div>
           <div className="d-flex gap-2 mt-4">
             <Link className="boton" to="/admin/productos">Gestionar productos</Link>
+            <Link className="boton boton-secundario" to="/admin/sistema">Sistema administrativo</Link>
             <Link className="boton boton-secundario" to="/">Ver tienda</Link>
           </div>
         </div>

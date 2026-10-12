@@ -27,6 +27,11 @@ export function Login() {
     navigate('/')
   }
 
+  const usarDemo = () => {
+    localStorage.setItem(CLAVE_SESION, JSON.stringify({ nombre: 'Cliente Demo', correo: 'clientedemo@gmail.com' }))
+    navigate('/')
+  }
+
   return (
     <main>
       <section>
@@ -45,7 +50,15 @@ export function Login() {
               </div>
               <button type="submit" className="boton boton-ancho">Ingresar</button>
             </form>
+            <div className="panel-demo">
+              <p>
+                <strong>Cuenta de prueba:</strong> <code>clientedemo@gmail.com</code> / <code>demo123</code>.
+                Úsala para simular un inicio de sesión sin registrarte.
+              </p>
+              <button type="button" className="boton boton-secundario" onClick={usarDemo}>Usar cuenta demo</button>
+            </div>
             <p className="text-center mt-3">¿No tienes cuenta? <Link to="/registro">Crear cuenta</Link></p>
+      <p className="text-center">¿Eres personal de la empresa? <Link to="/personal">Acceso del personal</Link></p>
           </div>
         </div>
       </section>

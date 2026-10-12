@@ -1,4 +1,4 @@
-import { Link, Route, Routes, useParams } from 'react-router-dom';
+import { Link, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -10,8 +10,10 @@ import { CategoriaDetalle, Categorias } from './pages/Categorias';
 import Ofertas from './pages/Ofertas';
 import { Checkout, PagoCorrecto, PagoError } from './pages/Checkout';
 import { Login, Registro } from './pages/Auth';
+import { Operador, Personal, Repartidor } from './pages/Personal';
 import { Blog, BlogDetalle, Contacto, Nosotros } from './pages/Info';
 import { AdminDashboard, AdminProductos } from './pages/Admin';
+import AdminSistema from './pages/AdminSistema';
 
 function Inicio() {
   const { agregar } = useCarrito();
@@ -224,10 +226,15 @@ function Carrito() {
   );
 }
 
+const RUTAS_SIN_MARCO = ['/operador', '/repartidor', '/admin/sistema']
+
 function App() {
+  const { pathname } = useLocation()
+  const sinMarco = RUTAS_SIN_MARCO.includes(pathname)
+
   return (
     <>
-      <Navbar />
+      {!sinMarco && <Navbar />}
       <Routes>
         <Route path="/" element={<Inicio />} />
         <Route path="/productos" element={<Catalogo />} />
@@ -241,14 +248,18 @@ function App() {
         <Route path="/pago-error" element={<PagoError />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
+        <Route path="/personal" element={<Personal />} />
+        <Route path="/operador" element={<Operador />} />
+        <Route path="/repartidor" element={<Repartidor />} />
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogDetalle />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/productos" element={<AdminProductos />} />
+        <Route path="/admin/sistema" element={<AdminSistema />} />
       </Routes>
-      <Footer />
+      {!sinMarco && <Footer />}
     </>
   );
 }

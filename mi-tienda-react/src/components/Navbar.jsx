@@ -1,7 +1,26 @@
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useCarrito } from '../context/useCarrito'
 import { BASE_URL } from '../services/productoService'
 import { formatearPrecio } from '../utils/formato'
+
+const CLAVE_SESION_CLIENTE = 'elvolcan_usuario'
+const CLAVE_SESION_PERSONAL = 'elvolcan_sesion_personal'
+
+function leerSesion() {
+  try {
+    const personal = JSON.parse(localStorage.getItem(CLAVE_SESION_PERSONAL))
+    if (personal) return { ...personal, esPersonal: true }
+  } catch {
+    //
+  }
+  try {
+    const cliente = JSON.parse(localStorage.getItem(CLAVE_SESION_CLIENTE))
+    if (cliente) return { ...cliente, esPersonal: false }
+  } catch {
+    //
+  }
+  return null
+}
 
 function enlaceClase({ isActive }) {
   return isActive ? 'activo' : undefined
@@ -9,6 +28,14 @@ function enlaceClase({ isActive }) {
 
 function Navbar() {
   const { totalUnidades, total } = useCarrito()
+  const navigate = useNavigate()
+  const sesion = leerSesion()
+
+  const cerrarSesion = () => {
+    localStorage.removeItem(CLAVE_SESION_CLIENTE)
+    localStorage.removeItem(CLAVE_SESION_PERSONAL)
+    navigate('/')
+  }
 
   return (
     <header className="navbar">
@@ -33,8 +60,21 @@ function Navbar() {
           <NavLink to="/blog" className={enlaceClase}>Blog</NavLink>
           <NavLink to="/contacto" className={enlaceClase}>Contacto</NavLink>
           <div className="area-cuenta">
-            <NavLink to="/login" className={enlaceClase}>Ingresar</NavLink>
-            <NavLink to="/registro" className={enlaceClase}>Registro</NavLink>
+            {sesion ? (
+              <>
+                <span className="usuario-activo">
+                  👤 {sesion.nombre ?? sesion.email}{sesion.rol ? ` · ${sesion.rol}` : ''}
+                </span>
+                <button type="button" className="boton-cerrar-sesion" onClick={cerrarSesion}>
+                  Cerrar sesión
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink to="/login" className={enlaceClase}>Ingresar</NavLink>
+                <NavLink to="/registro" className={enlaceClase}>Registro</NavLink>
+              </>
+            )}
           </div>
         </nav>
 

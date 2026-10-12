@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.65% </span>
+                <span class="strong">95.91% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>44/46</span>
+                <span class='fraction'>47/49</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.65% </span>
+                <span class="strong">95.91% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>44/46</span>
+                <span class='fraction'>47/49</span>
             </div>
         
             
@@ -180,7 +180,20 @@
 <a name='L115'></a><a href='#L115'>115</a>
 <a name='L116'></a><a href='#L116'>116</a>
 <a name='L117'></a><a href='#L117'>117</a>
-<a name='L118'></a><a href='#L118'>118</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -190,12 +203,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -209,7 +222,12 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -224,6 +242,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -326,6 +352,11 @@ export function Login() {
     navigate('/')
   }
 &nbsp;
+  const usarDemo = () =&gt; {
+    localStorage.setItem(CLAVE_SESION, JSON.stringify({ nombre: 'Cliente Demo', correo: 'clientedemo@gmail.com' }))
+    navigate('/')
+  }
+&nbsp;
   return (
     &lt;main&gt;
       &lt;section&gt;
@@ -344,7 +375,15 @@ export function Login() {
               &lt;/div&gt;
               &lt;button type="submit" className="boton boton-ancho"&gt;Ingresar&lt;/button&gt;
             &lt;/form&gt;
+            &lt;div className="panel-demo"&gt;
+              &lt;p&gt;
+                &lt;strong&gt;Cuenta de prueba:&lt;/strong&gt; &lt;code&gt;clientedemo@gmail.com&lt;/code&gt; / &lt;code&gt;demo123&lt;/code&gt;.
+                Úsala para simular un inicio de sesión sin registrarte.
+              &lt;/p&gt;
+              &lt;button type="button" className="boton boton-secundario" onClick={usarDemo}&gt;Usar cuenta demo&lt;/button&gt;
+            &lt;/div&gt;
             &lt;p className="text-center mt-3"&gt;¿No tienes cuenta? &lt;Link to="/registro"&gt;Crear cuenta&lt;/Link&gt;&lt;/p&gt;
+      &lt;p className="text-center"&gt;¿Eres personal de la empresa? &lt;Link to="/personal"&gt;Acceso del personal&lt;/Link&gt;&lt;/p&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/section&gt;
@@ -421,7 +460,7 @@ export function Registro() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-12T06:48:13.592Z
+                at 2026-10-12T18:09:10.735Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
