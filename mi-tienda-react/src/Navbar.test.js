@@ -5,7 +5,7 @@ import CarritoProvider from './context/CarritoProvider'
 
 describe('Pruebas del Navbar', () => {
   beforeEach(() => {
-    // el carrito se guarda en localStorage, hay que limpiarlo entre tests
+    // Limpiar localStorage antes de cada prueba
     localStorage.removeItem('elvolcan_react_carrito')
   })
 
@@ -34,7 +34,7 @@ describe('Pruebas del Navbar', () => {
   it('deberia mostrar el carrito en cero cuando no hay nada agregado', () => {
     montar()
 
-    // el boton queda asi: Carrito (0) $0
+    // El botón renderiza: Carrito (0) $0
     expect(screen.getByText(/\(0\)/)).not.toBeNull()
   })
 })

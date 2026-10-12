@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 import ProductoCard from './components/ProductoCard'
 
 describe('Pruebas de ProductoCard', () => {
-  // producto de ejemplo para todos los tests
+  // Producto de ejemplo reutilizado en todas las pruebas
   const producto = {
     id: 'CL001',
     nombre: 'Cilindro GLP 5 kg',
@@ -32,7 +32,7 @@ describe('Pruebas de ProductoCard', () => {
   it('deberia mostrar el precio con formato de moneda', () => {
     mostrar(producto)
 
-    // el precio se ve asi $6.500
+    // formatearPrecio retorna $6.500 para el precio de ejemplo
     expect(screen.getByText('$6.500')).not.toBeNull()
   })
 
@@ -59,7 +59,7 @@ describe('Pruebas de ProductoCard', () => {
       </BrowserRouter>
     )
 
-    // aqui simulamos que el usuario aprieta el boton
+    // Simula el clic del usuario sobre el botón agregar
     fireEvent.click(screen.getByRole('button', { name: /agregar/i }))
 
     expect(espia).toHaveBeenCalledWith(producto)
