@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { CarritoContext } from './carritoContext'
-import { precioFinal } from '../data/baseDatos'
+import { precioFinal } from '../services/productoService'
 
 const CLAVE_CARRITO = 'elvolcan_react_carrito'
 

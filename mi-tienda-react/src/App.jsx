@@ -3,8 +3,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/Navbar';
 import ProductoCard from './components/ProductoCard';
 import { useCarrito } from './context/useCarrito';
-import { obtenerProductoPorId, obtenerProductos } from './data/baseDatos';
+import { obtenerProductoPorId, obtenerProductos } from './services/productoService';
 import { formatearPrecio } from './utils/formato';
+import { CategoriaDetalle, Categorias } from './pages/Categorias';
+import Ofertas from './pages/Ofertas';
+import { Checkout, PagoCorrecto, PagoError } from './pages/Checkout';
+import { Login, Registro } from './pages/Auth';
+import { Blog, BlogDetalle, Contacto, Nosotros } from './pages/Info';
+import { AdminDashboard, AdminProductos } from './pages/Admin';
 
 function Inicio() {
   const { agregar } = useCarrito();
@@ -114,7 +120,10 @@ function Carrito() {
         ))}
       </ul>
       <p className="fs-4">Total: <strong>{formatearPrecio(total)}</strong></p>
-      <button type="button" className="btn btn-outline-danger" onClick={vaciar}>Vaciar carrito</button>
+      <div className="d-flex gap-2">
+        <Link className="btn btn-success" to="/checkout">Comprar ahora</Link>
+        <button type="button" className="btn btn-outline-danger" onClick={vaciar}>Vaciar carrito</button>
+      </div>
     </div>
   );
 }
@@ -128,6 +137,20 @@ function App() {
         <Route path="/productos" element={<Catalogo />} />
         <Route path="/productos/:id" element={<Detalle />} />
         <Route path="/carrito" element={<Carrito />} />
+        <Route path="/categorias" element={<Categorias />} />
+        <Route path="/categorias/:id" element={<CategoriaDetalle />} />
+        <Route path="/ofertas" element={<Ofertas />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/pago-correcto" element={<PagoCorrecto />} />
+        <Route path="/pago-error" element={<PagoError />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registro" element={<Registro />} />
+        <Route path="/nosotros" element={<Nosotros />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogDetalle />} />
+        <Route path="/contacto" element={<Contacto />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/productos" element={<AdminProductos />} />
       </Routes>
     </>
   );

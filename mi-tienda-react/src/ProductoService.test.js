@@ -8,7 +8,7 @@ import {
   restablecerProductos,
 } from './services/productoService'
 
-const CLAVE = 'elvolcan_servicio_productos'
+const CLAVE = 'elvolcan_react_productos_v2'
 
 const productoNuevo = {
   id: 'XX001',
@@ -29,7 +29,7 @@ describe('Pruebas de productoService', () => {
   })
 
   it('deberia cargar el listado inicial de productos', () => {
-    expect(obtenerProductos().length).toBe(8)
+    expect(obtenerProductos().length).toBe(14)
   })
 
   it('deberia obtener un producto por su id', () => {
@@ -42,14 +42,14 @@ describe('Pruebas de productoService', () => {
 
   it('deberia filtrar los productos por categoria', () => {
     expect(obtenerProductosPorCategoria('cilindros').length).toBe(4)
-    expect(obtenerProductosPorCategoria('accesorios').length).toBe(1)
+    expect(obtenerProductosPorCategoria('accesorios').length).toBe(3)
   })
 
   it('deberia crear un producto y sumarlo al listado', () => {
     const creado = crearProducto(productoNuevo)
 
     expect(creado.id).toBe('XX001')
-    expect(obtenerProductos().length).toBe(9)
+    expect(obtenerProductos().length).toBe(15)
   })
 
   it('deberia persistir el producto creado en localStorage', () => {
@@ -57,7 +57,7 @@ describe('Pruebas de productoService', () => {
 
     const guardados = JSON.parse(localStorage.getItem(CLAVE))
 
-    expect(guardados.length).toBe(9)
+    expect(guardados.length).toBe(15)
     expect(guardados.some((p) => p.id === 'XX001')).toBeTrue()
   })
 
@@ -80,7 +80,7 @@ describe('Pruebas de productoService', () => {
 
   it('deberia eliminar un producto del listado', () => {
     expect(eliminarProducto('CL001')).toBeTrue()
-    expect(obtenerProductos().length).toBe(7)
+    expect(obtenerProductos().length).toBe(13)
     expect(obtenerProductoPorId('CL001')).toBeNull()
   })
 
@@ -94,7 +94,7 @@ describe('Pruebas de productoService', () => {
 
     restablecerProductos()
 
-    expect(obtenerProductos().length).toBe(8)
+    expect(obtenerProductos().length).toBe(14)
     expect(obtenerProductoPorId('CL001')).not.toBeNull()
   })
 })

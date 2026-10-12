@@ -33,11 +33,32 @@ function Navbar() {
             <li className="nav-item">
               <NavLink className="nav-link" to="/productos">Productos</NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/categorias">Categorías</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/ofertas">Ofertas</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/nosotros">Nosotros</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/blog">Blog</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/contacto">Contacto</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/admin">Admin</NavLink>
+            </li>
           </ul>
 
-          <Link className="btn btn-success" to="/carrito">
-            🛒 Carrito ({totalUnidades}) {formatearPrecio(total)}
-          </Link>
+          <div className="d-flex gap-2">
+            <Link className="btn btn-outline-light" to="/login">Ingresar</Link>
+            <Link className="btn btn-success" to="/carrito">
+              🛒 Carrito ({totalUnidades}) {formatearPrecio(total)}
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { precioFinal } from '../data/baseDatos'
+import { precioFinal } from '../services/productoService'
 import { formatearPrecio } from '../utils/formato'
 
 function ProductoCard({ producto, onAgregar }) {
