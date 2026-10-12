@@ -168,7 +168,19 @@
 <a name='L103'></a><a href='#L103'>103</a>
 <a name='L104'></a><a href='#L104'>104</a>
 <a name='L105'></a><a href='#L105'>105</a>
-<a name='L106'></a><a href='#L106'>106</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -204,11 +216,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -254,7 +272,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -267,6 +284,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -303,22 +327,28 @@ export function Login() {
   }
 &nbsp;
   return (
-    &lt;div className="container mt-5" style={{ maxWidth: '480px' }}&gt;
-      &lt;h1 className="text-center mb-4"&gt;Iniciar sesión&lt;/h1&gt;
-      {error &amp;&amp; &lt;div className="alert alert-danger"&gt;{error}&lt;/div&gt;}
-      &lt;form onSubmit={ingresar} noValidate&gt;
-        &lt;div className="mb-3"&gt;
-          &lt;label className="form-label" htmlFor="correo"&gt;Correo&lt;/label&gt;
-          &lt;input id="correo" type="email" className="form-control" value={correo} onChange={(e) =&gt; setCorreo(e.target.value)} /&gt;
+    &lt;main&gt;
+      &lt;section&gt;
+        &lt;div className="container" style={{ maxWidth: '480px' }}&gt;
+          &lt;h1 className="titulo-seccion"&gt;Iniciar sesión&lt;/h1&gt;
+          &lt;div className="panel"&gt;
+            {error &amp;&amp; &lt;div className="alert alert-danger"&gt;{error}&lt;/div&gt;}
+            &lt;form onSubmit={ingresar} noValidate&gt;
+              &lt;div className="campo"&gt;
+                &lt;label htmlFor="correo"&gt;Correo&lt;/label&gt;
+                &lt;input id="correo" type="email" value={correo} onChange={(e) =&gt; setCorreo(e.target.value)} /&gt;
+              &lt;/div&gt;
+              &lt;div className="campo"&gt;
+                &lt;label htmlFor="password"&gt;Contraseña&lt;/label&gt;
+                &lt;input id="password" type="password" value={password} onChange={(e) =&gt; setPassword(e.target.value)} /&gt;
+              &lt;/div&gt;
+              &lt;button type="submit" className="boton boton-ancho"&gt;Ingresar&lt;/button&gt;
+            &lt;/form&gt;
+            &lt;p className="text-center mt-3"&gt;¿No tienes cuenta? &lt;Link to="/registro"&gt;Crear cuenta&lt;/Link&gt;&lt;/p&gt;
+          &lt;/div&gt;
         &lt;/div&gt;
-        &lt;div className="mb-3"&gt;
-          &lt;label className="form-label" htmlFor="password"&gt;Contraseña&lt;/label&gt;
-          &lt;input id="password" type="password" className="form-control" value={password} onChange={(e) =&gt; setPassword(e.target.value)} /&gt;
-        &lt;/div&gt;
-        &lt;button type="submit" className="btn btn-primary w-100"&gt;Ingresar&lt;/button&gt;
-      &lt;/form&gt;
-      &lt;p className="text-center mt-3"&gt;¿No tienes cuenta? &lt;Link to="/registro"&gt;Crear cuenta&lt;/Link&gt;&lt;/p&gt;
-    &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
   )
 }
 &nbsp;
@@ -353,29 +383,35 @@ export function Registro() {
   }
 &nbsp;
   return (
-    &lt;div className="container mt-5" style={{ maxWidth: '480px' }}&gt;
-      &lt;h1 className="text-center mb-4"&gt;Crear cuenta&lt;/h1&gt;
-      {error &amp;&amp; &lt;div className="alert alert-danger"&gt;{error}&lt;/div&gt;}
-      &lt;form onSubmit={registrar} noValidate&gt;
-        &lt;div className="mb-3"&gt;
-          &lt;label className="form-label" htmlFor="nombre"&gt;Nombre&lt;/label&gt;
-          &lt;input id="nombre" className="form-control" value={nombre} onChange={(e) =&gt; setNombre(e.target.value)} /&gt;
+    &lt;main&gt;
+      &lt;section&gt;
+        &lt;div className="container" style={{ maxWidth: '480px' }}&gt;
+          &lt;h1 className="titulo-seccion"&gt;Crear cuenta&lt;/h1&gt;
+          &lt;div className="panel"&gt;
+            {error &amp;&amp; &lt;div className="alert alert-danger"&gt;{error}&lt;/div&gt;}
+            &lt;form onSubmit={registrar} noValidate&gt;
+              &lt;div className="campo"&gt;
+                &lt;label htmlFor="nombre"&gt;Nombre&lt;/label&gt;
+                &lt;input id="nombre" value={nombre} onChange={(e) =&gt; setNombre(e.target.value)} /&gt;
+              &lt;/div&gt;
+              &lt;div className="campo"&gt;
+                &lt;label htmlFor="correo"&gt;Correo&lt;/label&gt;
+                &lt;input id="correo" type="email" value={correo} onChange={(e) =&gt; setCorreo(e.target.value)} /&gt;
+              &lt;/div&gt;
+              &lt;div className="campo"&gt;
+                &lt;label htmlFor="password"&gt;Contraseña&lt;/label&gt;
+                &lt;input id="password" type="password" value={password} onChange={(e) =&gt; setPassword(e.target.value)} /&gt;
+              &lt;/div&gt;
+              &lt;div className="campo"&gt;
+                &lt;label htmlFor="confirmar"&gt;Confirmar contraseña&lt;/label&gt;
+                &lt;input id="confirmar" type="password" value={confirmar} onChange={(e) =&gt; setConfirmar(e.target.value)} /&gt;
+              &lt;/div&gt;
+              &lt;button type="submit" className="boton boton-ancho"&gt;Registrarme&lt;/button&gt;
+            &lt;/form&gt;
+          &lt;/div&gt;
         &lt;/div&gt;
-        &lt;div className="mb-3"&gt;
-          &lt;label className="form-label" htmlFor="correo"&gt;Correo&lt;/label&gt;
-          &lt;input id="correo" type="email" className="form-control" value={correo} onChange={(e) =&gt; setCorreo(e.target.value)} /&gt;
-        &lt;/div&gt;
-        &lt;div className="mb-3"&gt;
-          &lt;label className="form-label" htmlFor="password"&gt;Contraseña&lt;/label&gt;
-          &lt;input id="password" type="password" className="form-control" value={password} onChange={(e) =&gt; setPassword(e.target.value)} /&gt;
-        &lt;/div&gt;
-        &lt;div className="mb-3"&gt;
-          &lt;label className="form-label" htmlFor="confirmar"&gt;Confirmar contraseña&lt;/label&gt;
-          &lt;input id="confirmar" type="password" className="form-control" value={confirmar} onChange={(e) =&gt; setConfirmar(e.target.value)} /&gt;
-        &lt;/div&gt;
-        &lt;button type="submit" className="btn btn-primary w-100"&gt;Registrarme&lt;/button&gt;
-      &lt;/form&gt;
-    &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
   )
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -385,7 +421,7 @@ export function Registro() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-12T05:58:45.908Z
+                at 2026-10-12T06:48:13.592Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

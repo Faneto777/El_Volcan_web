@@ -5,23 +5,25 @@ import { CATEGORIAS, obtenerProductosPorCategoria } from '../services/productoSe
 
 export function Categorias() {
   return (
-    <div className="container mt-5">
-      <h1 className="text-center mb-4">Categorías</h1>
-      <div className="row g-4">
-        {CATEGORIAS.map((cat) => (
-          <div className="col-12 col-md-6 col-lg-3" key={cat.id}>
-            <div className="card h-100 shadow-sm text-center">
-              <div className="card-body d-flex flex-column">
-                <h5 className="card-title">{cat.nombre}</h5>
-                <Link className="btn btn-primary mt-auto" to={`/categorias/${cat.id}`}>
+    <main>
+      <section>
+        <div className="container">
+          <h1 className="titulo-seccion">Categorías</h1>
+          <p className="descripcion-seccion">Explora los productos separados por categoría.</p>
+          <div className="grid-beneficios">
+            {CATEGORIAS.map((cat) => (
+              <div className="tarjeta-beneficio" key={cat.id}>
+                <h3>{cat.nombre}</h3>
+                <p>Revisa todos los productos de esta categoría.</p>
+                <Link className="boton mt-2" to={`/categorias/${cat.id}`}>
                   Ver productos
                 </Link>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      </section>
+    </main>
   )
 }
 
@@ -33,27 +35,33 @@ export function CategoriaDetalle() {
 
   if (!categoria) {
     return (
-      <div className="container mt-5 text-center">
-        <h2>Categoría no encontrada</h2>
-        <Link className="btn btn-primary mt-3" to="/categorias">Volver a categorías</Link>
-      </div>
+      <main>
+        <section>
+          <div className="container text-center">
+            <h2 className="titulo-seccion">Categoría no encontrada</h2>
+            <Link className="boton mt-3" to="/categorias">Volver a categorías</Link>
+          </div>
+        </section>
+      </main>
     )
   }
 
   return (
-    <div className="container mt-5">
-      <h1 className="text-center mb-4">{categoria.nombre}</h1>
-      {productos.length === 0 ? (
-        <p className="text-center text-secondary">No hay productos en esta categoría.</p>
-      ) : (
-        <div className="row g-4">
-          {productos.map((producto) => (
-            <div className="col-12 col-md-4" key={producto.id}>
-              <ProductoCard producto={producto} onAgregar={agregar} />
+    <main>
+      <section>
+        <div className="container">
+          <h1 className="titulo-seccion">{categoria.nombre}</h1>
+          {productos.length === 0 ? (
+            <p className="descripcion-seccion">No hay productos en esta categoría.</p>
+          ) : (
+            <div className="grid-productos">
+              {productos.map((producto) => (
+                <ProductoCard key={producto.id} producto={producto} onAgregar={agregar} />
+              ))}
             </div>
-          ))}
+          )}
         </div>
-      )}
-    </div>
+      </section>
+    </main>
   )
 }

@@ -193,7 +193,25 @@
 <a name='L128'></a><a href='#L128'>128</a>
 <a name='L129'></a><a href='#L129'>129</a>
 <a name='L130'></a><a href='#L130'>130</a>
-<a name='L131'></a><a href='#L131'>131</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -246,6 +264,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -305,6 +327,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -315,7 +343,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -376,81 +412,99 @@ export function Checkout() {
 &nbsp;
   if (items.length === 0) {
     return (
-      &lt;div className="container mt-5 text-center"&gt;
-        &lt;h1&gt;Checkout&lt;/h1&gt;
-        &lt;p className="text-secondary"&gt;No hay productos para pagar.&lt;/p&gt;
-        &lt;Link className="btn btn-primary" to="/productos"&gt;Ver productos&lt;/Link&gt;
-      &lt;/div&gt;
+      &lt;main&gt;
+        &lt;section&gt;
+          &lt;div className="container text-center"&gt;
+            &lt;h1 className="titulo-seccion"&gt;Checkout&lt;/h1&gt;
+            &lt;p className="descripcion-seccion"&gt;No hay productos para pagar.&lt;/p&gt;
+            &lt;Link className="boton" to="/productos"&gt;Ver productos&lt;/Link&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
     )
   }
 &nbsp;
   return (
-    &lt;div className="container mt-5"&gt;
-      &lt;h1&gt;Checkout&lt;/h1&gt;
-      &lt;p className="text-secondary"&gt;Completa tus datos y dirección de entrega. Total a pagar: &lt;strong&gt;{formatearPrecio(total)}&lt;/strong&gt;&lt;/p&gt;
-      {error &amp;&amp; &lt;div className="alert alert-danger"&gt;{error}&lt;/div&gt;}
-      &lt;form onSubmit={pagar} noValidate&gt;
-        &lt;h4 className="mt-4"&gt;Información del cliente&lt;/h4&gt;
-        &lt;div className="row g-3"&gt;
-          &lt;div className="col-12 col-md-4"&gt;
-            &lt;label className="form-label" htmlFor="nombre"&gt;Nombre*&lt;/label&gt;
-            &lt;input id="nombre" name="nombre" className="form-control" value={form.nombre} onChange={cambiar} /&gt;
-          &lt;/div&gt;
-          &lt;div className="col-12 col-md-4"&gt;
-            &lt;label className="form-label" htmlFor="apellidos"&gt;Apellidos*&lt;/label&gt;
-            &lt;input id="apellidos" name="apellidos" className="form-control" value={form.apellidos} onChange={cambiar} /&gt;
-          &lt;/div&gt;
-          &lt;div className="col-12 col-md-4"&gt;
-            &lt;label className="form-label" htmlFor="correo"&gt;Correo*&lt;/label&gt;
-            &lt;input id="correo" name="correo" type="email" className="form-control" value={form.correo} onChange={cambiar} /&gt;
+    &lt;main&gt;
+      &lt;section&gt;
+        &lt;div className="container"&gt;
+          &lt;h1 className="titulo-seccion"&gt;Checkout&lt;/h1&gt;
+          &lt;p className="descripcion-seccion"&gt;Completa tus datos y dirección de entrega. Total a pagar: &lt;strong&gt;{formatearPrecio(total)}&lt;/strong&gt;&lt;/p&gt;
+          &lt;div className="panel"&gt;
+            {error &amp;&amp; &lt;div className="alert alert-danger"&gt;{error}&lt;/div&gt;}
+            &lt;form onSubmit={pagar} noValidate&gt;
+              &lt;h4&gt;Información del cliente&lt;/h4&gt;
+              &lt;div className="grid-formulario"&gt;
+                &lt;div className="campo"&gt;
+                  &lt;label htmlFor="nombre"&gt;Nombre*&lt;/label&gt;
+                  &lt;input id="nombre" name="nombre" value={form.nombre} onChange={cambiar} /&gt;
+                &lt;/div&gt;
+                &lt;div className="campo"&gt;
+                  &lt;label htmlFor="apellidos"&gt;Apellidos*&lt;/label&gt;
+                  &lt;input id="apellidos" name="apellidos" value={form.apellidos} onChange={cambiar} /&gt;
+                &lt;/div&gt;
+                &lt;div className="campo"&gt;
+                  &lt;label htmlFor="correo"&gt;Correo*&lt;/label&gt;
+                  &lt;input id="correo" name="correo" type="email" value={form.correo} onChange={cambiar} /&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;h4 className="mt-4"&gt;Dirección de entrega&lt;/h4&gt;
+              &lt;div className="grid-formulario"&gt;
+                &lt;div className="campo"&gt;
+                  &lt;label htmlFor="calle"&gt;Calle*&lt;/label&gt;
+                  &lt;input id="calle" name="calle" value={form.calle} onChange={cambiar} placeholder="Ej: Los crisantemos, Edificio Norte" /&gt;
+                &lt;/div&gt;
+                &lt;div className="campo"&gt;
+                  &lt;label htmlFor="depto"&gt;Departamento (opcional)&lt;/label&gt;
+                  &lt;input id="depto" name="depto" value={form.depto} onChange={cambiar} placeholder="Ej: 603" /&gt;
+                &lt;/div&gt;
+                &lt;div className="campo"&gt;
+                  &lt;label htmlFor="region"&gt;Región*&lt;/label&gt;
+                  &lt;input id="region" name="region" value={form.region} onChange={cambiar} /&gt;
+                &lt;/div&gt;
+                &lt;div className="campo"&gt;
+                  &lt;label htmlFor="comuna"&gt;Comuna*&lt;/label&gt;
+                  &lt;input id="comuna" name="comuna" value={form.comuna} onChange={cambiar} /&gt;
+                &lt;/div&gt;
+                &lt;div className="campo campo-ancho"&gt;
+                  &lt;label htmlFor="indicaciones"&gt;Indicaciones (opcional)&lt;/label&gt;
+                  &lt;textarea id="indicaciones" name="indicaciones" value={form.indicaciones} onChange={cambiar} /&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;button type="submit" className="boton mt-4"&gt;Pagar ahora {formatearPrecio(total)}&lt;/button&gt;
+            &lt;/form&gt;
           &lt;/div&gt;
         &lt;/div&gt;
-        &lt;h4 className="mt-4"&gt;Dirección de entrega&lt;/h4&gt;
-        &lt;div className="row g-3"&gt;
-          &lt;div className="col-12 col-md-6"&gt;
-            &lt;label className="form-label" htmlFor="calle"&gt;Calle*&lt;/label&gt;
-            &lt;input id="calle" name="calle" className="form-control" value={form.calle} onChange={cambiar} placeholder="Ej: Los crisantemos, Edificio Norte" /&gt;
-          &lt;/div&gt;
-          &lt;div className="col-12 col-md-6"&gt;
-            &lt;label className="form-label" htmlFor="depto"&gt;Departamento (opcional)&lt;/label&gt;
-            &lt;input id="depto" name="depto" className="form-control" value={form.depto} onChange={cambiar} placeholder="Ej: 603" /&gt;
-          &lt;/div&gt;
-          &lt;div className="col-12 col-md-6"&gt;
-            &lt;label className="form-label" htmlFor="region"&gt;Región*&lt;/label&gt;
-            &lt;input id="region" name="region" className="form-control" value={form.region} onChange={cambiar} /&gt;
-          &lt;/div&gt;
-          &lt;div className="col-12 col-md-6"&gt;
-            &lt;label className="form-label" htmlFor="comuna"&gt;Comuna*&lt;/label&gt;
-            &lt;input id="comuna" name="comuna" className="form-control" value={form.comuna} onChange={cambiar} /&gt;
-          &lt;/div&gt;
-          &lt;div className="col-12"&gt;
-            &lt;label className="form-label" htmlFor="indicaciones"&gt;Indicaciones (opcional)&lt;/label&gt;
-            &lt;textarea id="indicaciones" name="indicaciones" className="form-control" value={form.indicaciones} onChange={cambiar} /&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;button type="submit" className="btn btn-success mt-4"&gt;Pagar ahora {formatearPrecio(total)}&lt;/button&gt;
-      &lt;/form&gt;
-    &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
   )
 }
 &nbsp;
 export function <span class="fstat-no" title="function not covered" >PagoCorrecto() {</span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div className="container mt-5 text-center"&gt;
-      &lt;h1 className="text-success"&gt;✅ Se ha realizado la compra&lt;/h1&gt;
-      &lt;p className="text-secondary"&gt;Gracias por tu compra. Te enviaremos la boleta a tu correo.&lt;/p&gt;
-      &lt;Link className="btn btn-primary mt-3" to="/productos"&gt;Seguir comprando&lt;/Link&gt;
-    &lt;/div&gt;
+    &lt;main&gt;
+      &lt;section&gt;
+        &lt;div className="container text-center"&gt;
+          &lt;h1 className="titulo-seccion"&gt;✅ Se ha realizado la compra&lt;/h1&gt;
+          &lt;p className="descripcion-seccion"&gt;Gracias por tu compra. Te enviaremos la boleta a tu correo.&lt;/p&gt;
+          &lt;Link className="boton" to="/productos"&gt;Seguir comprando&lt;/Link&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
   )
 }
 &nbsp;
 export function <span class="fstat-no" title="function not covered" >PagoError() {</span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div className="container mt-5 text-center"&gt;
-      &lt;h1 className="text-danger"&gt;❌ No se pudo realizar el pago&lt;/h1&gt;
-      &lt;p className="text-secondary"&gt;Inténtalo nuevamente o revisa los datos de entrega.&lt;/p&gt;
-      &lt;Link className="btn btn-success mt-3" to="/checkout"&gt;Volver a realizar el pago&lt;/Link&gt;
-    &lt;/div&gt;
+    &lt;main&gt;
+      &lt;section&gt;
+        &lt;div className="container text-center"&gt;
+          &lt;h1 className="titulo-seccion"&gt;❌ No se pudo realizar el pago&lt;/h1&gt;
+          &lt;p className="descripcion-seccion"&gt;Inténtalo nuevamente o revisa los datos de entrega.&lt;/p&gt;
+          &lt;Link className="boton" to="/checkout"&gt;Volver a realizar el pago&lt;/Link&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
   )
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -460,7 +514,7 @@ export function <span class="fstat-no" title="function not covered" >PagoError()
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-12T05:58:45.908Z
+                at 2026-10-12T06:48:13.592Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

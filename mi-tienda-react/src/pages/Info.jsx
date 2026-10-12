@@ -8,31 +8,35 @@ const BLOGS = [
 
 export function Nosotros() {
   return (
-    <div className="container mt-5">
-      <h1>Nosotros</h1>
-      <p className="text-secondary">Distribuidora El Volcán: venta y despacho de gas licuado, cilindros y accesorios para el hogar. Servicio rápido y seguro.</p>
-    </div>
+    <main>
+      <section>
+        <div className="container">
+          <h1 className="titulo-seccion">Nosotros</h1>
+          <p className="descripcion-seccion">Distribuidora El Volcán: venta y despacho de gas licuado, cilindros y accesorios para el hogar. Servicio rápido y seguro.</p>
+        </div>
+      </section>
+    </main>
   )
 }
 
 export function Blog() {
   return (
-    <div className="container mt-5">
-      <h1>Blog</h1>
-      <div className="row g-4 mt-2">
-        {BLOGS.map((b) => (
-          <div className="col-12 col-md-6" key={b.id}>
-            <div className="card h-100 shadow-sm">
-              <div className="card-body">
-                <h5 className="card-title">{b.titulo}</h5>
-                <p className="card-text text-secondary">{b.resumen}</p>
-                <Link className="btn btn-outline-primary" to={`/blog/${b.id}`}>Leer más</Link>
+    <main>
+      <section>
+        <div className="container">
+          <h1 className="titulo-seccion">Blog</h1>
+          <div className="grid-beneficios">
+            {BLOGS.map((b) => (
+              <div className="tarjeta-beneficio" key={b.id} style={{ textAlign: 'left' }}>
+                <h3>{b.titulo}</h3>
+                <p>{b.resumen}</p>
+                <Link className="boton boton-secundario mt-2" to={`/blog/${b.id}`}>Leer más</Link>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      </section>
+    </main>
   )
 }
 
@@ -41,18 +45,28 @@ export function BlogDetalle() {
   const blog = BLOGS.find((b) => b.id === id)
   if (!blog) {
     return (
-      <div className="container mt-5 text-center">
-        <h2>Artículo no encontrado</h2>
-        <Link className="btn btn-primary mt-3" to="/blog">Volver al blog</Link>
-      </div>
+      <main>
+        <section>
+          <div className="container text-center">
+            <h2 className="titulo-seccion">Artículo no encontrado</h2>
+            <Link className="boton mt-3" to="/blog">Volver al blog</Link>
+          </div>
+        </section>
+      </main>
     )
   }
   return (
-    <div className="container mt-5">
-      <h1>{blog.titulo}</h1>
-      <p>{blog.contenido}</p>
-      <Link className="btn btn-outline-secondary" to="/blog">Volver</Link>
-    </div>
+    <main>
+      <section>
+        <div className="container">
+          <div className="panel">
+            <h1>{blog.titulo}</h1>
+            <p>{blog.contenido}</p>
+            <Link className="boton boton-secundario" to="/blog">Volver</Link>
+          </div>
+        </div>
+      </section>
+    </main>
   )
 }
 
@@ -85,25 +99,31 @@ export function Contacto() {
   }
 
   return (
-    <div className="container mt-5" style={{ maxWidth: '640px' }}>
-      <h1>Contacto</h1>
-      {error && <div className="alert alert-danger">{error}</div>}
-      {ok && <div className="alert alert-success">{ok}</div>}
-      <form onSubmit={enviar} noValidate>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="nombre">Nombre</label>
-          <input id="nombre" className="form-control" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+    <main>
+      <section>
+        <div className="container" style={{ maxWidth: '640px' }}>
+          <h1 className="titulo-seccion">Contacto</h1>
+          <div className="panel">
+            {error && <div className="alert alert-danger">{error}</div>}
+            {ok && <div className="alert alert-success">{ok}</div>}
+            <form onSubmit={enviar} noValidate>
+              <div className="campo">
+                <label htmlFor="nombre">Nombre</label>
+                <input id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+              </div>
+              <div className="campo">
+                <label htmlFor="correo">Correo</label>
+                <input id="correo" type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} />
+              </div>
+              <div className="campo">
+                <label htmlFor="mensaje">Mensaje</label>
+                <textarea id="mensaje" value={mensaje} onChange={(e) => setMensaje(e.target.value)} />
+              </div>
+              <button type="submit" className="boton">Enviar</button>
+            </form>
+          </div>
         </div>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="correo">Correo</label>
-          <input id="correo" type="email" className="form-control" value={correo} onChange={(e) => setCorreo(e.target.value)} />
-        </div>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="mensaje">Mensaje</label>
-          <textarea id="mensaje" className="form-control" value={mensaje} onChange={(e) => setMensaje(e.target.value)} />
-        </div>
-        <button type="submit" className="btn btn-primary">Enviar</button>
-      </form>
-    </div>
+      </section>
+    </main>
   )
 }

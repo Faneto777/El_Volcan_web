@@ -7,41 +7,37 @@ function ProductoCard({ producto, onAgregar }) {
   const sinStock = stock <= 0
 
   return (
-    <div className="card shadow-sm h-100">
-      <img
-        src={imagen}
-        className="card-img-top"
-        alt={nombre}
-        style={{ height: '200px', objectFit: 'contain' }}
-      />
-      <div className="card-body d-flex flex-column">
-        <h5 className="card-title fw-bold">{nombre}</h5>
-        <p className="card-text text-secondary flex-grow-1">{descripcion}</p>
-
-        <p className="mb-2">
-          {oferta && (
-            <span className="text-decoration-line-through text-muted me-2">
-              {formatearPrecio(precio)}
-            </span>
-          )}
-          <strong className="fs-5">{formatearPrecio(precioFinal(producto))}</strong>
-        </p>
-
-        <div className="d-flex gap-2 mt-auto">
-          <Link className="btn btn-outline-secondary flex-fill" to={`/productos/${id}`}>
-            Ver detalle
-          </Link>
+    <article className="producto">
+      <div className="producto-imagen">
+        <img src={imagen} alt={nombre} loading="lazy" />
+      </div>
+      <div className="producto-cuerpo">
+        <h3>{nombre}</h3>
+        <p className="producto-descripcion">{descripcion}</p>
+        <div className="producto-pie">
+          <span className="producto-precio">
+            <small>Precio del producto</small>
+            {oferta && (
+              <span className="text-decoration-line-through text-muted me-2">
+                {formatearPrecio(precio)}
+              </span>
+            )}
+            {formatearPrecio(precioFinal(producto))}
+          </span>
           <button
             type="button"
-            className="btn btn-primary flex-fill"
+            className="btn-agregar-carrito"
             onClick={() => onAgregar(producto)}
             disabled={sinStock}
           >
             {sinStock ? 'Sin stock' : 'Agregar'}
           </button>
         </div>
+        <Link className="boton boton-secundario" to={`/productos/${id}`}>
+          Ver detalle
+        </Link>
       </div>
-    </div>
+    </article>
   )
 }
 

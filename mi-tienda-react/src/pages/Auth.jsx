@@ -28,22 +28,28 @@ export function Login() {
   }
 
   return (
-    <div className="container mt-5" style={{ maxWidth: '480px' }}>
-      <h1 className="text-center mb-4">Iniciar sesión</h1>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <form onSubmit={ingresar} noValidate>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="correo">Correo</label>
-          <input id="correo" type="email" className="form-control" value={correo} onChange={(e) => setCorreo(e.target.value)} />
+    <main>
+      <section>
+        <div className="container" style={{ maxWidth: '480px' }}>
+          <h1 className="titulo-seccion">Iniciar sesión</h1>
+          <div className="panel">
+            {error && <div className="alert alert-danger">{error}</div>}
+            <form onSubmit={ingresar} noValidate>
+              <div className="campo">
+                <label htmlFor="correo">Correo</label>
+                <input id="correo" type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} />
+              </div>
+              <div className="campo">
+                <label htmlFor="password">Contraseña</label>
+                <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              </div>
+              <button type="submit" className="boton boton-ancho">Ingresar</button>
+            </form>
+            <p className="text-center mt-3">¿No tienes cuenta? <Link to="/registro">Crear cuenta</Link></p>
+          </div>
         </div>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="password">Contraseña</label>
-          <input id="password" type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <button type="submit" className="btn btn-primary w-100">Ingresar</button>
-      </form>
-      <p className="text-center mt-3">¿No tienes cuenta? <Link to="/registro">Crear cuenta</Link></p>
-    </div>
+      </section>
+    </main>
   )
 }
 
@@ -78,28 +84,34 @@ export function Registro() {
   }
 
   return (
-    <div className="container mt-5" style={{ maxWidth: '480px' }}>
-      <h1 className="text-center mb-4">Crear cuenta</h1>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <form onSubmit={registrar} noValidate>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="nombre">Nombre</label>
-          <input id="nombre" className="form-control" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+    <main>
+      <section>
+        <div className="container" style={{ maxWidth: '480px' }}>
+          <h1 className="titulo-seccion">Crear cuenta</h1>
+          <div className="panel">
+            {error && <div className="alert alert-danger">{error}</div>}
+            <form onSubmit={registrar} noValidate>
+              <div className="campo">
+                <label htmlFor="nombre">Nombre</label>
+                <input id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+              </div>
+              <div className="campo">
+                <label htmlFor="correo">Correo</label>
+                <input id="correo" type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} />
+              </div>
+              <div className="campo">
+                <label htmlFor="password">Contraseña</label>
+                <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              </div>
+              <div className="campo">
+                <label htmlFor="confirmar">Confirmar contraseña</label>
+                <input id="confirmar" type="password" value={confirmar} onChange={(e) => setConfirmar(e.target.value)} />
+              </div>
+              <button type="submit" className="boton boton-ancho">Registrarme</button>
+            </form>
+          </div>
         </div>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="correo">Correo</label>
-          <input id="correo" type="email" className="form-control" value={correo} onChange={(e) => setCorreo(e.target.value)} />
-        </div>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="password">Contraseña</label>
-          <input id="password" type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="confirmar">Confirmar contraseña</label>
-          <input id="confirmar" type="password" className="form-control" value={confirmar} onChange={(e) => setConfirmar(e.target.value)} />
-        </div>
-        <button type="submit" className="btn btn-primary w-100">Registrarme</button>
-      </form>
-    </div>
+      </section>
+    </main>
   )
 }

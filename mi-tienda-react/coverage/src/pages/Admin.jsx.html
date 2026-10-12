@@ -173,7 +173,20 @@
 <a name='L108'></a><a href='#L108'>108</a>
 <a name='L109'></a><a href='#L109'>109</a>
 <a name='L110'></a><a href='#L110'>110</a>
-<a name='L111'></a><a href='#L111'>111</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -190,6 +203,13 @@
 <span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -249,6 +269,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -283,6 +306,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
@@ -300,24 +326,31 @@ export function AdminDashboard() {
   const enOferta = productos.filter((p) =&gt; p.oferta).length
 &nbsp;
   return (
-    &lt;div className="container mt-5"&gt;
-      &lt;h1&gt;Panel administrador&lt;/h1&gt;
-      &lt;div className="row g-4 mt-2"&gt;
-        &lt;div className="col-12 col-md-4"&gt;
-          &lt;div className="card text-bg-primary"&gt;&lt;div className="card-body"&gt;&lt;h5&gt;Productos&lt;/h5&gt;&lt;p className="fs-3 mb-0"&gt;{productos.length}&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;main&gt;
+      &lt;section&gt;
+        &lt;div className="container"&gt;
+          &lt;h1 className="titulo-seccion"&gt;Panel administrador&lt;/h1&gt;
+          &lt;div className="grid-beneficios"&gt;
+            &lt;div className="tarjeta-beneficio"&gt;
+              &lt;h3&gt;Productos&lt;/h3&gt;
+              &lt;p className="producto-precio"&gt;{productos.length}&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className="tarjeta-beneficio"&gt;
+              &lt;h3&gt;Stock total&lt;/h3&gt;
+              &lt;p className="producto-precio"&gt;{stockTotal}&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className="tarjeta-beneficio"&gt;
+              &lt;h3&gt;En oferta&lt;/h3&gt;
+              &lt;p className="producto-precio"&gt;{enOferta}&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className="d-flex gap-2 mt-4"&gt;
+            &lt;Link className="boton" to="/admin/productos"&gt;Gestionar productos&lt;/Link&gt;
+            &lt;Link className="boton boton-secundario" to="/"&gt;Ver tienda&lt;/Link&gt;
+          &lt;/div&gt;
         &lt;/div&gt;
-        &lt;div className="col-12 col-md-4"&gt;
-          &lt;div className="card text-bg-success"&gt;&lt;div className="card-body"&gt;&lt;h5&gt;Stock total&lt;/h5&gt;&lt;p className="fs-3 mb-0"&gt;{stockTotal}&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div className="col-12 col-md-4"&gt;
-          &lt;div className="card text-bg-warning"&gt;&lt;div className="card-body"&gt;&lt;h5&gt;En oferta&lt;/h5&gt;&lt;p className="fs-3 mb-0"&gt;{enOferta}&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div className="mt-4 d-flex gap-2"&gt;
-        &lt;Link className="btn btn-primary" to="/admin/productos"&gt;Gestionar productos&lt;/Link&gt;
-        &lt;Link className="btn btn-outline-secondary" to="/"&gt;Ver tienda&lt;/Link&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
   )
 }
 &nbsp;
@@ -355,42 +388,48 @@ export function AdminProductos() {
   }
 &nbsp;
   return (
-    &lt;div className="container mt-5"&gt;
-      &lt;h1&gt;Productos&lt;/h1&gt;
-      {error &amp;&amp; &lt;div className="alert alert-danger"&gt;{error}&lt;/div&gt;}
-      &lt;form onSubmit={guardar} className="row g-2 mt-2"&gt;
-        &lt;div className="col-6 col-md-2"&gt;&lt;input className="form-control" placeholder="Código" value={form.id} onChange={(e) =&gt; setForm({ ...form, id: e.target.value })} /&gt;&lt;/div&gt;
-        &lt;div className="col-6 col-md-3"&gt;&lt;input className="form-control" placeholder="Nombre" value={form.nombre} onChange={(e) =&gt; setForm({ ...form, nombre: e.target.value })} /&gt;&lt;/div&gt;
-        &lt;div className="col-6 col-md-2"&gt;&lt;input className="form-control" type="number" placeholder="Precio" value={form.precio} onChange={(e) =&gt; setForm({ ...form, precio: e.target.value })} /&gt;&lt;/div&gt;
-        &lt;div className="col-6 col-md-2"&gt;&lt;input className="form-control" type="number" placeholder="Stock" value={form.stock} onChange={(e) =&gt; setForm({ ...form, stock: e.target.value })} /&gt;&lt;/div&gt;
-        &lt;div className="col-6 col-md-2"&gt;
-          &lt;select className="form-select" value={form.categoria} onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >setForm({ ...form, categoria: e.target.value })}&gt;</span>
-            &lt;option value="cilindros"&gt;Cilindros&lt;/option&gt;
-            &lt;option value="reguladores"&gt;Reguladores&lt;/option&gt;
-            &lt;option value="mangueras"&gt;Mangueras&lt;/option&gt;
-            &lt;option value="accesorios"&gt;Accesorios&lt;/option&gt;
-          &lt;/select&gt;
+    &lt;main&gt;
+      &lt;section&gt;
+        &lt;div className="container"&gt;
+          &lt;h1 className="titulo-seccion"&gt;Productos&lt;/h1&gt;
+          &lt;div className="panel"&gt;
+            {error &amp;&amp; &lt;div className="alert alert-danger"&gt;{error}&lt;/div&gt;}
+            &lt;form onSubmit={guardar} className="grid-formulario"&gt;
+              &lt;div className="campo"&gt;&lt;input placeholder="Código" value={form.id} onChange={(e) =&gt; setForm({ ...form, id: e.target.value })} /&gt;&lt;/div&gt;
+              &lt;div className="campo"&gt;&lt;input placeholder="Nombre" value={form.nombre} onChange={(e) =&gt; setForm({ ...form, nombre: e.target.value })} /&gt;&lt;/div&gt;
+              &lt;div className="campo"&gt;&lt;input type="number" placeholder="Precio" value={form.precio} onChange={(e) =&gt; setForm({ ...form, precio: e.target.value })} /&gt;&lt;/div&gt;
+              &lt;div className="campo"&gt;&lt;input type="number" placeholder="Stock" value={form.stock} onChange={(e) =&gt; setForm({ ...form, stock: e.target.value })} /&gt;&lt;/div&gt;
+              &lt;div className="campo"&gt;
+                &lt;select value={form.categoria} onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >setForm({ ...form, categoria: e.target.value })}&gt;</span>
+                  &lt;option value="cilindros"&gt;Cilindros&lt;/option&gt;
+                  &lt;option value="reguladores"&gt;Reguladores&lt;/option&gt;
+                  &lt;option value="mangueras"&gt;Mangueras&lt;/option&gt;
+                  &lt;option value="accesorios"&gt;Accesorios&lt;/option&gt;
+                &lt;/select&gt;
+              &lt;/div&gt;
+              &lt;div className="campo"&gt;&lt;button type="submit" className="boton"&gt;Guardar&lt;/button&gt;&lt;/div&gt;
+            &lt;/form&gt;
+            &lt;div className="tabla-seccion mt-4"&gt;
+              &lt;table&gt;
+                &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Código&lt;/th&gt;&lt;th&gt;Nombre&lt;/th&gt;&lt;th&gt;Precio&lt;/th&gt;&lt;th&gt;Stock&lt;/th&gt;&lt;th&gt;Acciones&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+                &lt;tbody&gt;
+                  {lista.map((p) =&gt; (
+                    &lt;tr key={p.id}&gt;
+                      &lt;td&gt;{p.id}&lt;/td&gt;
+                      &lt;td&gt;{p.nombre}&lt;/td&gt;
+                      &lt;td&gt;{formatearPrecio(p.precio)}&lt;/td&gt;
+                      &lt;td&gt;{p.stock}&lt;/td&gt;
+                      &lt;td&gt;&lt;button type="button" className="boton boton-secundario" onClick={() =&gt; eliminar(p.id)}&gt;Eliminar&lt;/button&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                  ))}
+                &lt;/tbody&gt;
+              &lt;/table&gt;
+            &lt;/div&gt;
+            &lt;button type="button" className="boton boton-secundario mt-3" onClick={() =&gt; { restablecerProductos(); refrescar() }}&gt;Restablecer&lt;/button&gt;
+          &lt;/div&gt;
         &lt;/div&gt;
-        &lt;div className="col-12 col-md-1"&gt;&lt;button type="submit" className="btn btn-success w-100"&gt;Guardar&lt;/button&gt;&lt;/div&gt;
-      &lt;/form&gt;
-      &lt;div className="table-responsive mt-4"&gt;
-        &lt;table className="table table-striped"&gt;
-          &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Código&lt;/th&gt;&lt;th&gt;Nombre&lt;/th&gt;&lt;th&gt;Precio&lt;/th&gt;&lt;th&gt;Stock&lt;/th&gt;&lt;th&gt;Acciones&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
-          &lt;tbody&gt;
-            {lista.map((p) =&gt; (
-              &lt;tr key={p.id}&gt;
-                &lt;td&gt;{p.id}&lt;/td&gt;
-                &lt;td&gt;{p.nombre}&lt;/td&gt;
-                &lt;td&gt;{formatearPrecio(p.precio)}&lt;/td&gt;
-                &lt;td&gt;{p.stock}&lt;/td&gt;
-                &lt;td&gt;&lt;button type="button" className="btn btn-sm btn-danger" onClick={() =&gt; eliminar(p.id)}&gt;Eliminar&lt;/button&gt;&lt;/td&gt;
-              &lt;/tr&gt;
-            ))}
-          &lt;/tbody&gt;
-        &lt;/table&gt;
-      &lt;/div&gt;
-      &lt;button type="button" className="btn btn-outline-secondary" onClick={() =&gt; { restablecerProductos(); refrescar() }}&gt;Restablecer&lt;/button&gt;
-    &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
   )
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -400,7 +439,7 @@ export function AdminProductos() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-12T05:58:45.908Z
+                at 2026-10-12T06:48:13.592Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

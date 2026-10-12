@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -114,53 +114,19 @@
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">198x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -204,77 +170,60 @@ import { useCarrito } from '../context/useCarrito'
 import { BASE_URL } from '../services/productoService'
 import { formatearPrecio } from '../utils/formato'
 &nbsp;
+function enlaceClase({ isActive }) {
+  return isActive ? 'activo' : undefined
+}
+&nbsp;
 function Navbar() {
   const { totalUnidades, total } = useCarrito()
 &nbsp;
   return (
-    &lt;nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"&gt;
+    &lt;header className="navbar"&gt;
       &lt;div className="container"&gt;
-        &lt;Link className="navbar-brand d-flex align-items-center gap-2" to="/"&gt;
-          &lt;img src={`${BASE_URL}assets/logo/logosinfondo.png`} alt="Logo El Volcán" height="36" /&gt;
-          El Volcán
+        &lt;Link to="/" className="brand"&gt;
+          &lt;img className="brand-logo" src={`${BASE_URL}assets/logo/logosinfondo.png`} alt="Logo de Distribuidora El Volcán" /&gt;
+          &lt;span&gt;
+            El Volcán
+            &lt;small&gt;Gas Licuado&lt;/small&gt;
+          &lt;/span&gt;
         &lt;/Link&gt;
 &nbsp;
-        &lt;button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#menuPrincipal"
-          aria-controls="menuPrincipal"
-          aria-expanded="false"
-          aria-label="Mostrar menú"
-        &gt;
-          &lt;span className="navbar-toggler-icon"&gt;&lt;/span&gt;
-        &lt;/button&gt;
+        &lt;input type="checkbox" id="menuToggle" className="menu-toggle" hidden /&gt;
+        &lt;label htmlFor="menuToggle" className="icono-toggle" aria-hidden="true"&gt;&amp;#9776;&lt;/label&gt;
 &nbsp;
-        &lt;div className="collapse navbar-collapse" id="menuPrincipal"&gt;
-          &lt;ul className="navbar-nav me-auto mb-2 mb-lg-0"&gt;
-            &lt;li className="nav-item"&gt;
-              &lt;NavLink className="nav-link" to="/" end&gt;Inicio&lt;/NavLink&gt;
-            &lt;/li&gt;
-            &lt;li className="nav-item"&gt;
-              &lt;NavLink className="nav-link" to="/productos"&gt;Productos&lt;/NavLink&gt;
-            &lt;/li&gt;
-            &lt;li className="nav-item"&gt;
-              &lt;NavLink className="nav-link" to="/categorias"&gt;Categorías&lt;/NavLink&gt;
-            &lt;/li&gt;
-            &lt;li className="nav-item"&gt;
-              &lt;NavLink className="nav-link" to="/ofertas"&gt;Ofertas&lt;/NavLink&gt;
-            &lt;/li&gt;
-            &lt;li className="nav-item"&gt;
-              &lt;NavLink className="nav-link" to="/nosotros"&gt;Nosotros&lt;/NavLink&gt;
-            &lt;/li&gt;
-            &lt;li className="nav-item"&gt;
-              &lt;NavLink className="nav-link" to="/blog"&gt;Blog&lt;/NavLink&gt;
-            &lt;/li&gt;
-            &lt;li className="nav-item"&gt;
-              &lt;NavLink className="nav-link" to="/contacto"&gt;Contacto&lt;/NavLink&gt;
-            &lt;/li&gt;
-            &lt;li className="nav-item"&gt;
-              &lt;NavLink className="nav-link" to="/admin"&gt;Admin&lt;/NavLink&gt;
-            &lt;/li&gt;
-          &lt;/ul&gt;
-&nbsp;
-          &lt;div className="d-flex gap-2"&gt;
-            &lt;Link className="btn btn-outline-light" to="/login"&gt;Ingresar&lt;/Link&gt;
-            &lt;Link className="btn btn-success" to="/carrito"&gt;
-              🛒 Carrito ({totalUnidades}) {formatearPrecio(total)}
-            &lt;/Link&gt;
+        &lt;nav&gt;
+          &lt;NavLink to="/" end className={enlaceClase}&gt;Inicio&lt;/NavLink&gt;
+          &lt;NavLink to="/productos" className={enlaceClase}&gt;Productos&lt;/NavLink&gt;
+          &lt;NavLink to="/categorias" className={enlaceClase}&gt;Categorías&lt;/NavLink&gt;
+          &lt;NavLink to="/ofertas" className={enlaceClase}&gt;Ofertas&lt;/NavLink&gt;
+          &lt;NavLink to="/nosotros" className={enlaceClase}&gt;Nosotros&lt;/NavLink&gt;
+          &lt;NavLink to="/blog" className={enlaceClase}&gt;Blog&lt;/NavLink&gt;
+          &lt;NavLink to="/contacto" className={enlaceClase}&gt;Contacto&lt;/NavLink&gt;
+          &lt;div className="area-cuenta"&gt;
+            &lt;NavLink to="/login" className={enlaceClase}&gt;Ingresar&lt;/NavLink&gt;
+            &lt;NavLink to="/registro" className={enlaceClase}&gt;Registro&lt;/NavLink&gt;
           &lt;/div&gt;
-        &lt;/div&gt;
+        &lt;/nav&gt;
+&nbsp;
+        &lt;Link className="boton-carrito" to="/carrito" aria-label="Abrir carrito de compras"&gt;
+          &lt;span aria-hidden="true"&gt;&amp;#128722;&lt;/span&gt;
+          {' '}Carrito ({totalUnidades}) {formatearPrecio(total)}
+          &lt;span className={`badge-carrito${totalUnidades === 0 ? ' oculto' : ''}`}&gt;{totalUnidades}&lt;/span&gt;
+        &lt;/Link&gt;
       &lt;/div&gt;
-    &lt;/nav&gt;
+    &lt;/header&gt;
   )
 }
 &nbsp;
-export default Navbar</pre></td></tr></table></pre>
+export default Navbar
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-12T05:58:45.908Z
+                at 2026-10-12T06:48:13.592Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -3,66 +3,48 @@ import { useCarrito } from '../context/useCarrito'
 import { BASE_URL } from '../services/productoService'
 import { formatearPrecio } from '../utils/formato'
 
+function enlaceClase({ isActive }) {
+  return isActive ? 'activo' : undefined
+}
+
 function Navbar() {
   const { totalUnidades, total } = useCarrito()
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <header className="navbar">
       <div className="container">
-        <Link className="navbar-brand d-flex align-items-center gap-2" to="/">
-          <img src={`${BASE_URL}assets/logo/logosinfondo.png`} alt="Logo El Volcán" height="36" />
-          El Volcán
+        <Link to="/" className="brand">
+          <img className="brand-logo" src={`${BASE_URL}assets/logo/logosinfondo.png`} alt="Logo de Distribuidora El Volcán" />
+          <span>
+            El Volcán
+            <small>Gas Licuado</small>
+          </span>
         </Link>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#menuPrincipal"
-          aria-controls="menuPrincipal"
-          aria-expanded="false"
-          aria-label="Mostrar menú"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+        <input type="checkbox" id="menuToggle" className="menu-toggle" hidden />
+        <label htmlFor="menuToggle" className="icono-toggle" aria-hidden="true">&#9776;</label>
 
-        <div className="collapse navbar-collapse" id="menuPrincipal">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/" end>Inicio</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/productos">Productos</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/categorias">Categorías</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/ofertas">Ofertas</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/nosotros">Nosotros</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/blog">Blog</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/contacto">Contacto</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/admin">Admin</NavLink>
-            </li>
-          </ul>
-
-          <div className="d-flex gap-2">
-            <Link className="btn btn-outline-light" to="/login">Ingresar</Link>
-            <Link className="btn btn-success" to="/carrito">
-              🛒 Carrito ({totalUnidades}) {formatearPrecio(total)}
-            </Link>
+        <nav>
+          <NavLink to="/" end className={enlaceClase}>Inicio</NavLink>
+          <NavLink to="/productos" className={enlaceClase}>Productos</NavLink>
+          <NavLink to="/categorias" className={enlaceClase}>Categorías</NavLink>
+          <NavLink to="/ofertas" className={enlaceClase}>Ofertas</NavLink>
+          <NavLink to="/nosotros" className={enlaceClase}>Nosotros</NavLink>
+          <NavLink to="/blog" className={enlaceClase}>Blog</NavLink>
+          <NavLink to="/contacto" className={enlaceClase}>Contacto</NavLink>
+          <div className="area-cuenta">
+            <NavLink to="/login" className={enlaceClase}>Ingresar</NavLink>
+            <NavLink to="/registro" className={enlaceClase}>Registro</NavLink>
           </div>
-        </div>
+        </nav>
+
+        <Link className="boton-carrito" to="/carrito" aria-label="Abrir carrito de compras">
+          <span aria-hidden="true">&#128722;</span>
+          {' '}Carrito ({totalUnidades}) {formatearPrecio(total)}
+          <span className={`badge-carrito${totalUnidades === 0 ? ' oculto' : ''}`}>{totalUnidades}</span>
+        </Link>
       </div>
-    </nav>
+    </header>
   )
 }
 

@@ -122,7 +122,15 @@
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
 <a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,8 +141,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -164,7 +174,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -188,23 +204,25 @@ import { CATEGORIAS, obtenerProductosPorCategoria } from '../services/productoSe
 &nbsp;
 export function Categorias() {
   return (
-    &lt;div className="container mt-5"&gt;
-      &lt;h1 className="text-center mb-4"&gt;Categorías&lt;/h1&gt;
-      &lt;div className="row g-4"&gt;
-        {CATEGORIAS.map((cat) =&gt; (
-          &lt;div className="col-12 col-md-6 col-lg-3" key={cat.id}&gt;
-            &lt;div className="card h-100 shadow-sm text-center"&gt;
-              &lt;div className="card-body d-flex flex-column"&gt;
-                &lt;h5 className="card-title"&gt;{cat.nombre}&lt;/h5&gt;
-                &lt;Link className="btn btn-primary mt-auto" to={`/categorias/${cat.id}`}&gt;
+    &lt;main&gt;
+      &lt;section&gt;
+        &lt;div className="container"&gt;
+          &lt;h1 className="titulo-seccion"&gt;Categorías&lt;/h1&gt;
+          &lt;p className="descripcion-seccion"&gt;Explora los productos separados por categoría.&lt;/p&gt;
+          &lt;div className="grid-beneficios"&gt;
+            {CATEGORIAS.map((cat) =&gt; (
+              &lt;div className="tarjeta-beneficio" key={cat.id}&gt;
+                &lt;h3&gt;{cat.nombre}&lt;/h3&gt;
+                &lt;p&gt;Revisa todos los productos de esta categoría.&lt;/p&gt;
+                &lt;Link className="boton mt-2" to={`/categorias/${cat.id}`}&gt;
                   Ver productos
                 &lt;/Link&gt;
               &lt;/div&gt;
-            &lt;/div&gt;
+            ))}
           &lt;/div&gt;
-        ))}
-      &lt;/div&gt;
-    &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
   )
 }
 &nbsp;
@@ -216,28 +234,34 @@ export function CategoriaDetalle() {
 &nbsp;
   if (!categoria) {
     return (
-      &lt;div className="container mt-5 text-center"&gt;
-        &lt;h2&gt;Categoría no encontrada&lt;/h2&gt;
-        &lt;Link className="btn btn-primary mt-3" to="/categorias"&gt;Volver a categorías&lt;/Link&gt;
-      &lt;/div&gt;
+      &lt;main&gt;
+        &lt;section&gt;
+          &lt;div className="container text-center"&gt;
+            &lt;h2 className="titulo-seccion"&gt;Categoría no encontrada&lt;/h2&gt;
+            &lt;Link className="boton mt-3" to="/categorias"&gt;Volver a categorías&lt;/Link&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
     )
   }
 &nbsp;
   return (
-    &lt;div className="container mt-5"&gt;
-      &lt;h1 className="text-center mb-4"&gt;{categoria.nombre}&lt;/h1&gt;
-      {productos.length === 0 ? (
-<span class="branch-0 cbranch-no" title="branch not covered" >        &lt;p className="text-center text-secondary"&gt;No hay productos en esta categoría.&lt;/p&gt;</span>
-      ) : (
-        &lt;div className="row g-4"&gt;
-          {productos.map((producto) =&gt; (
-            &lt;div className="col-12 col-md-4" key={producto.id}&gt;
-              &lt;ProductoCard producto={producto} onAgregar={agregar} /&gt;
+    &lt;main&gt;
+      &lt;section&gt;
+        &lt;div className="container"&gt;
+          &lt;h1 className="titulo-seccion"&gt;{categoria.nombre}&lt;/h1&gt;
+          {productos.length === 0 ? (
+<span class="branch-0 cbranch-no" title="branch not covered" >            &lt;p className="descripcion-seccion"&gt;No hay productos en esta categoría.&lt;/p&gt;</span>
+          ) : (
+            &lt;div className="grid-productos"&gt;
+              {productos.map((producto) =&gt; (
+                &lt;ProductoCard key={producto.id} producto={producto} onAgregar={agregar} /&gt;
+              ))}
             &lt;/div&gt;
-          ))}
+          )}
         &lt;/div&gt;
-      )}
-    &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
   )
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -247,7 +271,7 @@ export function CategoriaDetalle() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-12T05:58:45.908Z
+                at 2026-10-12T06:48:13.592Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

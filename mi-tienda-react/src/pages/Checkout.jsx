@@ -51,80 +51,98 @@ export function Checkout() {
 
   if (items.length === 0) {
     return (
-      <div className="container mt-5 text-center">
-        <h1>Checkout</h1>
-        <p className="text-secondary">No hay productos para pagar.</p>
-        <Link className="btn btn-primary" to="/productos">Ver productos</Link>
-      </div>
+      <main>
+        <section>
+          <div className="container text-center">
+            <h1 className="titulo-seccion">Checkout</h1>
+            <p className="descripcion-seccion">No hay productos para pagar.</p>
+            <Link className="boton" to="/productos">Ver productos</Link>
+          </div>
+        </section>
+      </main>
     )
   }
 
   return (
-    <div className="container mt-5">
-      <h1>Checkout</h1>
-      <p className="text-secondary">Completa tus datos y dirección de entrega. Total a pagar: <strong>{formatearPrecio(total)}</strong></p>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <form onSubmit={pagar} noValidate>
-        <h4 className="mt-4">Información del cliente</h4>
-        <div className="row g-3">
-          <div className="col-12 col-md-4">
-            <label className="form-label" htmlFor="nombre">Nombre*</label>
-            <input id="nombre" name="nombre" className="form-control" value={form.nombre} onChange={cambiar} />
-          </div>
-          <div className="col-12 col-md-4">
-            <label className="form-label" htmlFor="apellidos">Apellidos*</label>
-            <input id="apellidos" name="apellidos" className="form-control" value={form.apellidos} onChange={cambiar} />
-          </div>
-          <div className="col-12 col-md-4">
-            <label className="form-label" htmlFor="correo">Correo*</label>
-            <input id="correo" name="correo" type="email" className="form-control" value={form.correo} onChange={cambiar} />
+    <main>
+      <section>
+        <div className="container">
+          <h1 className="titulo-seccion">Checkout</h1>
+          <p className="descripcion-seccion">Completa tus datos y dirección de entrega. Total a pagar: <strong>{formatearPrecio(total)}</strong></p>
+          <div className="panel">
+            {error && <div className="alert alert-danger">{error}</div>}
+            <form onSubmit={pagar} noValidate>
+              <h4>Información del cliente</h4>
+              <div className="grid-formulario">
+                <div className="campo">
+                  <label htmlFor="nombre">Nombre*</label>
+                  <input id="nombre" name="nombre" value={form.nombre} onChange={cambiar} />
+                </div>
+                <div className="campo">
+                  <label htmlFor="apellidos">Apellidos*</label>
+                  <input id="apellidos" name="apellidos" value={form.apellidos} onChange={cambiar} />
+                </div>
+                <div className="campo">
+                  <label htmlFor="correo">Correo*</label>
+                  <input id="correo" name="correo" type="email" value={form.correo} onChange={cambiar} />
+                </div>
+              </div>
+              <h4 className="mt-4">Dirección de entrega</h4>
+              <div className="grid-formulario">
+                <div className="campo">
+                  <label htmlFor="calle">Calle*</label>
+                  <input id="calle" name="calle" value={form.calle} onChange={cambiar} placeholder="Ej: Los crisantemos, Edificio Norte" />
+                </div>
+                <div className="campo">
+                  <label htmlFor="depto">Departamento (opcional)</label>
+                  <input id="depto" name="depto" value={form.depto} onChange={cambiar} placeholder="Ej: 603" />
+                </div>
+                <div className="campo">
+                  <label htmlFor="region">Región*</label>
+                  <input id="region" name="region" value={form.region} onChange={cambiar} />
+                </div>
+                <div className="campo">
+                  <label htmlFor="comuna">Comuna*</label>
+                  <input id="comuna" name="comuna" value={form.comuna} onChange={cambiar} />
+                </div>
+                <div className="campo campo-ancho">
+                  <label htmlFor="indicaciones">Indicaciones (opcional)</label>
+                  <textarea id="indicaciones" name="indicaciones" value={form.indicaciones} onChange={cambiar} />
+                </div>
+              </div>
+              <button type="submit" className="boton mt-4">Pagar ahora {formatearPrecio(total)}</button>
+            </form>
           </div>
         </div>
-        <h4 className="mt-4">Dirección de entrega</h4>
-        <div className="row g-3">
-          <div className="col-12 col-md-6">
-            <label className="form-label" htmlFor="calle">Calle*</label>
-            <input id="calle" name="calle" className="form-control" value={form.calle} onChange={cambiar} placeholder="Ej: Los crisantemos, Edificio Norte" />
-          </div>
-          <div className="col-12 col-md-6">
-            <label className="form-label" htmlFor="depto">Departamento (opcional)</label>
-            <input id="depto" name="depto" className="form-control" value={form.depto} onChange={cambiar} placeholder="Ej: 603" />
-          </div>
-          <div className="col-12 col-md-6">
-            <label className="form-label" htmlFor="region">Región*</label>
-            <input id="region" name="region" className="form-control" value={form.region} onChange={cambiar} />
-          </div>
-          <div className="col-12 col-md-6">
-            <label className="form-label" htmlFor="comuna">Comuna*</label>
-            <input id="comuna" name="comuna" className="form-control" value={form.comuna} onChange={cambiar} />
-          </div>
-          <div className="col-12">
-            <label className="form-label" htmlFor="indicaciones">Indicaciones (opcional)</label>
-            <textarea id="indicaciones" name="indicaciones" className="form-control" value={form.indicaciones} onChange={cambiar} />
-          </div>
-        </div>
-        <button type="submit" className="btn btn-success mt-4">Pagar ahora {formatearPrecio(total)}</button>
-      </form>
-    </div>
+      </section>
+    </main>
   )
 }
 
 export function PagoCorrecto() {
   return (
-    <div className="container mt-5 text-center">
-      <h1 className="text-success">✅ Se ha realizado la compra</h1>
-      <p className="text-secondary">Gracias por tu compra. Te enviaremos la boleta a tu correo.</p>
-      <Link className="btn btn-primary mt-3" to="/productos">Seguir comprando</Link>
-    </div>
+    <main>
+      <section>
+        <div className="container text-center">
+          <h1 className="titulo-seccion">✅ Se ha realizado la compra</h1>
+          <p className="descripcion-seccion">Gracias por tu compra. Te enviaremos la boleta a tu correo.</p>
+          <Link className="boton" to="/productos">Seguir comprando</Link>
+        </div>
+      </section>
+    </main>
   )
 }
 
 export function PagoError() {
   return (
-    <div className="container mt-5 text-center">
-      <h1 className="text-danger">❌ No se pudo realizar el pago</h1>
-      <p className="text-secondary">Inténtalo nuevamente o revisa los datos de entrega.</p>
-      <Link className="btn btn-success mt-3" to="/checkout">Volver a realizar el pago</Link>
-    </div>
+    <main>
+      <section>
+        <div className="container text-center">
+          <h1 className="titulo-seccion">❌ No se pudo realizar el pago</h1>
+          <p className="descripcion-seccion">Inténtalo nuevamente o revisa los datos de entrega.</p>
+          <Link className="boton" to="/checkout">Volver a realizar el pago</Link>
+        </div>
+      </section>
+    </main>
   )
 }
