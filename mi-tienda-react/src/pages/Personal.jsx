@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import MapaEntregas from '../components/MapaEntregas'
 import { BASE_URL } from '../services/productoService'
-import { ESTADOS_PEDIDO, actualizarPedido, crearPedido, obtenerPedidos, obtenerRepartidores } from '../services/pedidosService'
+import { ESTADOS_PEDIDO, actualizarPedido, crearPedido, geocodificarDireccion, obtenerPedidos, obtenerRepartidores } from '../services/pedidosService'
 import { CLAVE_SESION_PERSONAL, iniciarSesionPersonal, leerSesionPersonal } from '../services/sesionPersonal'
 
 export function Personal() {
@@ -67,6 +67,7 @@ export function Operador() {
   const sesion = leerSesion()
   const [pedidos, setPedidos] = useState(obtenerPedidos)
   const [modalAbierto, setModalAbierto] = useState(false)
+  const [ubicando, setUbicando] = useState(false)
   const [nuevo, setNuevo] = useState({ cliente: '', direccion: '', cilindro: '5 kg' })
 
   const refrescar = () => setPedidos(obtenerPedidos())
@@ -81,13 +82,22 @@ export function Operador() {
     refrescar()
   }
 
-  const guardarPedido = (e) => {
+  const guardarPedido = async (e) => {
     e.preventDefault()
     if (!nuevo.cliente.trim() || !nuevo.direccion.trim()) return
-    crearPedido(nuevo)
+    const direccion = nuevo.direccion.trim()
+    const creado = crearPedido(nuevo)
     setNuevo({ cliente: '', direccion: '', cilindro: '5 kg' })
     setModalAbierto(false)
     refrescar()
+
+    setUbicando(true)
+    const punto = await geocodificarDireccion(direccion)
+    if (punto) {
+      actualizarPedido(creado.id, punto)
+      refrescar()
+    }
+    setUbicando(false)
   }
 
   return (
@@ -118,6 +128,7 @@ export function Operador() {
               <div>
                 <h3>Pedidos del Día</h3>
                 <p className="panel-subtitulo">Gestiona, crea y asigna los pedidos activos.</p>
+                {ubicando && <p className="panel-subtitulo" role="status">Ubicando el pedido en el mapa…</p>}
               </div>
               <button type="button" className="btn-nuevo" onClick={() => setModalAbierto(true)}>+ Nuevo Pedido</button>
             </div>

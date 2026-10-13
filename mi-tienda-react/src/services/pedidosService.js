@@ -46,6 +46,48 @@ export function obtenerPedidos() {
   return PEDIDOS_DEFAULT.map((p) => ({ ...p }))
 }
 
+const CACHE_GEOCODIGO = new Map()
+const ULTIMA_CONSULTA = { valor: 0 }
+
+function esperarTurno() {
+  const desde = Date.now() - ULTIMA_CONSULTA.valor
+  const espera = desde >= 1100 ? 0 : 1100 - desde
+  ULTIMA_CONSULTA.valor = Date.now() + espera
+  return new Promise((r) => setTimeout(r, espera))
+}
+
+export function olvidarGeocodigo() {
+  CACHE_GEOCODIGO.clear()
+}
+
+export async function geocodificarDireccion(direccion, { timeout = 8000 } = {}) {
+  const consulta = String(direccion || '').trim()
+  if (!consulta) return null
+
+  const clave = consulta.toLowerCase()
+  if (CACHE_GEOCODIGO.has(clave)) return CACHE_GEOCODIGO.get(clave)
+
+  await esperarTurno()
+
+  const control = new AbortController()
+  const reloj = setTimeout(() => control.abort(), timeout)
+
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=cl&q=${encodeURIComponent(`${consulta}, Chillán, Chile`)}`
+    const respuesta = await fetch(url, { signal: control.signal })
+    if (!respuesta.ok) return null
+    const datos = await respuesta.json()
+    const encontrado = Array.isArray(datos) ? datos[0] : null
+    const punto = encontrado ? { lat: Number(encontrado.lat), lng: Number(encontrado.lon) } : null
+    CACHE_GEOCODIGO.set(clave, punto)
+    return punto
+  } catch {
+    return null
+  } finally {
+    clearTimeout(reloj)
+  }
+}
+
 export function crearPedido({ cliente, direccion, cilindro }) {
   const lista = obtenerPedidos()
   const maxNumero = lista.reduce((max, p) => {
