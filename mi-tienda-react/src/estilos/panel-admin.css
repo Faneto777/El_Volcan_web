@@ -204,6 +204,7 @@
   text-align: left;
   padding: 10px 8px;
   border-bottom: 2px solid var(--borde);
+  background: transparent;
   color: var(--azul);
   font-size: 13px;
 }
@@ -411,6 +412,13 @@
 }
 
 .modal {
+  position: relative;
+  display: block;
+  height: auto;
+  top: auto;
+  left: auto;
+  z-index: auto;
+  overflow: visible;
   background: #ffffff;
   border-radius: 16px;
   width: 100%;

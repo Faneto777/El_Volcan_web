@@ -252,6 +252,13 @@ td {
 }
 
 .modal {
+  position: relative;
+  display: block;
+  height: auto;
+  top: auto;
+  left: auto;
+  z-index: auto;
+  overflow: visible;
   background: #ffffff;
   border-radius: 12px;
   padding: 24px;
