@@ -249,6 +249,7 @@ td {
 
 .overlay-modal.abierto {
   display: flex;
+  z-index: 1100;
 }
 
 .modal {
