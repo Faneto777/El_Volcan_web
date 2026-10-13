@@ -11,12 +11,16 @@ function MapaEntregas({ id, pedidos, centro = CENTRO_CHILLAN, zoom = 14 }) {
     if (!ref.current) return undefined
     let mapa = null
     try {
-      mapa = L.map(ref.current).setView(centro, zoom)
+      mapa = L.map(ref.current)
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap',
       }).addTo(mapa)
-      pedidos.forEach((p) => {
-        if (typeof p.lat !== 'number' || typeof p.lng !== 'number') return
+
+      const conUbicacion = pedidos.filter(
+        (p) => typeof p.lat === 'number' && typeof p.lng === 'number'
+      )
+
+      conUbicacion.forEach((p) => {
         const icono = L.divIcon({
           className: 'marcador-pedido',
           html: `<span class="punto punto-${COLORES[p.estado] || 'gray'}"></span>`,
@@ -27,6 +31,15 @@ function MapaEntregas({ id, pedidos, centro = CENTRO_CHILLAN, zoom = 14 }) {
           .addTo(mapa)
           .bindPopup(`<b>${p.cliente}</b><br>${p.cilindro}`)
       })
+
+      if (conUbicacion.length === 1) {
+        mapa.setView([conUbicacion[0].lat, conUbicacion[0].lng], zoom)
+      } else if (conUbicacion.length > 1) {
+        const limites = L.latLngBounds(conUbicacion.map((p) => [p.lat, p.lng]))
+        mapa.fitBounds(limites, { padding: [45, 45], maxZoom: zoom })
+      } else {
+        mapa.setView(centro, zoom)
+      }
     } catch {
       //
     }
