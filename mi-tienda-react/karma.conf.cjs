@@ -12,9 +12,8 @@ const pluginCobertura = {
   name: 'cobertura-istanbul',
   setup(build) {
     build.onLoad({ filter: /[\\/]src[\\/].*\.jsx?$/ }, async (args) => {
-      if (/\.test\.js$/.test(args.path)) return null // los tests no se miden
+      if (/\.test\.js$/.test(args.path)) return null
       const original = fs.readFileSync(args.path, 'utf8')
-      // 1) JSX -> JS, conservando el mapa para que el reporte muestre tus líneas originales
       const { code, map } = await esbuild.transform(original, {
         loader: 'jsx',
         jsx: 'automatic',

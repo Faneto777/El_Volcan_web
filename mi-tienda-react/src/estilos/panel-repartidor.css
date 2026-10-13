@@ -20,7 +20,6 @@ input {
   font-family: inherit;
 }
 
-/* ---------- App móvil (mínimo 360 px) ---------- */
 .app-movil {
   max-width: 480px;
   min-width: 360px;
@@ -94,7 +93,6 @@ input {
   }
 }
 
-/* ---------- Menú hamburguesa ---------- */
 .menu-lateral {
   position: fixed;
   top: 0;
@@ -203,7 +201,6 @@ body.menu-abierto {
   overflow: hidden;
 }
 
-/* ---------- Contenido ---------- */
 .contenido {
   flex: 1;
   padding: 16px;
@@ -255,7 +252,6 @@ body.menu-abierto {
   margin-bottom: 12px;
 }
 
-/* ---------- Tarjetas de pedido ---------- */
 .lista-pedidos {
   display: flex;
   flex-direction: column;
@@ -384,7 +380,6 @@ body.menu-abierto {
   border: 1px dashed var(--verde);
 }
 
-/* ---------- Mapa ---------- */
 .mapa-contenedor {
   height: 62vh;
   min-height: 340px;
@@ -418,7 +413,6 @@ body.menu-abierto {
   background: var(--azul-claro);
 }
 
-/* ---------- Barra inferior ---------- */
 .barra-inferior {
   position: fixed;
   bottom: 0;
@@ -456,7 +450,6 @@ body.menu-abierto {
   color: var(--naranja);
 }
 
-/* ---------- Login ---------- */
 .pagina-login {
   min-width: 360px;
   background: linear-gradient(160deg, var(--azul), var(--azul-claro));
@@ -577,7 +570,6 @@ body.menu-abierto {
   margin-top: 8px;
 }
 
-/* ---------- Notificación ---------- */
 .notificacion-repartidor {
   position: fixed;
   bottom: 84px;

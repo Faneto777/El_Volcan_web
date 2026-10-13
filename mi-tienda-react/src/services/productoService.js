@@ -1,5 +1,3 @@
-// Base pública de Vite: '/' en dev, '/El_Volcan_web/' en GitHub Pages.
-// En Karma (esbuild) import.meta no existe y cae al '/' por defecto.
 export const BASE_URL = import.meta.env?.BASE_URL ?? '/'
 
 const CLAVE_PRODUCTOS = 'elvolcan_react_productos_v3'
