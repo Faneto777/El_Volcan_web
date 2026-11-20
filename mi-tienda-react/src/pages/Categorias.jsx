@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import ProductoCard from '../components/ProductoCard'
 import { useCarrito } from '../context/useCarrito'
-import { CATEGORIAS, obtenerProductosPorCategoria } from '../services/productoService'
+import { CATEGORIAS, useProductos } from '../services/productoService'
 
 export function Categorias() {
   return (
@@ -31,18 +31,27 @@ export function CategoriaDetalle() {
   const { id } = useParams()
   const { agregar } = useCarrito()
   const categoria = CATEGORIAS.find((c) => c.id === id)
-  const productos = obtenerProductosPorCategoria(id)
+  const { productos, error } = useProductos()
+  const productosFiltrados = productos.filter(
+      (producto) => producto.categoria === id
+  )
 
-  if (!categoria) {
+  if (error) {
+    return <p className="alert alert-danger">{error}</p>
+  }
+
+  if (productosFiltrados.length === 0) {
     return (
-      <main>
-        <section>
-          <div className="container text-center">
-            <h2 className="titulo-seccion">Categoría no encontrada</h2>
-            <Link className="boton mt-3" to="/categorias">Volver a categorías</Link>
-          </div>
-        </section>
-      </main>
+        <main>
+          <section>
+            <div className="container">
+              <h1 className="titulo-seccion">{categoria.nombre}</h1>
+              <p className="descripcion-seccion">
+                No hay productos en esta categoría.
+              </p>
+            </div>
+          </section>
+        </main>
     )
   }
 
@@ -51,17 +60,18 @@ export function CategoriaDetalle() {
       <section>
         <div className="container">
           <h1 className="titulo-seccion">{categoria.nombre}</h1>
-          {productos.length === 0 ? (
-            <p className="descripcion-seccion">No hay productos en esta categoría.</p>
-          ) : (
-            <div className="grid-productos">
-              {productos.map((producto) => (
-                <ProductoCard key={producto.id} producto={producto} onAgregar={agregar} />
-              ))}
-            </div>
-          )}
+          <div className="grid-productos">
+            {productosFiltrados.map((producto) => (
+              <ProductoCard
+                key={producto.id}
+                producto={producto}
+                onAgregar={agregar}
+              />
+            ))}
+          </div>
         </div>
       </section>
     </main>
   )
 }
+

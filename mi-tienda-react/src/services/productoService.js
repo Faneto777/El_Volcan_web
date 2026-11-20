@@ -1,6 +1,9 @@
+import { useEffect, useState } from 'react'
+
 export const BASE_URL = import.meta.env?.BASE_URL ?? '/'
 
 const CLAVE_PRODUCTOS = 'elvolcan_react_productos_v3'
+const API_URL = import.meta.env.VITE_API_URL
 
 export const CATEGORIAS = [
   { id: 'cilindros', nombre: 'Cilindros de Gas' },
@@ -8,6 +11,57 @@ export const CATEGORIAS = [
   { id: 'mangueras', nombre: 'Mangueras y Conexiones' },
   { id: 'accesorios', nombre: 'Accesorios' },
 ]
+
+export async function obtenerProductosDesdeApi() {
+  const respuesta = await fetch(`${API_URL}/productos`)
+
+  if (!respuesta.ok) {
+    throw new Error('No se pudo cargar el catálogo')
+  }
+
+  return respuesta.json()
+}
+
+function normalizarProducto(producto) {
+  const nombreCategoria = producto.categoria?.nombre?.toLowerCase() ?? ''
+  let categoria = ''
+
+  if (nombreCategoria.includes('cilindro')) categoria = 'cilindros'
+  else if (nombreCategoria.includes('regulador')) categoria = 'reguladores'
+  else if (nombreCategoria.includes('manguera') || nombreCategoria.includes('conexion')) categoria = 'mangueras'
+  else if (nombreCategoria.includes('accesorio')) categoria = 'accesorios'
+
+  const imagenes = {
+    CL001: `${BASE_URL}assets/productos/cilindro%205kg.jpg`,
+    CL002: `${BASE_URL}assets/productos/cilindro%2011kg.jpg`,
+    RG001: `${BASE_URL}assets/productos/regulador%20domestico%20estandar.jpg`,
+    RG002: `${BASE_URL}assets/productos/regulador%20dual%202%20salidas.jpg`,
+    MG001: `${BASE_URL}assets/productos/manguera%20gas%201.5m.jpg`,
+    MG002: `${BASE_URL}assets/productos/kit%20conexion%20completo.jpg`,
+    AC001: `${BASE_URL}assets/productos/detector%20de%20gas.jpg`,
+    AC002: `${BASE_URL}assets/productos/tapas%20protectoras.jpg`,
+  }
+
+  return {
+    ...producto,
+    categoria,
+    categoriaId: producto.categoria?.id,
+    imagen: imagenes[producto.id] || `${BASE_URL}assets/logo/logosinfondo.png`,
+  }
+}
+
+export function useProductos() {
+  const [productos, setProductos] = useState([])
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    obtenerProductosDesdeApi()
+      .then((lista) => setProductos(lista.map(normalizarProducto)))
+      .catch((err) => setError(err.message))
+  }, [])
+
+  return { productos, error }
+}
 
 const productosIniciales = [
   { id: 'CL001', nombre: 'Cilindro GLP 5 kg', descripcion: 'Cilindro de gas licuado de petróleo 5 kg. Para uso residencial (cocina, calefacción pequeña).', precio: 6500, stock: 80, categoria: 'cilindros', imagen: `${BASE_URL}assets/productos/cilindro%205kg.jpg`, oferta: false, precioOferta: null },

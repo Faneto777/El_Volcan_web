@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 const CLAVE_SESION = 'elvolcan_usuario'
+const CLAVE_SESION_PERSONAL = 'elvolcan_sesion_personal'
 
 function validarEmail(correo) {
   return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(correo)
@@ -13,7 +14,7 @@ export function Login() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
-  const ingresar = (e) => {
+  const ingresar = async (e) => {
     e.preventDefault()
     if (!validarEmail(correo)) {
       setError('Ingresa un correo electrónico válido.')
@@ -23,8 +24,57 @@ export function Login() {
       setError('La contraseña debe tener al menos 6 caracteres.')
       return
     }
-    localStorage.setItem(CLAVE_SESION, JSON.stringify({ correo }))
-    navigate('/')
+
+    try {
+      const respuesta = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: correo,
+            password,
+          }),
+        }
+      )
+
+      if (!respuesta.ok) {
+        throw new Error('Credenciales invalidas')
+      }
+
+      const datos = await respuesta.json()
+      const rol = datos.rol?.toUpperCase()
+      localStorage.setItem(
+        CLAVE_SESION,
+        JSON.stringify({
+          nombre: datos.nombre,
+          correo: datos.email,
+          rol,
+          token: datos.token,
+        })
+      )
+
+      if (rol === 'ADMIN' || rol === 'VENDEDOR') {
+        const esAdministrador = rol === 'ADMIN'
+        localStorage.setItem(
+          CLAVE_SESION_PERSONAL,
+          JSON.stringify({
+            nombre: datos.nombre,
+            email: datos.email,
+            rol: esAdministrador ? 'administrador' : 'operador',
+          })
+        )
+        navigate(esAdministrador ? '/admin' : '/operador')
+        return
+      }
+
+      localStorage.removeItem(CLAVE_SESION_PERSONAL)
+      navigate('/')
+    } catch {
+      setError('Correo o contraseña incorrectos.')
+    }
   }
 
   const usarDemo = () => {

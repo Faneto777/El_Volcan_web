@@ -59,6 +59,12 @@ function Navbar() {
           <NavLink to="/nosotros" className={enlaceClase}>Nosotros</NavLink>
           <NavLink to="/blog" className={enlaceClase}>Blog</NavLink>
           <NavLink to="/contacto" className={enlaceClase}>Contacto</NavLink>
+          {['admin', 'administrador'].includes(sesion?.rol?.toLowerCase()) && (
+            <NavLink to="/admin" className={enlaceClase}>Panel admin</NavLink>
+          )}
+          {['vendedor', 'operador'].includes(sesion?.rol?.toLowerCase()) && (
+            <NavLink to="/operador" className={enlaceClase}>Panel operador</NavLink>
+          )}
           <div className="area-cuenta">
             {sesion ? (
               <>

@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ProductoCard from './components/ProductoCard';
 import { useCarrito } from './context/useCarrito';
-import { obtenerProductoPorId, obtenerProductos } from './services/productoService';
+import { useProductos } from './services/productoService';
 import { formatearPrecio } from './utils/formato';
 import { CategoriaDetalle, Categorias } from './pages/Categorias';
 import Ofertas from './pages/Ofertas';
@@ -17,7 +17,8 @@ import AdminSistema from './pages/AdminSistema';
 
 function Inicio() {
   const { agregar } = useCarrito();
-  const productos = obtenerProductos().slice(0, 6);
+  const { productos, error } = useProductos();
+  const productosDestacados = productos.slice(0, 6);
 
   return (
     <main>
@@ -77,9 +78,13 @@ function Inicio() {
             tarifas de gas, reguladores, mangueras y accesorios.
           </p>
           <div className="grid-productos grid-destacados">
-            {productos.map((producto) => (
+            {error && <p className="alert alert-danger">{error}</p>}
+            {!error && productosDestacados.map((producto) => (
               <ProductoCard key={producto.id} producto={producto} onAgregar={agregar} />
             ))}
+            {!error && productosDestacados.length === 0 && (
+              <p>No hay productos disponibles en el backend.</p>
+            )}
           </div>
           <div className="text-center mt-4">
             <Link className="boton" to="/productos">
@@ -102,7 +107,7 @@ function Inicio() {
 
 function Catalogo() {
   const { agregar } = useCarrito();
-  const productos = obtenerProductos();
+  const { productos, error } = useProductos();
 
   return (
     <main>
@@ -113,7 +118,8 @@ function Catalogo() {
             Catálogo completo de cilindros, reguladores, mangueras y accesorios.
           </p>
           <div className="grid-productos">
-            {productos.map((producto) => (
+            {error && <p className="alert alert-danger">{error}</p>}
+            {!error && productos.map((producto) => (
               <ProductoCard key={producto.id} producto={producto} onAgregar={agregar} />
             ))}
           </div>
@@ -124,9 +130,14 @@ function Catalogo() {
 }
 
 function Detalle() {
-  const { id } = useParams();
-  const { agregar } = useCarrito();
-  const producto = obtenerProductoPorId(id);
+  const { id } = useParams()
+  const { agregar } = useCarrito()
+  const { productos, error } = useProductos()
+  const producto = productos.find((item) => item.id === id)
+
+  if (error) {
+    return <p className="alert alert-danger">{error}</p>
+  }
 
   if (!producto) {
     return (
@@ -138,7 +149,7 @@ function Detalle() {
           </div>
         </section>
       </main>
-    );
+    )
   }
 
   return (
@@ -153,7 +164,10 @@ function Detalle() {
               <div>
                 <h1>{producto.nombre}</h1>
                 <p className="producto-descripcion">{producto.descripcion}</p>
-                <p className="producto-precio"><small>Precio del producto</small>{formatearPrecio(producto.precio)}</p>
+                <p className="producto-precio">
+                  <small>Precio del producto</small>
+                  {formatearPrecio(producto.precio)}
+                </p>
                 <p>Stock: {producto.stock}</p>
                 <button
                   type="button"
@@ -169,7 +183,7 @@ function Detalle() {
         </div>
       </section>
     </main>
-  );
+  )
 }
 
 function Carrito() {
