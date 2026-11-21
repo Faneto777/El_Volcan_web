@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 export const BASE_URL = import.meta.env?.BASE_URL ?? '/'
 
 const CLAVE_PRODUCTOS = 'elvolcan_react_productos_v3'
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env?.VITE_API_URL ?? 'http://localhost:8080/api/v1'
 
 export const CATEGORIAS = [
   { id: 'cilindros', nombre: 'Cilindros de Gas' },
