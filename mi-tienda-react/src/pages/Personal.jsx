@@ -1,56 +1,19 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import MapaEntregas from '../components/MapaEntregas'
 import { BASE_URL } from '../services/productoService'
 import { ESTADOS_PEDIDO, actualizarPedido, crearPedido, geocodificarDireccion, obtenerPedidos, obtenerRepartidores } from '../services/pedidosService'
-import { CLAVE_SESION_PERSONAL, iniciarSesionPersonal, leerSesionPersonal } from '../services/sesionPersonal'
+import { CLAVE_SESION_PERSONAL, leerSesionPersonal } from '../services/sesionPersonal'
 
+// El personal entra por el mismo login del backend (/login). Esta ruta solo redirige.
 export function Personal() {
   const navigate = useNavigate()
-  const [correo, setCorreo] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
 
-  const entrar = (e) => {
-    e.preventDefault()
-    const sesion = iniciarSesionPersonal(correo.trim(), password)
-    if (!sesion) {
-      setError('Correo o contraseña incorrectos. Usa una de las cuentas señaladas.')
-      return
-    }
-    navigate(sesion.destino)
-  }
+  useEffect(() => {
+    navigate('/login', { replace: true })
+  }, [navigate])
 
-  return (
-    <main>
-      <section>
-        <div className="container" style={{ maxWidth: '520px' }}>
-          <h1 className="titulo-seccion">Acceso del personal</h1>
-          <p className="descripcion-seccion">Ingreso exclusivo para el personal interno de la distribuidora.</p>
-          <div className="panel">
-            {error && <div className="alert alert-danger">{error}</div>}
-            <form onSubmit={entrar} noValidate>
-              <div className="campo">
-                <label htmlFor="correo">Correo interno</label>
-                <input id="correo" type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} placeholder="operador@gmail.com" />
-              </div>
-              <div className="campo">
-                <label htmlFor="password">Contraseña</label>
-                <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Ingresa tu contraseña" />
-              </div>
-              <button type="submit" className="boton boton-ancho">Entrar al panel</button>
-            </form>
-            <div className="panel-demo">
-              <p><strong>Administradora:</strong> <code>administradora@gmail.com</code> / <code>admin123</code></p>
-              <p><strong>Operadora:</strong> <code>operador@gmail.com</code> / <code>volcan123</code></p>
-              <p><strong>Repartidor:</strong> <code>repartidordemo@gmail.com</code> / <code>demo123</code></p>
-            </div>
-            <p className="text-center mt-3"><Link to="/login">Volver al ingreso de clientes</Link></p>
-          </div>
-        </div>
-      </section>
-    </main>
-  )
+  return null
 }
 
 function leerSesion() {

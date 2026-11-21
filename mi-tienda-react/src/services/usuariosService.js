@@ -1,12 +1,7 @@
 const CLAVE_USUARIOS = 'elvolcan_usuarios'
 
-const USUARIOS_DEFAULT = [
-  { nombre: 'Administradora', email: 'administradora@gmail.com', password: 'admin123', rol: 'administrador', activo: true },
-  { nombre: 'Juan Perez', email: 'operador@gmail.com', password: 'volcan123', rol: 'operador', activo: true },
-  { nombre: 'Repartidor Demo', email: 'repartidordemo@gmail.com', password: 'demo123', rol: 'repartidor', activo: true },
-  { nombre: 'Luis Fuentes', email: 'luis.fuentes@gmail.com', password: 'demo123', rol: 'repartidor', activo: true },
-  { nombre: 'Clienta Demo', email: 'clientedemo@gmail.com', password: 'demo123', rol: 'cliente', activo: true },
-]
+// Sin cuentas de prueba: los usuarios reales vendrán del backend.
+const USUARIOS_DEFAULT = []
 
 function guardarUsuarios(lista) {
   localStorage.setItem(CLAVE_USUARIOS, JSON.stringify(lista))

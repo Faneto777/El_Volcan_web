@@ -67,35 +67,41 @@ describe('Servicio de usuarios', () => {
     localStorage.removeItem('elvolcan_usuarios')
   })
 
-  it('deberia cargar los 5 usuarios iniciales', () => {
-    expect(obtenerUsuarios().length).toBe(5)
+  it('deberia iniciar sin cuentas de prueba', () => {
+    expect(obtenerUsuarios().length).toBe(0)
   })
 
   it('deberia crear un usuario nuevo', () => {
-    crearUsuario({ nombre: 'Nuevo', email: 'nuevo@correo.cl', password: 'demo123', rol: 'cliente' })
+    crearUsuario({ nombre: 'Nuevo', email: 'nuevo@correo.cl', rol: 'cliente' })
 
-    expect(obtenerUsuarios().length).toBe(6)
+    expect(obtenerUsuarios().length).toBe(1)
   })
 
   it('deberia lanzar error con correo repetido', () => {
-    expect(() => crearUsuario({ nombre: 'Otro', email: 'operador@gmail.com', password: 'x' })).toThrow()
+    crearUsuario({ nombre: 'Uno', email: 'uno@correo.cl' })
+
+    expect(() => crearUsuario({ nombre: 'Otro', email: 'UNO@correo.cl' })).toThrow()
   })
 
   it('deberia actualizar el rol de un usuario', () => {
-    const actualizado = actualizarUsuario('operador@gmail.com', { rol: 'administrador' })
+    crearUsuario({ nombre: 'Uno', email: 'uno@correo.cl', rol: 'cliente' })
+
+    const actualizado = actualizarUsuario('uno@correo.cl', { rol: 'administrador' })
 
     expect(actualizado.rol).toBe('administrador')
   })
 
   it('deberia eliminar un usuario', () => {
-    expect(eliminarUsuario('operador@gmail.com')).toBeTrue()
-    expect(obtenerUsuarios().length).toBe(4)
+    crearUsuario({ nombre: 'Uno', email: 'uno@correo.cl' })
+
+    expect(eliminarUsuario('uno@correo.cl')).toBeTrue()
+    expect(obtenerUsuarios().length).toBe(0)
   })
 
-  it('deberia restablecer los usuarios iniciales', () => {
-    eliminarUsuario('operador@gmail.com')
+  it('deberia restablecer la lista sin cuentas de prueba', () => {
+    crearUsuario({ nombre: 'Uno', email: 'uno@correo.cl' })
     restablecerUsuarios()
 
-    expect(obtenerUsuarios().length).toBe(5)
+    expect(obtenerUsuarios().length).toBe(0)
   })
 })
