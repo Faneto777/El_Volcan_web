@@ -14,6 +14,7 @@ import { Operador, Personal, Repartidor } from './pages/Personal';
 import { Blog, BlogDetalle, Contacto, Nosotros } from './pages/Info';
 import { AdminDashboard, AdminProductos } from './pages/Admin';
 import AdminSistema from './pages/AdminSistema';
+import MisCompras from './pages/MisCompras';
 
 function Inicio() {
   const { agregar } = useCarrito();
@@ -260,6 +261,7 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/pago-correcto" element={<PagoCorrecto />} />
         <Route path="/pago-error" element={<PagoError />} />
+        <Route path="/mis-compras" element={<MisCompras />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/personal" element={<Personal />} />

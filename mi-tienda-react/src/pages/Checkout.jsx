@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCarrito } from '../context/useCarrito'
+import { crearBoletaDesdeApi } from '../services/productoService'
 import { formatearPrecio } from '../utils/formato'
 
 const CLAVE_SESION = 'elvolcan_usuario'
@@ -31,7 +32,7 @@ export function Checkout() {
 
   const cambiar = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
-  const pagar = (e) => {
+  const pagar = async (e) => {
     e.preventDefault()
     if (!form.nombre.trim() || !form.correo.includes('@') || !form.calle.trim() || !form.comuna.trim()) {
       setError('Completa nombre, correo válido, calle y comuna para continuar.')
@@ -41,12 +42,17 @@ export function Checkout() {
       setError('Tu carrito está vacío.')
       return
     }
-    const nro = `nro #${Date.now().toString().slice(-8)}`
-    const pagoOk = total > 0
-    vaciar()
-    navigate(pagoOk ? `/pago-correcto?orden=${encodeURIComponent(nro)}` : '/pago-error', {
-      state: { total, form, nro },
-    })
+    try {
+      const boleta = await crearBoletaDesdeApi(items)
+      const nro = `nro #${boleta.id}`
+      vaciar()
+      navigate(`/pago-correcto?orden=${encodeURIComponent(nro)}`, {
+        state: { total: boleta.total, form, nro, boleta },
+      })
+    } catch (err) {
+      setError(err.message)
+      navigate('/pago-error')
+    }
   }
 
   if (items.length === 0) {

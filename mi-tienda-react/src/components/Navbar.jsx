@@ -65,6 +65,9 @@ function Navbar() {
           {['vendedor', 'operador'].includes(sesion?.rol?.toLowerCase()) && (
             <NavLink to="/operador" className={enlaceClase}>Panel operador</NavLink>
           )}
+          {sesion && !sesion.esPersonal && (
+            <NavLink to="/mis-compras" className={enlaceClase}>Mis compras</NavLink>
+          )}
           <div className="area-cuenta">
             {sesion ? (
               <>

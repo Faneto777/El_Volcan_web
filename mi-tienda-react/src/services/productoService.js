@@ -22,6 +22,154 @@ export async function obtenerProductosDesdeApi() {
   return respuesta.json()
 }
 
+export async function obtenerBoletasDesdeApi() {
+  const sesion = JSON.parse(localStorage.getItem('elvolcan_usuario') || 'null')
+  const respuesta = await fetch(`${API_URL}/boletas`, {
+    headers: {
+      Authorization: `Bearer ${sesion?.token}`,
+    },
+  })
+
+  if (!respuesta.ok) {
+    if (respuesta.status === 401) {
+      throw new Error('Tu sesión venció. Vuelve a iniciar sesión.')
+    }
+    if (respuesta.status === 403) {
+      throw new Error('Solo administradores pueden consultar el historial.')
+    }
+    throw new Error('No se pudo cargar el historial de boletas')
+  }
+
+  return respuesta.json()
+}
+
+export async function obtenerMisComprasDesdeApi() {
+  const sesion = JSON.parse(localStorage.getItem('elvolcan_usuario') || 'null')
+  const respuesta = await fetch(`${API_URL}/boletas/mis-compras`, {
+    headers: {
+      Authorization: `Bearer ${sesion?.token}`,
+    },
+  })
+
+  if (!respuesta.ok) {
+    if (respuesta.status === 401) {
+      throw new Error('Inicia sesión para consultar tus compras.')
+    }
+    throw new Error('No se pudo cargar tu historial de compras')
+  }
+
+  return respuesta.json()
+}
+
+export async function crearBoletaDesdeApi(items) {
+  const sesion = JSON.parse(localStorage.getItem('elvolcan_usuario') || 'null')
+  const respuesta = await fetch(`${API_URL}/boletas`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sesion?.token}`,
+    },
+    body: JSON.stringify({
+      items: items.map((item) => ({
+        productoId: item.id,
+        cantidad: item.cantidad,
+      })),
+    }),
+  })
+
+  if (!respuesta.ok) {
+    if (respuesta.status === 401) {
+      throw new Error('Tu sesión venció. Vuelve a iniciar sesión.')
+    }
+
+    const datos = await respuesta.json().catch(() => null)
+    throw new Error(datos?.detail || datos?.message || 'No se pudo crear la boleta')
+  }
+
+  return respuesta.json()
+}
+
+function obtenerToken() {
+  try {
+    const sesion = JSON.parse(localStorage.getItem('elvolcan_usuario'))
+    return sesion?.token || ''
+  } catch {
+    return ''
+  }
+}
+
+function obtenerCategoriaId(categoria) {
+  const categorias = {
+    accesorios: 4,
+    cilindros: 5,
+    reguladores: 6,
+    mangueras: 7,
+  }
+
+  return categorias[categoria] || categorias.cilindros
+}
+
+function construirProductoApi(datos) {
+  return {
+    id: datos.id,
+    nombre: datos.nombre,
+    descripcion: datos.descripcion || '',
+    precio: Number(datos.precio) || 0,
+    stock: Number(datos.stock) || 0,
+    oferta: Boolean(datos.oferta),
+    precioOferta: datos.precioOferta ? Number(datos.precioOferta) : null,
+    imagen: datos.imagen || '',
+    categoria: {
+      id: obtenerCategoriaId(datos.categoria),
+    },
+  }
+}
+
+async function solicitudProducto(ruta, opciones = {}) {
+  const token = obtenerToken()
+  const respuesta = await fetch(`${API_URL}${ruta}`, {
+    ...opciones,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...opciones.headers,
+    },
+  })
+
+  if (!respuesta.ok) {
+    if (respuesta.status === 401) {
+      throw new Error('Tu sesión venció. Vuelve a iniciar sesión.')
+    }
+    if (respuesta.status === 403) {
+      throw new Error('Tu cuenta no tiene permiso para administrar productos.')
+    }
+    throw new Error('No se pudo completar la operación')
+  }
+
+  if (respuesta.status === 204) return null
+  return respuesta.json()
+}
+
+export function crearProductoApi(datos) {
+  return solicitudProducto('/productos', {
+    method: 'POST',
+    body: JSON.stringify(construirProductoApi(datos)),
+  })
+}
+
+export function actualizarProductoApi(id, datos) {
+  return solicitudProducto(`/productos/${encodeURIComponent(id)}`, {
+    method: 'PUT',
+    body: JSON.stringify(construirProductoApi(datos)),
+  })
+}
+
+export function eliminarProductoApi(id) {
+  return solicitudProducto(`/productos/${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+  })
+}
+
 function normalizarProducto(producto) {
   const nombreCategoria = producto.categoria?.nombre?.toLowerCase() ?? ''
   let categoria = ''
@@ -50,7 +198,7 @@ function normalizarProducto(producto) {
   }
 }
 
-export function useProductos() {
+export function useProductos(revision = 0) {
   const [productos, setProductos] = useState([])
   const [error, setError] = useState('')
 
@@ -58,7 +206,7 @@ export function useProductos() {
     obtenerProductosDesdeApi()
       .then((lista) => setProductos(lista.map(normalizarProducto)))
       .catch((err) => setError(err.message))
-  }, [])
+  }, [revision])
 
   return { productos, error }
 }

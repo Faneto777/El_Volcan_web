@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import MapaEntregas from '../components/MapaEntregas'
-import { BASE_URL } from '../services/productoService'
+import { BASE_URL, obtenerBoletasDesdeApi } from '../services/productoService'
 import { ESTADOS_PEDIDO, actualizarPedido, obtenerPedidos, obtenerRepartidores } from '../services/pedidosService'
 import { CLAVE_SESION_PERSONAL, leerSesionPersonal } from '../services/sesionPersonal'
 import { actualizarUsuario, crearUsuario, eliminarUsuario, obtenerUsuarios } from '../services/usuariosService'
+import { formatearPrecio } from '../utils/formato'
 
 function cerrarSesion(navigate) {
   localStorage.removeItem(CLAVE_SESION_PERSONAL)
@@ -20,6 +21,16 @@ function AdminSistema() {
   const [modalUsuario, setModalUsuario] = useState(null)
   const [formUsuario, setFormUsuario] = useState({ nombre: '', email: '', password: 'demo123', rol: 'repartidor', activo: true })
   const [errorUsuario, setErrorUsuario] = useState('')
+  const [boletas, setBoletas] = useState([])
+  const [errorBoletas, setErrorBoletas] = useState('')
+
+  useEffect(() => {
+    if (pestana === 'boletas') {
+      obtenerBoletasDesdeApi()
+        .then(setBoletas)
+        .catch((err) => setErrorBoletas(err.message))
+    }
+  }, [pestana])
 
   const refrescarPedidos = () => setPedidos(obtenerPedidos())
   const refrescarUsuarios = () => setUsuarios(obtenerUsuarios())
@@ -101,6 +112,7 @@ function AdminSistema() {
           <button type="button" className={`tab-admin${pestana === 'pedidos' ? ' activo' : ''}`} onClick={() => setPestana('pedidos')}>📦 Pedidos</button>
           <button type="button" className={`tab-admin${pestana === 'usuarios' ? ' activo' : ''}`} onClick={() => setPestana('usuarios')}>👥 Usuarios y roles</button>
           <button type="button" className={`tab-admin${pestana === 'reportes' ? ' activo' : ''}`} onClick={() => setPestana('reportes')}>📊 Reportes</button>
+          <button type="button" className={`tab-admin${pestana === 'boletas' ? ' activo' : ''}`} onClick={() => { setErrorBoletas(''); setPestana('boletas') }}>🧾 Boletas</button>
           <Link className="tab-admin" to="/admin">🏪 Tienda</Link>
         </nav>
 
@@ -244,6 +256,56 @@ function AdminSistema() {
                   <p className="panel-subtitulo-admin">Todos los destinos del sistema (Chillán y alrededores).</p>
                 </div>
                 <MapaEntregas id="mapa-admin" pedidos={pedidos} />
+              </div>
+            </div>
+          </section>
+        )}
+
+        {pestana === 'boletas' && (
+          <section className="pestana">
+            <div className="panel-admin">
+              <div className="panel-header-admin">
+                <div>
+                  <h3>Historial de ventas</h3>
+                  <p className="panel-subtitulo-admin">Boletas registradas desde el backend.</p>
+                </div>
+              </div>
+
+              {errorBoletas && <div className="alert alert-danger">{errorBoletas}</div>}
+
+              {!errorBoletas && boletas.length === 0 && (
+                <p className="panel-subtitulo-admin">No hay boletas registradas.</p>
+              )}
+
+              <div className="tabla-contenedor-admin">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Boleta</th>
+                      <th>Fecha</th>
+                      <th>Cliente</th>
+                      <th>Productos</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {boletas.map((boleta) => (
+                      <tr key={boleta.id}>
+                        <td>#{boleta.id}</td>
+                        <td>{new Date(boleta.fecha).toLocaleString('es-CL')}</td>
+                        <td>{boleta.usuario?.nombre ?? boleta.usuario?.email ?? 'Sin datos'}</td>
+                        <td>
+                          {boleta.detalles?.map((detalle) => (
+                            <div key={detalle.id}>
+                              {detalle.cantidad} × {detalle.producto?.nombre}
+                            </div>
+                          ))}
+                        </td>
+                        <td>{formatearPrecio(Number(boleta.total))}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </section>

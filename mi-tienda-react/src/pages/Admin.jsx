@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  actualizarProducto,
-  crearProducto,
-  eliminarProducto,
-  obtenerProductos,
-  restablecerProductos,
+  actualizarProductoApi,
+  crearProductoApi,
+  eliminarProductoApi,
+  useProductos,
 } from '../services/productoService'
 import { formatearPrecio } from '../utils/formato'
 
 export function AdminDashboard() {
-  const productos = obtenerProductos()
+  const { productos } = useProductos()
   const stockTotal = productos.reduce((s, p) => s + p.stock, 0)
   const enOferta = productos.filter((p) => p.oferta).length
 
@@ -45,25 +44,35 @@ export function AdminDashboard() {
 }
 
 export function AdminProductos() {
-  const [lista, setLista] = useState(obtenerProductos())
+  const [revision, setRevision] = useState(0)
+  const { productos: lista, error: errorCarga } = useProductos(revision)
   const [form, setForm] = useState({ id: '', nombre: '', precio: '', stock: '', categoria: 'cilindros' })
   const [error, setError] = useState('')
 
-  const refrescar = () => setLista(obtenerProductos())
+  const refrescar = () => setRevision((valor) => valor + 1)
 
-  const guardar = (e) => {
+  const guardar = async (e) => {
     e.preventDefault()
     setError('')
     if (!form.id.trim() || !form.nombre.trim()) {
       setError('Código y nombre son obligatorios.')
       return
     }
-    const datos = { id: form.id.trim(), nombre: form.nombre.trim(), precio: Number(form.precio) || 0, stock: Number(form.stock) || 0, categoria: form.categoria, descripcion: '', imagen: '' }
+    const datos = {
+      id: form.id.trim(),
+      nombre: form.nombre.trim(),
+      precio: Number(form.precio) || 0,
+      stock: Number(form.stock) || 0,
+      categoria: form.categoria,
+      descripcion: '',
+      imagen: '',
+    }
+
     try {
-      if (obtenerProductos().some((p) => p.id === datos.id)) {
-        actualizarProducto(datos.id, datos)
+      if (lista.some((p) => p.id === datos.id)) {
+        await actualizarProductoApi(datos.id, datos)
       } else {
-        crearProducto(datos)
+        await crearProductoApi(datos)
       }
       setForm({ id: '', nombre: '', precio: '', stock: '', categoria: 'cilindros' })
       refrescar()
@@ -72,9 +81,14 @@ export function AdminProductos() {
     }
   }
 
-  const eliminar = (id) => {
-    eliminarProducto(id)
-    refrescar()
+  const eliminar = async (id) => {
+    setError('')
+    try {
+      await eliminarProductoApi(id)
+      refrescar()
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   return (
@@ -84,6 +98,7 @@ export function AdminProductos() {
           <h1 className="titulo-seccion">Productos</h1>
           <div className="panel">
             {error && <div className="alert alert-danger">{error}</div>}
+            {errorCarga && <div className="alert alert-danger">{errorCarga}</div>}
             <form onSubmit={guardar} className="grid-formulario">
               <div className="campo"><input placeholder="Código" value={form.id} onChange={(e) => setForm({ ...form, id: e.target.value })} /></div>
               <div className="campo"><input placeholder="Nombre" value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} /></div>
@@ -115,7 +130,6 @@ export function AdminProductos() {
                 </tbody>
               </table>
             </div>
-            <button type="button" className="boton boton-secundario mt-3" onClick={() => { restablecerProductos(); refrescar() }}>Restablecer</button>
           </div>
         </div>
       </section>
