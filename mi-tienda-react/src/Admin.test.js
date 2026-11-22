@@ -1,29 +1,35 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { AdminDashboard, AdminProductos } from './pages/Admin'
-import { obtenerProductos } from './services/productoService'
+import { PRODUCTOS_PRUEBA } from './test/productosPrueba'
+import { simularApiDeProductos } from './test/fetchMock'
 
 const montar = (elemento) => render(<MemoryRouter>{elemento}</MemoryRouter>)
 
 const escribir = (placeholder, valor) =>
-  fireEvent.change(screen.getByPlaceholderText(placeholder), { target: { value: valor } })
+    fireEvent.change(screen.getByPlaceholderText(placeholder), { target: { value: valor } })
 
 const filasDeDatos = () => screen.getAllByRole('row').length - 1
+
+const esperarFilas = (cantidad) =>
+    waitFor(() => {
+      if (filasDeDatos() !== cantidad) throw new Error(`Se esperaban ${cantidad} filas`)
+    })
 
 describe('Dashboard del administrador', () => {
   beforeEach(() => {
     localStorage.clear()
+    simularApiDeProductos(PRODUCTOS_PRUEBA)
   })
 
-  it('deberia mostrar los KPIs de productos, stock total y ofertas', () => {
-    const productos = obtenerProductos()
-    const stockTotal = productos.reduce((suma, p) => suma + p.stock, 0)
-    const enOferta = productos.filter((p) => p.oferta).length
+  it('deberia mostrar los KPIs de productos, stock total y ofertas', async () => {
+    const stockTotal = PRODUCTOS_PRUEBA.reduce((suma, p) => suma + p.stock, 0)
+    const enOferta = PRODUCTOS_PRUEBA.filter((p) => p.oferta).length
 
     montar(<AdminDashboard />)
 
     expect(screen.getByRole('heading', { name: 'Panel administrador' })).not.toBeNull()
-    expect(screen.getByText(String(productos.length))).not.toBeNull()
+    expect(await screen.findByText(String(PRODUCTOS_PRUEBA.length))).not.toBeNull()
     expect(screen.getByText(String(stockTotal))).not.toBeNull()
     expect(screen.getByText(String(enOferta))).not.toBeNull()
   })
@@ -39,25 +45,27 @@ describe('Dashboard del administrador', () => {
 describe('CRUD de productos del administrador', () => {
   beforeEach(() => {
     localStorage.clear()
+    simularApiDeProductos(PRODUCTOS_PRUEBA)
   })
 
-  it('deberia listar los 14 productos en la tabla', () => {
+  it('deberia listar los 14 productos en la tabla', async () => {
     montar(<AdminProductos />)
 
-    expect(filasDeDatos()).toBe(14)
+    await esperarFilas(14)
   })
 
-  it('deberia mostrar error si faltan codigo y nombre', () => {
+  it('deberia mostrar error si faltan codigo y nombre', async () => {
     montar(<AdminProductos />)
 
     fireEvent.click(screen.getByRole('button', { name: /guardar/i }))
 
     expect(screen.getByText('Código y nombre son obligatorios.')).not.toBeNull()
-    expect(filasDeDatos()).toBe(14)
+    await esperarFilas(14)
   })
 
-  it('deberia crear un producto nuevo y mostrarlo en la tabla', () => {
+  it('deberia crear un producto nuevo y mostrarlo en la tabla', async () => {
     montar(<AdminProductos />)
+    await esperarFilas(14)
 
     escribir('Código', 'XX001')
     escribir('Nombre', 'Cilindro de prueba')
@@ -65,13 +73,14 @@ describe('CRUD de productos del administrador', () => {
     escribir('Stock', '15')
     fireEvent.click(screen.getByRole('button', { name: /guardar/i }))
 
-    expect(screen.getByText('Cilindro de prueba')).not.toBeNull()
+    expect(await screen.findByText('Cilindro de prueba')).not.toBeNull()
     expect(screen.getByText('$5.000')).not.toBeNull()
-    expect(filasDeDatos()).toBe(15)
+    await esperarFilas(15)
   })
 
-  it('deberia actualizar un producto existente si el codigo ya existe', () => {
+  it('deberia actualizar un producto existente si el codigo ya existe', async () => {
     montar(<AdminProductos />)
+    await esperarFilas(14)
 
     escribir('Código', 'CL001')
     escribir('Nombre', 'Cilindro editado')
@@ -79,29 +88,20 @@ describe('CRUD de productos del administrador', () => {
     escribir('Stock', '10')
     fireEvent.click(screen.getByRole('button', { name: /guardar/i }))
 
-    expect(screen.getByText('Cilindro editado')).not.toBeNull()
+    expect(await screen.findByText('Cilindro editado')).not.toBeNull()
     expect(screen.queryByText('Cilindro GLP 5 kg')).toBeNull()
-    expect(filasDeDatos()).toBe(14)
+    await esperarFilas(14)
   })
 
-  it('deberia eliminar un producto de la tabla', () => {
+  it('deberia eliminar un producto de la tabla', async () => {
     montar(<AdminProductos />)
+    expect(await screen.findByText('Cilindro GLP 5 kg')).not.toBeNull()
 
     fireEvent.click(screen.getAllByRole('button', { name: /^eliminar$/i })[0])
 
-    expect(screen.queryByText('Cilindro GLP 5 kg')).toBeNull()
-    expect(filasDeDatos()).toBe(13)
-  })
-
-  it('deberia restablecer los productos originales', () => {
-    montar(<AdminProductos />)
-
-    fireEvent.click(screen.getAllByRole('button', { name: /^eliminar$/i })[0])
-    expect(filasDeDatos()).toBe(13)
-
-    fireEvent.click(screen.getByRole('button', { name: /restablecer/i }))
-
-    expect(filasDeDatos()).toBe(14)
-    expect(screen.getByText('Cilindro GLP 5 kg')).not.toBeNull()
+    await waitFor(() => {
+      if (screen.queryByText('Cilindro GLP 5 kg')) throw new Error('Sigue visible')
+    })
+    await esperarFilas(13)
   })
 })

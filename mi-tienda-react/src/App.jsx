@@ -15,6 +15,8 @@ import { Blog, BlogDetalle, Contacto, Nosotros } from './pages/Info';
 import { AdminDashboard, AdminProductos } from './pages/Admin';
 import AdminSistema from './pages/AdminSistema';
 import MisCompras from './pages/MisCompras';
+import Vendedor from './pages/Vendedor';
+import RutaProtegida from './components/RutaProtegida';
 
 function Inicio() {
   const { agregar } = useCarrito();
@@ -261,19 +263,20 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/pago-correcto" element={<PagoCorrecto />} />
         <Route path="/pago-error" element={<PagoError />} />
-        <Route path="/mis-compras" element={<MisCompras />} />
+        <Route path="/mis-compras" element={<RutaProtegida roles={['CLIENTE', 'VENDEDOR', 'REPARTIDOR', 'ADMIN']}><MisCompras /></RutaProtegida>} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/personal" element={<Personal />} />
-        <Route path="/operador" element={<Operador />} />
-        <Route path="/repartidor" element={<Repartidor />} />
+        <Route path="/operador" element={<RutaProtegida roles={['ADMIN']}><Operador /></RutaProtegida>} />
+        <Route path="/repartidor" element={<RutaProtegida roles={['REPARTIDOR', 'ADMIN']}><Repartidor /></RutaProtegida>} />
+        <Route path="/vendedor" element={<RutaProtegida roles={['VENDEDOR', 'ADMIN']}><Vendedor /></RutaProtegida>} />
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogDetalle />} />
         <Route path="/contacto" element={<Contacto />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/productos" element={<AdminProductos />} />
-        <Route path="/admin/sistema" element={<AdminSistema />} />
+        <Route path="/admin" element={<RutaProtegida roles={['ADMIN']}><AdminDashboard /></RutaProtegida>} />
+        <Route path="/admin/productos" element={<RutaProtegida roles={['ADMIN']}><AdminProductos /></RutaProtegida>} />
+        <Route path="/admin/sistema" element={<RutaProtegida roles={['ADMIN']}><AdminSistema /></RutaProtegida>} />
       </Routes>
       {!sinMarco && <Footer />}
     </>

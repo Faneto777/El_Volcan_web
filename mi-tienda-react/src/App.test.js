@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import App from './App'
 import CarritoProvider from './context/CarritoProvider'
+import { simularApiProductos } from './test/productosPrueba'
 
 const CLAVE_CARRITO = 'elvolcan_react_carrito'
 
@@ -25,27 +26,28 @@ const montar = (ruta) =>
 describe('Rutas de la aplicacion (App)', () => {
   beforeEach(() => {
     localStorage.clear()
+    simularApiProductos()
   })
 
-  it('deberia mostrar el catalogo de inicio con 6 productos', () => {
+  it('deberia mostrar el catalogo de inicio con 6 productos', async () => {
     montar('/')
 
     expect(screen.getByRole('heading', { name: 'Catálogo El Volcán' })).not.toBeNull()
-    expect(screen.getAllByRole('button', { name: /^agregar$/i }).length).toBe(6)
+    expect((await screen.findAllByRole('button', { name: /^agregar$/i })).length).toBe(6)
     expect(screen.getByRole('link', { name: /ver catálogo completo/i })).not.toBeNull()
   })
 
-  it('deberia mostrar los 14 productos en la pagina de catalogo', () => {
+  it('deberia mostrar los 14 productos en la pagina de catalogo', async () => {
     montar('/productos')
 
     expect(screen.getByRole('heading', { name: 'Productos' })).not.toBeNull()
-    expect(screen.getAllByRole('button', { name: /^agregar$/i }).length).toBe(14)
+    expect((await screen.findAllByRole('button', { name: /^agregar$/i })).length).toBe(14)
   })
 
-  it('deberia mostrar el detalle de un producto y agregarlo al carrito', () => {
+  it('deberia mostrar el detalle de un producto y agregarlo al carrito', async () => {
     montar('/productos/CL001')
 
-    expect(screen.getByRole('heading', { name: 'Cilindro GLP 5 kg' })).not.toBeNull()
+    expect(await screen.findByRole('heading', { name: 'Cilindro GLP 5 kg' })).not.toBeNull()
     expect(screen.getByText(/\(0\)/)).not.toBeNull()
 
     fireEvent.click(screen.getByRole('button', { name: /agregar al carrito/i }))

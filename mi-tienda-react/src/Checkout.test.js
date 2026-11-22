@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import CarritoProvider from './context/CarritoProvider'
 import { Checkout } from './pages/Checkout'
+import { simularFetch } from './test/fetchMock'
 
 const CLAVE_CARRITO = 'elvolcan_react_carrito'
 
@@ -71,7 +72,8 @@ describe('Checkout', () => {
     expect(screen.queryByText('PAGO CORRECTO')).toBeNull()
   })
 
-  it('deberia navegar a pago correcto y vaciar el carrito con datos completos', () => {
+  it('deberia navegar a pago correcto y vaciar el carrito con datos completos', async () => {
+    simularFetch({ id: 1 })
     localStorage.setItem(CLAVE_CARRITO, JSON.stringify([itemEjemplo]))
     montar()
 
@@ -81,7 +83,7 @@ describe('Checkout', () => {
     escribir('Calle*', 'Los Crisantemos 123')
     fireEvent.click(screen.getByRole('button', { name: /pagar ahora/i }))
 
-    expect(screen.getByText('PAGO CORRECTO')).not.toBeNull()
+    expect(await screen.findByText('PAGO CORRECTO')).not.toBeNull()
     expect(JSON.parse(localStorage.getItem(CLAVE_CARRITO))).toEqual([])
   })
 })

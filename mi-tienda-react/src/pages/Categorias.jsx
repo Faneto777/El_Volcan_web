@@ -35,6 +35,17 @@ export function CategoriaDetalle() {
   const productosFiltrados = productos.filter(
       (producto) => producto.categoria === id
   )
+  if (!categoria) {
+    return (
+        <main>
+          <section>
+            <div className="container">
+              <h1 className="titulo-seccion">Categoría no encontrada</h1>
+            </div>
+          </section>
+        </main>
+    )
+  }
 
   if (error) {
     return <p className="alert alert-danger">{error}</p>

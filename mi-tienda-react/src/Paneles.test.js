@@ -25,6 +25,10 @@ describe('Panel del administrador (sistema)', () => {
   })
 
   it('deberia cambiar a la pestaña de usuarios y mostrar la tabla', () => {
+    localStorage.setItem(
+        'elvolcan_usuarios',
+        JSON.stringify([{ nombre: 'Administradora', email: 'administradora@gmail.com', rol: 'ADMIN', activo: true }])
+    )
     montar('/admin/sistema', <AdminSistema />)
 
     fireEvent.click(screen.getByRole('button', { name: /usuarios y roles/i }))

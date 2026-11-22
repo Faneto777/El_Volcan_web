@@ -45,7 +45,7 @@ describe('Pruebas del Navbar', () => {
   })
 
   it('deberia mostrar la sesion y cerrar sesion en vez de ingresar', () => {
-    localStorage.setItem('elvolcan_sesion_personal', JSON.stringify({ nombre: 'Administradora', email: 'administradora@gmail.com', rol: 'administrador' }))
+    localStorage.setItem('elvolcan_usuario', JSON.stringify({ nombre: 'Administradora', correo: 'administradora@gmail.com', rol: 'ADMIN', token: 'x' }))
     montar()
 
     expect(screen.getByText(/Administradora/)).not.toBeNull()

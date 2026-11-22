@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { RUTA_INICIO_POR_ROL, SESION_PERSONAL_POR_ROL } from '../services/sesion'
 
 const CLAVE_SESION = 'elvolcan_usuario'
 const CLAVE_SESION_PERSONAL = 'elvolcan_sesion_personal'
+const API_URL = import.meta.env?.VITE_API_URL ?? 'http://localhost:8080/api/v1'
 
 function validarEmail(correo) {
   return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(correo)
@@ -26,19 +28,16 @@ export function Login() {
     }
 
     try {
-      const respuesta = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/login`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: correo,
-            password,
-          }),
-        }
-      )
+      const respuesta = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: correo,
+          password,
+        }),
+      })
 
       if (!respuesta.ok) {
         throw new Error('Credenciales invalidas')
@@ -47,32 +46,31 @@ export function Login() {
       const datos = await respuesta.json()
       const rol = datos.rol?.toUpperCase()
       localStorage.setItem(
-        CLAVE_SESION,
-        JSON.stringify({
-          nombre: datos.nombre,
-          correo: datos.email,
-          rol,
-          token: datos.token,
-        })
-      )
-
-      if (rol === 'ADMIN' || rol === 'VENDEDOR') {
-        const esAdministrador = rol === 'ADMIN'
-        localStorage.setItem(
-          CLAVE_SESION_PERSONAL,
+          CLAVE_SESION,
           JSON.stringify({
             nombre: datos.nombre,
-            email: datos.email,
-            rol: esAdministrador ? 'administrador' : 'operador',
+            correo: datos.email,
+            rol,
+            token: datos.token,
           })
+      )
+
+      const rolPersonal = SESION_PERSONAL_POR_ROL[rol]
+      if (rolPersonal) {
+        localStorage.setItem(
+            CLAVE_SESION_PERSONAL,
+            JSON.stringify({
+              nombre: datos.nombre,
+              email: datos.email,
+              rol: rolPersonal,
+            })
         )
-        navigate(esAdministrador ? '/admin' : '/operador')
-        return
+      } else {
+        localStorage.removeItem(CLAVE_SESION_PERSONAL)
       }
 
-      localStorage.removeItem(CLAVE_SESION_PERSONAL)
-      navigate('/')
-    } catch {
+      navigate(RUTA_INICIO_POR_ROL[rol] ?? '/')
+    } catch (err) {
       setError('Correo o contraseña incorrectos.')
     }
   }
@@ -111,7 +109,7 @@ export function Registro() {
   const [confirmar, setConfirmar] = useState('')
   const [error, setError] = useState('')
 
-  const registrar = (e) => {
+  const registrar = async (e) => {
     e.preventDefault()
     if (nombre.trim().length < 3) {
       setError('Ingresa un nombre válido (mínimo 3 letras).')
@@ -129,8 +127,34 @@ export function Registro() {
       setError('Las contraseñas no coinciden.')
       return
     }
-    localStorage.setItem(CLAVE_SESION, JSON.stringify({ nombre, correo }))
-    navigate('/')
+
+    try {
+      const respuesta = await fetch(`${API_URL}/auth/registro`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, email: correo, password }),
+      })
+
+      if (!respuesta.ok) {
+        const datos = await respuesta.json().catch(() => null)
+        throw new Error(datos?.detail || datos?.message || 'No se pudo crear la cuenta')
+      }
+
+      const datos = await respuesta.json()
+      localStorage.setItem(
+          CLAVE_SESION,
+          JSON.stringify({
+            nombre: datos.nombre,
+            correo: datos.email,
+            rol: datos.rol?.toUpperCase(),
+            token: datos.token,
+          })
+      )
+      localStorage.removeItem(CLAVE_SESION_PERSONAL)
+      navigate('/')
+    } catch (err) {
+      setError('Correo o contraseña incorrectos.')
+    }
   }
 
   return (

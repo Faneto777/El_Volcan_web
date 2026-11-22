@@ -35,9 +35,30 @@ export async function obtenerBoletasDesdeApi() {
       throw new Error('Tu sesión venció. Vuelve a iniciar sesión.')
     }
     if (respuesta.status === 403) {
-      throw new Error('Solo administradores pueden consultar el historial.')
+      throw new Error('No tienes permiso para consultar el historial de boletas.')
     }
     throw new Error('No se pudo cargar el historial de boletas')
+  }
+
+  return respuesta.json()
+}
+
+export async function obtenerBoletaPorIdDesdeApi(id) {
+  const sesion = JSON.parse(localStorage.getItem('elvolcan_usuario') || 'null')
+  const respuesta = await fetch(`${API_URL}/boletas/${encodeURIComponent(id)}`, {
+    headers: {
+      Authorization: `Bearer ${sesion?.token}`,
+    },
+  })
+
+  if (!respuesta.ok) {
+    if (respuesta.status === 401) {
+      throw new Error('Tu sesión venció. Vuelve a iniciar sesión.')
+    }
+    if (respuesta.status === 403) {
+      throw new Error('No tienes permiso para ver esta boleta.')
+    }
+    throw new Error('No se pudo cargar la boleta')
   }
 
   return respuesta.json()
