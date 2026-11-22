@@ -209,6 +209,12 @@ function normalizarProducto(producto) {
     MG002: `${BASE_URL}assets/productos/kit%20conexion%20completo.jpg`,
     AC001: `${BASE_URL}assets/productos/detector%20de%20gas.jpg`,
     AC002: `${BASE_URL}assets/productos/tapas%20protectoras.jpg`,
+    CL003: `${BASE_URL}assets/productos/cilindro%2015kg.jpg`,
+    CL004: `${BASE_URL}assets/productos/cilindro%2045kg.jpg`,
+    RG003: `${BASE_URL}assets/productos/regulador%20de%20alta%20presion.jpg`,
+    MG003: `${BASE_URL}assets/productos/manguera%20gas%203m.jpg`,
+    MG004: `${BASE_URL}assets/productos/abrazadera%20metalica.jpg`,
+    AC003: `${BASE_URL}assets/productos/carro%20porta%20cilindro.jpg`,
   }
 
   return {
