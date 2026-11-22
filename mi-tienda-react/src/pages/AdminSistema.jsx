@@ -19,7 +19,7 @@ function AdminSistema() {
   const [pedidos, setPedidos] = useState(obtenerPedidos)
   const [usuarios, setUsuarios] = useState(obtenerUsuarios)
   const [modalUsuario, setModalUsuario] = useState(null)
-  const [formUsuario, setFormUsuario] = useState({ nombre: '', email: '', password: 'demo123', rol: 'repartidor', activo: true })
+  const [formUsuario, setFormUsuario] = useState({ nombre: '', email: '', password: '', rol: 'repartidor', activo: true })
   const [errorUsuario, setErrorUsuario] = useState('')
   const [boletas, setBoletas] = useState([])
   const [errorBoletas, setErrorBoletas] = useState('')
@@ -48,7 +48,7 @@ function AdminSistema() {
   }
 
   const abrirNuevoUsuario = () => {
-    setFormUsuario({ nombre: '', email: '', password: 'demo123', rol: 'repartidor', activo: true })
+    setFormUsuario({ nombre: '', email: '', password: '', rol: 'repartidor', activo: true })
     setErrorUsuario('')
     setModalUsuario({ modo: 'nuevo' })
   }
